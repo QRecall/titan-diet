@@ -34,15 +34,54 @@ function defaultState(){
     tab:"hoy"
   };
 }
+/* Sanea el estado cargado: una copia vieja, editada a mano o con recetas que ya
+   no existen no puede tumbar la app. Todo lo que no encaje vuelve a su valor por defecto. */
+function saneaEstado(o){
+  const d = defaultState();
+  const esReceta = id => RECIPES.some(r=>r.id===id);
+  const obj = (v,def) => (v && typeof v==="object" && !Array.isArray(v)) ? v : def;
+  const S = Object.assign({}, d, obj(o,{}));
+
+  S.plan = (Array.isArray(S.plan)? S.plan : d.plan).slice(0,14);
+  while(S.plan.length<14) S.plan.push({r:null,q:1});
+  S.plan = S.plan.map(p=>{ const x=obj(p,{}); const q=Number(x.q);
+    return {r: esReceta(x.r)? x.r : null, q: (q>0&&isFinite(q))? q : 1}; });
+
+  S.extras = (Array.isArray(S.extras)? S.extras : d.extras).slice(0,7);
+  while(S.extras.length<7) S.extras.push({desayuno:"",otro:""});
+  S.extras = S.extras.map(e=>{ const x=obj(e,{});
+    return {desayuno: esReceta(x.desayuno)? x.desayuno : "", otro: typeof x.otro==="string"? x.otro : ""}; });
+
+  S.freezer = (Array.isArray(S.freezer)? S.freezer : []).filter(f=>obj(f,null)&&esReceta(f.recipeId)).map(f=>({
+    id: String(f.id || "f"+Date.now()+Math.random().toString(36).slice(2,6)),
+    recipeId: f.recipeId,
+    portions: Math.max(0, Number(f.portions)||0),
+    left: Math.max(0, Number(f.left)||0),
+    date: typeof f.date==="string"? f.date : todayISO(),
+    where: f.where==="Nevera" ? "Nevera" : "Congelador",
+    grams: Number(f.grams)>0 ? Number(f.grams) : null
+  }));
+
+  for(const k of ["targets","consumed","batches","pantry","ov","fov","checks","sunday","adj"]) S[k]=obj(S[k], d[k]);
+  for(const k of ["kcal","p","c","f","fib"]){
+    S.targets[k] = Math.max(0, Number(S.targets[k])||0);
+    S.consumed[k] = Math.max(0, Number(S.consumed[k])||0);
+  }
+  for(const k of Object.keys(S.batches)) if(!esReceta(k) || !(Number(S.batches[k])>=0)) delete S.batches[k];
+  if(!esReceta(S.adj.recipe)) S.adj.recipe = d.adj.recipe;
+  if(!(Number(S.adj.q)>0)) S.adj.q = 1;
+  if(!(Number(S.adj.g)>0)) S.adj.g = null;
+  if(typeof S.tab!=="string") S.tab = "hoy";
+  return S;
+}
 let S;
 function load(){
   try{
     let raw = localStorage.getItem(STORE_KEY);
     if(!raw){ raw = localStorage.getItem(OLD_KEY); }   // datos de la versión anterior del archivo
     if(!raw) return defaultState();
-    const o = JSON.parse(raw);
-    return Object.assign(defaultState(), o);
-  }catch(e){ storageOK=false; return defaultState(); }
+    return saneaEstado(JSON.parse(raw));
+  }catch(e){ return defaultState(); }
 }
 let saveTimer=null;
 function save(){
@@ -129,6 +168,7 @@ function renderTabs(){
   $$("#tabs button").forEach(b=>b.onclick=()=>{ S.tab=b.dataset.v; save(); renderTabs(); showView(); });
 }
 function showView(){
+  if(!VIEWS.some(v=>v[0]===S.tab)) S.tab = "hoy";
   VIEWS.forEach(([id])=>{ const el=$("#v-"+id); if(el) el.hidden = (id!==S.tab); });
   // la pirámide y el domingo dependen del plan y de las recetas: se recalculan al entrar
   if(S.tab==="piramide" && typeof renderPiramide==="function") renderPiramide();
@@ -144,10 +184,10 @@ function qTag(q){
 function macroBox(m,label){
   return `<div class="macros">
     <div><b>${r0(m.kcal)}</b><span>kcal</span></div>
-    <div><b>${r1(m.p)}</b><span>prot</span></div>
-    <div><b>${r1(m.c)}</b><span>hc</span></div>
-    <div><b>${r1(m.f)}</b><span>grasa</span></div>
-    <div><b>${r1(m.fib)}</b><span>fibra</span></div>
+    <div><b>${d1(m.p)}</b><span>prot</span></div>
+    <div><b>${d1(m.c)}</b><span>hc</span></div>
+    <div><b>${d1(m.f)}</b><span>grasa</span></div>
+    <div><b>${d1(m.fib)}</b><span>fibra</span></div>
   </div>${label?`<p class="small" style="text-align:center;margin:.3rem 0 0">${label}</p>`:""}`;
 }
 
@@ -159,9 +199,9 @@ function renderHoy(){
   $("#targetRows").innerHTML = MACROS.map(([k,label,u])=>`
     <tr>
       <td>${label} <small>(${u})</small></td>
-      <td class="num"><input type="number" data-t="${k}" value="${S.targets[k]??0}" step="1" min="0" style="max-width:110px;text-align:right"></td>
-      <td class="num"><input type="number" data-c="${k}" value="${S.consumed[k]??0}" step="1" min="0" style="max-width:110px;text-align:right"></td>
-      <td class="num"><input type="number" data-r="${k}" value="${r1(rem[k])}" step="1" style="max-width:110px;text-align:right"></td>
+      <td class="num"><input type="number" data-t="${k}" aria-label="Objetivo de ${label}" value="${S.targets[k]??0}" step="1" min="0" style="max-width:110px;text-align:right"></td>
+      <td class="num"><input type="number" data-c="${k}" aria-label="${label} consumida hoy" value="${S.consumed[k]??0}" step="1" min="0" style="max-width:110px;text-align:right"></td>
+      <td class="num"><input type="number" data-r="${k}" aria-label="${label} que queda hoy" value="${r1(rem[k])}" step="1" style="max-width:110px;text-align:right"></td>
     </tr>`).join("");
   $$("#targetRows input[data-t]").forEach(i=>i.onchange=()=>{S.targets[i.dataset.t]=Number(i.value)||0;S.targets.source="macrofactor";S.targets.updated=todayISO();save();later(()=>{renderHoy();renderAdj();});});
   $$("#targetRows input[data-c]").forEach(i=>i.onchange=()=>{S.consumed[i.dataset.c]=Number(i.value)||0;save();later(()=>{renderHoy();renderAdj();});});
@@ -216,7 +256,7 @@ function renderAdj(){
     const over = (S.consumed[k]+m[k]) > (S.targets[k]||Infinity);
     return `<div style="margin:.45rem 0">
       <div class="kv" style="border:none;padding:0"><span>${label}</span>
-        <span><b>${r1(m[k])}</b> ${u} · quedarían <b style="color:${after[k]<0?'var(--bad)':'inherit'}">${r1(after[k])}</b> ${u}</span></div>
+        <span><b>${d1(m[k])}</b> ${u} · quedarían <b style="color:${after[k]<0?'var(--bad)':'inherit'}">${d1(after[k])}</b> ${u}</span></div>
       <div class="bar"><i class="${over?'over':''}" style="width:${pct}%"></i></div>
     </div>`;
   }).join("");
@@ -225,7 +265,7 @@ function renderAdj(){
   const protPct = rem.p>0 ? m.p/rem.p*100 : 0;
   let warn="";
   if(S.adj.q<1 || (S.adj.g && cw && S.adj.g < cw/r.servings)){
-    warn = `<div class="note warn"><b>Ojo con la proteína.</b> Media ración no deja media necesidad: esta porción aporta <b>${r1(m.p)} g</b> y te seguirían faltando <b>${r1(after.p)} g</b> en lo que queda del día. Si vas a reducir el táper, mira de dónde va a salir esa proteína (queso batido, un bol, un bocata) antes de reducirlo, no después.</div>`;
+    warn = `<div class="note warn"><b>Ojo con la proteína.</b> Media ración no deja media necesidad: esta porción aporta <b>${d1(m.p)} g</b> y te seguirían faltando <b>${d1(after.p)} g</b> en lo que queda del día. Si vas a reducir el táper, mira de dónde va a salir esa proteína (queso batido, un bol, un bocata) antes de reducirlo, no después.</div>`;
   }
   if(after.p < 0) warn += `<div class="note ok">Con esta porción ya cubres la proteína del día.</div>`;
 
@@ -253,12 +293,12 @@ function renderSemana(){
     [0,1].forEach(s=>{const p=S.plan[d*2+s]; if(p.r){const r=recipe(p.r); if(r) addTo(sum, servingMacros(r), p.q);}});
     const ex=S.extras[d]||{};
     if(ex.desayuno){const r=recipe(ex.desayuno); if(r) addTo(sum, servingMacros(r), 1);}
-    html+=`<div class="day"><h4><span>${DAYS[d]}</span><span class="badge">${r0(sum.kcal)} kcal · ${r1(sum.p)} g prot</span></h4>
+    html+=`<div class="day"><h4><span>${DAYS[d]}</span><span class="badge">${r0(sum.kcal)} kcal · ${d1(sum.p)} g prot</span></h4>
       <div class="grid g2">
       ${[0,1].map(s=>{const i=d*2+s;const p=S.plan[i];
         return `<div class="slot ${p.r?"":"libre"}">
           <div class="small" style="font-weight:700;margin-bottom:.25rem">${s===0?"Comida":"Cena"}${p.r?"":" · LIBRE"}</div>
-          <select data-slot="${i}">${opts(p.r)}</select>
+          <select data-slot="${i}" aria-label="${DAYS[d]}, ${s===0?"comida":"cena"}">${opts(p.r)}</select>
           ${p.r?`<div class="row tight" style="margin-top:.35rem">${PORTIONS.slice(0,5).map(([v,l])=>
             `<button class="chip" style="min-height:34px;font-size:.8rem" data-slotq="${i}" data-q="${v}" aria-pressed="${p.q===v}">${l}</button>`).join("")}</div>`:""}
         </div>`;}).join("")}
@@ -280,11 +320,11 @@ function renderSemana(){
   $("#weekCount").innerHTML = `
     <div class="row">
       <span class="badge">${used} huecos con táper</span>
-      <span class="badge">${r1(rac)} raciones planificadas</span>
+      <span class="badge">${d1(rac)} raciones planificadas</span>
       <span class="badge" style="${libres===2?'':'color:var(--warn)'}">${libres} libres ${libres===2?'✓':'(el plan base son 2)'}</span>
     </div>
-    ${rac>12?`<div class="note warn">Has planificado ${r1(rac)} raciones y el lote base son 12. O cocinas más (pestaña Compra) o tiras de congelador.</div>`:""}
-    ${falta.length?`<div class="note warn"><b>Stock insuficiente según tu congelador:</b> ${falta.map(([id,q])=>`${esc(recipe(id).n)} (necesitas ${r1(q)}, tienes ${r1(stock[id]||0)})`).join(" · ")}. Esto solo mira el inventario, no te obliga a nada.</div>`:""}`;
+    ${rac>12?`<div class="note warn">Has planificado ${d1(rac)} raciones y el lote base son 12. O cocinas más (pestaña Compra) o tiras de congelador.</div>`:""}
+    ${falta.length?`<div class="note warn"><b>Stock insuficiente según tu congelador:</b> ${falta.map(([id,q])=>`${esc(recipe(id).n)} (necesitas ${d1(q)}, tienes ${d1(stock[id]||0)})`).join(" · ")}. Esto solo mira el inventario, no te obliga a nada.</div>`:""}`;
 
   // extras
   const desOpts = id=>`<option value="">—</option>`+RECIPES.filter(r=>r.tipo==="desayuno")
@@ -292,8 +332,8 @@ function renderSemana(){
   $("#weekExtras").innerHTML = `<div class="scrollx"><table>
     <thead><tr><th>Día</th><th>Desayuno</th><th>Almuerzo / merienda / postre</th></tr></thead><tbody>
     ${DAYS.map((d,i)=>`<tr><td>${d}</td>
-      <td><select data-ex-d="${i}">${desOpts((S.extras[i]||{}).desayuno)}</select></td>
-      <td><input data-ex-o="${i}" value="${esc((S.extras[i]||{}).otro||"")}" placeholder="bocata, burrito, fruta…"></td></tr>`).join("")}
+      <td><select data-ex-d="${i}" aria-label="Desayuno del ${d.toLowerCase()}">${desOpts((S.extras[i]||{}).desayuno)}</select></td>
+      <td><input data-ex-o="${i}" aria-label="Almuerzo, merienda o postre del ${d.toLowerCase()}" value="${esc((S.extras[i]||{}).otro||"")}" placeholder="bocata, burrito, fruta…"></td></tr>`).join("")}
     </tbody></table></div>
     <div class="note">Si un día almuerzas un bocata que no estaba previsto, no pasa nada: apúntalo aquí, regístralo en MacroFactor y por la tarde ajusta la porción del táper en la pestaña «Hoy». Ese es todo el sistema.</div>`;
   $$("#weekExtras select[data-ex-d]").forEach(s=>s.onchange=()=>{S.extras[+s.dataset.exD].desayuno=s.value;save();later(renderSemana);});
