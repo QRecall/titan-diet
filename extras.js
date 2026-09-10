@@ -45,7 +45,7 @@ $("#importFile").onchange=e=>{
   rd.onload=()=>{ try{
       const o=JSON.parse(rd.result);
       if(!o || typeof o!=="object") throw 0;
-      S=Object.assign(defaultState(),o); save(); renderAll(); toast("Copia importada");
+      S=saneaEstado(o); save(); renderAll(); toast("Copia importada");
     }catch(err){ alert("Ese archivo no es una copia válida."); } };
   rd.readAsText(f); e.target.value="";
 };
