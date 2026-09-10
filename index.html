@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TITAN Diet</title>
+<meta name="description" content="TITAN Diet — meal prep, recetas con macros reales, lista de compra y pirámide de la alimentación.">
+<meta name="theme-color" content="#0e9f6e" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#080c17" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TITAN Diet">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 14.9 8.2H9.1L12 3Z" fill="#fff"/><path d="M8.6 9.1h6.8l2.1 3.8H6.5l2.1-3.8Z" fill="#fff" opacity=".92"/><path d="M5.9 13.8h12.2l2.4 4.4H3.5l2.4-4.4Z" fill="#fff" opacity=".8"/></svg></span>
+    <span><b><i>TITAN</i> Diet</b><span class="sub" id="brandSub">meal prep · 12 raciones · Mercadona</span></span>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist"></nav>
+</header>
+
+<main>
+
+<!-- ============ HOY / OBJETIVOS ============ -->
+<section id="v-hoy">
+  <div class="card">
+    <h2>Objetivos del día</h2>
+    <p class="small">Estos números <b>los pones tú desde MacroFactor</b>. No hay integración ni sincronización con la app: se escriben a mano y se guardan en este navegador.</p>
+    <div class="note warn" id="targetSourceNote"></div>
+    <div class="scrollx">
+    <table>
+      <thead><tr><th>Macro</th><th class="num">Objetivo</th><th class="num">Consumido</th><th class="num">Restante</th></tr></thead>
+      <tbody id="targetRows"></tbody>
+    </table>
+    </div>
+    <div class="row" style="margin-top:.6rem">
+      <button class="btn sm" id="btnResetConsumo">Poner consumido a 0</button>
+      <button class="btn sm ghost" id="btnEstimar">Ver estimación de partida</button>
+    </div>
+    <p class="small" style="margin-top:.5rem">Puedes escribir en <b>Consumido</b> o directamente en <b>Restante</b>: el otro se recalcula solo.</p>
+  </div>
+
+  <div class="card">
+    <h2>¿Qué me cabe ahora?</h2>
+    <p class="small">Elige un táper y una porción: te digo qué aporta esa porción y qué queda del día. No compensa nada ni te manda hacer nada raro.</p>
+    <div class="grid g2">
+      <label class="fld"><span>Receta</span><select id="adjRecipe"></select></label>
+      <label class="fld"><span>Cantidad</span>
+        <div class="row tight" id="adjChips"></div>
+      </label>
+    </div>
+    <label class="fld" style="max-width:260px"><span>…o gramos exactos del plato terminado</span><input type="number" id="adjGrams" min="0" step="10" placeholder="p. ej. 320"></label>
+    <div id="adjOut"></div>
+  </div>
+
+  <div class="card noprint">
+    <h3>Cómo se usa esto (30 segundos)</h3>
+    <ol class="steps small">
+      <li><b>Domingo:</b> pestaña «Domingo» → cocinas los lotes → repartes en táperes → los das de alta en «Congelador».</li>
+      <li><b>Antes de comprar:</b> pestaña «Compra» → marcas lo que ya tienes → la lista se recalcula sola.</li>
+      <li><b>Cada día:</b> aquí arriba metes objetivo y consumido de MacroFactor, eliges el táper y la porción que encaja.</li>
+      <li><b>Registrar:</b> en MacroFactor registras la receta por gramos (pestaña «Recetas» → «Cómo meterla en MacroFactor»).</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ SEMANA ============ -->
+<section id="v-semana" hidden>
+  <div class="card">
+    <h2>Semana</h2>
+    <p class="small">14 huecos de comida y cena. El plan base son <b>12 raciones</b> de táper + <b>2 libres</b>. Desayuno, almuerzo, merienda y postre van aparte y no gastan raciones.</p>
+    <div id="weekCount"></div>
+  </div>
+  <div id="weekDays"></div>
+  <div class="card">
+    <h3>Fuera de las 14</h3>
+    <p class="small">Aquí anotas desayunos, almuerzos, meriendas y postres del día. Sirve para tener presente lo que sumas, no para «gastar» raciones. Los burritos y los bocatas <b>no descuentan</b> ninguna comida principal: son existencias aparte.</p>
+    <div id="weekExtras"></div>
+  </div>
+</section>
+
+<!-- ============ RECETAS ============ -->
+<section id="v-recetas" hidden>
+  <div class="card noprint">
+    <div class="row">
+      <input type="search" id="recSearch" placeholder="Buscar receta o ingrediente…" style="flex:1;min-width:180px">
+    </div>
+    <div class="row tight" id="recFilters" style="margin-top:.5rem"></div>
+  </div>
+  <div id="recipeList"></div>
+</section>
+
+<!-- ============ PIRAMIDE ============ -->
+<section id="v-piramide" hidden>
+  <div class="card hero">
+    <h2>Pirámide de la alimentación</h2>
+    <p class="small">La de la <b>SENC</b> (Sociedad Española de Nutrición Comunitaria), con tus alimentos colocados encima. Toca un escalón para ver qué hay ahí y cuánto te aporta tu plan.</p>
+  </div>
+  <div class="card">
+    <div id="pyrSvg"></div>
+    <div class="pyrlegend" id="pyrLegend"></div>
+  </div>
+  <div id="pyrPanel"></div>
+  <div class="card">
+    <h3>Tu semana vista desde la pirámide</h3>
+    <div id="pyrAudit"></div>
+  </div>
+</section>
+
+<!-- ============ COMPRA ============ -->
+<section id="v-compra" hidden>
+  <div class="card">
+    <h2>Qué voy a cocinar este domingo</h2>
+    <p class="small">La lista de compra sale <b>solo de esto</b>. Si pones 0 raciones de algo, desaparece de la lista.</p>
+    <div id="batchPicker"></div>
+  </div>
+  <div class="card">
+    <h2>Lista de compra</h2>
+    <div class="row noprint" style="margin-bottom:.5rem">
+      <button class="btn sm" id="btnClearChecks">Desmarcar todo</button>
+      <button class="btn sm ghost" id="btnPrint2">Imprimir</button>
+      <span class="badge" id="shopCost"></span>
+    </div>
+    <div id="shopList"></div>
+  </div>
+  <div class="card noprint">
+    <h3>Ya lo tengo en casa</h3>
+    <p class="small">Lo que apuntes aquí se descuenta de la lista. En gramos (o unidades donde lo indique).</p>
+    <div id="pantryList"></div>
+  </div>
+</section>
+
+<!-- ============ DOMINGO ============ -->
+<section id="v-domingo" hidden>
+  <div class="card">
+    <h2>Domingo de cocina</h2>
+    <p class="small">Orden pensado para que el horno y la air fryer trabajen mientras tú haces otra cosa. Se genera con lo que hayas puesto en «Compra».</p>
+    <div class="row noprint">
+      <button class="btn sm" id="btnResetSunday">Reiniciar tareas</button>
+    </div>
+  </div>
+  <div id="sundayPlan"></div>
+</section>
+
+<!-- ============ CONGELADOR ============ -->
+<section id="v-congelador" hidden>
+  <div class="card">
+    <h2>Inventario de congelador y nevera</h2>
+    <p class="small">Esto es <b>stock</b>: lo que hay guardado. No es un registro de comidas — eso lo lleva MacroFactor. Aquí solo das de alta lo que guardas y das de baja lo que sacas.</p>
+    <div class="grid g3" style="margin-top:.6rem">
+      <label class="fld"><span>Receta</span><select id="frzRecipe"></select></label>
+      <label class="fld"><span>Raciones</span><input type="number" id="frzPortions" min="1" step="1" value="4"></label>
+      <label class="fld"><span>Fecha de cocinado</span><input type="date" id="frzDate"></label>
+      <label class="fld"><span>Dónde</span><select id="frzWhere"><option>Congelador</option><option>Nevera</option></select></label>
+      <label class="fld"><span>g por ración (opcional)</span><input type="number" id="frzGrams" min="0" step="10" placeholder="peso real del táper"></label>
+    </div>
+    <button class="btn primary" id="btnFrzAdd">Dar de alta</button>
+  </div>
+  <div id="freezerList"></div>
+</section>
+
+<!-- ============ EQUIPO ============ -->
+<section id="v-equipo" hidden>
+  <div id="equipContent"></div>
+</section>
+
+<!-- ============ DATOS ============ -->
+<section id="v-datos" hidden>
+  <div class="card">
+    <h2>Copia de seguridad</h2>
+    <p class="small">Todo lo que escribes se guarda <b>solo en este navegador</b> (localStorage). No hay cuenta, ni servidor, ni nube.</p>
+    <div class="row">
+      <button class="btn primary" id="btnExport">Exportar copia (.json)</button>
+      <label class="btn" for="importFile">Importar copia</label>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+      <button class="btn ghost" id="btnPrint">Vista imprimible</button>
+      <button class="btn danger" id="btnReset">Borrar todo y empezar de cero</button>
+    </div>
+    <div id="storeStatus" style="margin-top:.6rem"></div>
+  </div>
+  <div class="card">
+    <h3>Ponerlo en el móvil como app</h3>
+    <ol class="steps small">
+      <li><b>Android (Chrome):</b> menú de los tres puntos → «Añadir a pantalla de inicio» / «Instalar app». Si sale el botón azul de abajo, con tocarlo basta.</li>
+      <li><b>iPhone (Safari, y tiene que ser Safari):</b> botón de compartir → «Añadir a pantalla de inicio».</li>
+      <li>Se abre a pantalla completa, sin barra del navegador, y <b>funciona sin conexión</b> una vez cargada: el domingo en la cocina o en la facultad da igual la cobertura.</li>
+    </ol>
+    <h3>Límites que debes conocer</h3>
+    <ul class="small" style="padding-left:1.1rem">
+      <li>Tus datos se guardan <b>en el navegador de cada dispositivo</b>, no en ningún servidor. Lo que escribas en el móvil no aparece en el portátil: para pasarlo, exporta la copia .json y la importas.</li>
+      <li>Instalada como app y en el navegador del mismo móvil comparten datos. Otro navegador, o modo incógnito, empiezan de cero.</li>
+      <li>Borrar «datos de sitios» borra también esto. <b>Exporta de vez en cuando.</b></li>
+      <li>La app se actualiza sola cuando publique cambios; si algo se queda antiguo, cierra y vuelve a abrir.</li>
+      <li>No hay conexión con MacroFactor ni con ninguna tienda. Nada de lo que escribas sale de tu dispositivo, ni siquiera hacia GitHub: allí solo está el código de la página.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>De dónde salen los números</h3>
+    <div id="sourcesList"></div>
+  </div>
+</section>
+
+</main>
+
+<script src="core.js" defer></script>
+<script src="state.js" defer></script>
+<script src="views.js" defer></script>
+<script src="extras.js" defer></script>
+
+<div class="install" id="installBar">
+  <div class="row" style="justify-content:space-between;flex-wrap:nowrap">
+    <div><b>Instálalo como app</b><br><span class="small">Pantalla completa y funciona sin conexión.</span></div>
+    <div class="row tight" style="flex-wrap:nowrap">
+      <button class="btn sm ghost" id="installNo">Ahora no</button>
+      <button class="btn sm primary" id="installYes">Instalar</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if("serviceWorker" in navigator){
+    window.addEventListener("load",function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+  }
+  var dp=null, bar=document.getElementById("installBar");
+  window.addEventListener("beforeinstallprompt",function(e){
+    e.preventDefault(); dp=e;
+    try{ if(localStorage.getItem("titan_install_dismissed")) return; }catch(_){}
+    bar.classList.add("show");
+  });
+  document.getElementById("installYes").onclick=function(){
+    bar.classList.remove("show");
+    if(dp){ dp.prompt(); dp=null; }
+  };
+  document.getElementById("installNo").onclick=function(){
+    bar.classList.remove("show");
+    try{ localStorage.setItem("titan_install_dismissed","1"); }catch(_){}
+  };
+  window.addEventListener("appinstalled",function(){ bar.classList.remove("show"); });
+})();
+</script>
+</body>
+</html>
