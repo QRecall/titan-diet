@@ -28,13 +28,13 @@ function recipeCard(r){
   const ingRows = r.ing.map((it,i)=>{
     const F=food(it.f), m=ingMacros(it), scale=r.servings/base.servings;
     const g=it.g*scale;
-    const unit = F.unitG? ` <small>(${r1(g/F.unitG)} ${F.unitName||"ud"})</small>`:"";
+    const unit = F.unitG? ` <small>(${d1(g/F.unitG)} ${F.unitName||"ud"})</small>`:"";
     return `<tr>
       <td>${esc(F.n)} ${qTag(F.q)}<br><small>${esc(F.st)}${it.note?" · "+esc(it.note):""}</small></td>
-      <td class="num"><input type="number" data-ig="${r.id}|${i}|${it.key||it.f}" value="${r1(it.g)}" min="0" step="5" style="max-width:90px;text-align:right"></td>
-      <td class="num">${r1(g)} g${unit}</td>
+      <td class="num"><input type="number" data-ig="${r.id}|${i}|${it.key||it.f}" aria-label="Gramos de ${esc(F.n)}" value="${r1(it.g)}" min="0" step="5" style="max-width:90px;text-align:right"></td>
+      <td class="num">${d1(g)} g${unit}</td>
       <td class="num">${r0(m.kcal*scale)}</td>
-      <td class="num">${r1(m.p*scale)}</td>
+      <td class="num">${d1(m.p*scale)}</td>
     </tr>`;
   }).join("");
 
@@ -62,7 +62,7 @@ function recipeCard(r){
     </table></div>
     <p class="small">La columna editable está referida al lote base de <b>${base.servings} ${label}</b>. Cambia las raciones arriba y todo se escala solo.</p>
 
-    <div class="grid g3" style="margin-top:.7rem">
+    <div class="grid g2" style="margin-top:.7rem">
       <div><h4>Por lote (${r.servings} ${label})</h4>${macroBox(bm)}</div>
       <div><h4>Por ración</h4>${macroBox(sm)}</div>
       <div><h4>Por 100 g del plato terminado</h4>${p1?macroBox(p1):`<div class="note warn small" style="margin:0">Sin peso cocinado no puedo darlo. Pesa el resultado y escríbelo arriba: no me lo voy a inventar.</div>`}</div>
