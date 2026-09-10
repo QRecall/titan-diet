@@ -8,8 +8,8 @@ function renderCompra(){
     <thead><tr><th>Receta</th><th class="num">Raciones<br><small>a cocinar</small></th><th class="num">kcal<br><small>/rac.</small></th><th class="num">prot<br><small>/rac.</small></th></tr></thead><tbody>
     ${RECIPES.map(b=>{const r=recipe(b.id),sm=servingMacros(r);
       return `<tr><td>${esc(b.n)}<br><small>${b.tipo==="antojo"?"antojo — no descuenta comidas principales":b.tipo==="desayuno"?"desayuno/postre":"principal"}</small></td>
-      <td class="num"><input type="number" data-bt="${b.id}" value="${S.batches[b.id]??0}" min="0" step="1" style="max-width:90px;text-align:right"></td>
-      <td class="num">${r0(sm.kcal)}</td><td class="num">${r1(sm.p)}</td></tr>`;}).join("")}
+      <td class="num"><input type="number" data-bt="${b.id}" aria-label="Raciones a cocinar de ${esc(b.n)}" value="${S.batches[b.id]??0}" min="0" step="1" style="max-width:90px;text-align:right"></td>
+      <td class="num">${r0(sm.kcal)}</td><td class="num">${d1(sm.p)}</td></tr>`;}).join("")}
     </tbody></table></div>
     <div class="note small">Los <b>burritos</b> y los <b>bocatas</b> se cocinan en la cantidad que quieras y duran semanas en el congelador. Ponlos a 0 las semanas que no toque.</div>`;
   $$("input[data-bt]").forEach(i=>i.onchange=()=>{
@@ -35,7 +35,7 @@ function renderCompra(){
     if(F.noWeight){ (cats[F.cat]=cats[F.cat]||[]).push({fid,F,gross:null,buy:null,have}); return; }
     if(buy<=0 && gross>0){ (cats[F.cat]=cats[F.cat]||[]).push({fid,F,gross,buy:0,have}); return; }
     let purchase=buy, purchaseNote="";
-    if(F.buyFactor){ purchase=buy*F.buyFactor; purchaseNote=`≈ ${r1(purchase/1000)} kg de ${F.buyUnit}`; }
+    if(F.buyFactor){ purchase=buy*F.buyFactor; purchaseNote=`≈ ${d1(purchase/1000)} kg de ${F.buyUnit}`; }
     const c = F.price? (purchase/1000)*F.price : 0;
     if(F.price){ cost+=c; if(F.priceQ) anyUnverifiedPrice=true; } else anyUnverifiedPrice=true;
     (cats[F.cat]=cats[F.cat]||[]).push({fid,F,gross,buy,have,purchase,purchaseNote,c});
@@ -52,21 +52,21 @@ function renderCompra(){
       if(F.noWeight) qty="lo que tengas";
       else if(it.buy<=0) qty=`<span class="tag v">YA LO TIENES</span> (necesitas ${r0(it.gross)} g, tienes ${r0(it.have)} g)`;
       else{
-        qty=`<b>${it.buy>=1000? r1(it.buy/1000)+" kg" : r0(it.buy)+" g"}</b>`;
+        qty=`<b>${it.buy>=1000? d1(it.buy/1000)+" kg" : r0(it.buy)+" g"}</b>`;
         if(F.unitG) qty+= ` · ≈ ${Math.ceil(it.buy/F.unitG)} ${F.unitName||"ud"}`;
         if(it.purchaseNote) qty+= ` · comprar ${it.purchaseNote}`;
         if(it.have>0) qty+= ` <small>(descontados ${r0(it.have)} g que ya tienes)</small>`;
       }
       html+=`<li class="${done?"done":""}">
         <input type="checkbox" id="ck_${it.fid}" data-ck="${it.fid}" ${done?"checked":""}>
-        <label for="ck_${it.fid}">${esc(F.n)} ${qTag(F.q)}<br><small>${qty}${it.c?` · ~${it.c.toFixed(2)} €`:""}</small></label></li>`;
+        <label for="ck_${it.fid}">${esc(F.n)} ${qTag(F.q)}<br><small>${qty}${it.c?` · ~${eur(it.c)} €`:""}</small></label></li>`;
     });
     html+="</ul>";
   });
   if(!html) html=`<p class="small">No has puesto ninguna ración a cocinar. Arriba, en «Qué voy a cocinar este domingo».</p>`;
   $("#shopList").innerHTML=html;
   $$("input[data-ck]").forEach(c=>c.onchange=()=>{S.checks[c.dataset.ck]=c.checked;save();renderCompra();});
-  $("#shopCost").innerHTML = cost? `≈ ${cost.toFixed(2)} € ${anyUnverifiedPrice?'<span class="tag e">precios sin verificar</span>':''}` : "";
+  $("#shopCost").innerHTML = cost? `≈ ${eur(cost)} € ${anyUnverifiedPrice?'<span class="tag e">precios sin verificar</span>':''}` : "";
 
   // despensa
   const usedFoods=Object.keys(need).filter(f=>!food(f).noWeight).sort((a,b)=>food(a).n.localeCompare(food(b).n));
@@ -139,7 +139,7 @@ function renderCongelador(){
   $("#freezerList").innerHTML=`<div class="card">
     <h3>Lo que tienes ahora</h3>
     ${Object.keys(totals).length? `<div class="row">${Object.entries(totals).filter(([,n])=>n>0).map(([id,n])=>
-      `<span class="badge">${esc((RECIPES.find(r=>r.id===id)||{}).n||id)}: <b>${r1(n)}</b></span>`).join("")}</div>`
+      `<span class="badge">${esc((RECIPES.find(r=>r.id===id)||{}).n||id)}: <b>${d1(n)}</b></span>`).join("")}</div>`
       : `<p class="small">Vacío. Da de alta lo que guardes el domingo.</p>`}
     ${items.length?`<div class="scrollx" style="margin-top:.7rem"><table>
       <thead><tr><th>Receta</th><th>Cocinado</th><th>Dónde</th><th class="num">Quedan</th><th></th></tr></thead><tbody>
@@ -150,11 +150,11 @@ function renderCongelador(){
           <td>${esc((RECIPES.find(r=>r.id===f.recipeId)||{}).n||f.recipeId)}${f.grams?`<br><small>${f.grams} g/ración</small>`:""}</td>
           <td>${fmtDate(f.date)}<br><small>${d!==null?`hace ${d} d`:""}${alertN?' <span class="tag p">pasa de 3-4 días</span>':""}${alertC?' <span class="tag e">+3 meses</span>':""}</small></td>
           <td>${esc(f.where)}</td>
-          <td class="num">${r1(f.left)} / ${r1(f.portions)}</td>
+          <td class="num">${d1(f.left)} / ${d1(f.portions)}</td>
           <td class="num noprint">
-            <button class="btn xs" data-fz-take="${f.id}" ${f.left<=0?"disabled":""}>−1</button>
-            <button class="btn xs" data-fz-half="${f.id}" ${f.left<=0?"disabled":""}>−½</button>
-            <button class="btn xs danger" data-fz-del="${f.id}">✕</button></td></tr>`;}).join("")}
+            <button class="btn xs" data-fz-take="${f.id}" aria-label="Sacar una ración" ${f.left<=0?"disabled":""}>−1</button>
+            <button class="btn xs" data-fz-half="${f.id}" aria-label="Sacar media ración" ${f.left<=0?"disabled":""}>−½</button>
+            <button class="btn xs danger" data-fz-del="${f.id}" aria-label="Borrar esta entrada">✕</button></td></tr>`;}).join("")}
     </tbody></table></div>`:""}
     <div class="note small">Esto es solo stock. Lo que te comes se registra en MacroFactor: si sacas media ración, aquí bajas media y allí registras los gramos. Nunca cuentes una comida dos veces por tenerla en dos sitios.</div>
   </div>`;
