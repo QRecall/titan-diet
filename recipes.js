@@ -66,7 +66,7 @@ const RECIPES = [
   ],
   conservacion:{
     nevera:"3-4 días (USDA, sobras de carne cocinada). Es la receta que mejor aguanta en nevera de las tres.",
-    congelador:"Sí. La USDA da 2-3 meses de calidad para «cazuelas con huevo», que es exactamente este formato: el huevo cuajado dentro de una masa se comporta mucho mejor que un huevo duro suelto (ese sí, la FDA dice directamente «no lo congeles»). Congelalo ya cortado en porciones y envuelto.",
+    congelador:"Sí. La USDA da 2-3 meses de calidad para «cazuelas con huevo», que es exactamente este formato: el huevo cuajado dentro de una masa se comporta mucho mejor que un huevo duro suelto (ese sí, la FDA dice directamente «no lo congeles»). Congélalo ya cortado en porciones y envuelto.",
     descongelar:"Nevera de un día para otro (mejor textura) o directo al microondas.",
     recalentar:"Microondas tapado, 3-4 min desde nevera, 6-8 min desde congelado, a media potencia los 2 primeros minutos para que el huevo no se ponga gomoso. Objetivo 74 °C en el centro.",
     universidad:"Sí, y es la mejor de las tres para llevar: no lleva arroz, así que no tiene la limitación de 1 día."
@@ -189,7 +189,7 @@ const RECIPES = [
   ],
   utensilios:"Air fryer, sartén o plancha, papel de horno, papel de aluminio.",
   pasos:[
-    "Corta el pollo en filetes finos y marinalo 30 min con aceite, especias y zumo de lima.",
+    "Corta el pollo en filetes finos y marínalo 30 min con aceite, especias y zumo de lima.",
     "Plancha fuerte 3-4 min por lado. Deja templar y córtalo en tiras.",
     "Salsa cremosa: 150 g de queso batido 0 % + 60 g de salsa de yogur + 20 g de picante + zumo de lima + sal. Bátelo o mézclalo bien. Guárdala en un bote aparte.",
     "Monta cada bocata: pan abierto, pollo, loncha de queso, cebolla morada en juliana. <b>La salsa NO va dentro todavía.</b>",
