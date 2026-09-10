@@ -5,6 +5,9 @@
 const $ = (s,r=document)=>r.querySelector(s);
 const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
 const r0=n=>Math.round(n||0), r1=n=>Math.round((n||0)*10)/10;
+// en pantalla los decimales van con coma, como toca en español
+const d1=n=>String(r1(n)).replace(".",",");
+const eur=n=>(Number(n)||0).toFixed(2).replace(".",",");
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function later(fn){ setTimeout(fn,0); }
 function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
