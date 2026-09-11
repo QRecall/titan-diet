@@ -212,6 +212,49 @@ const RECIPES = [
   aviso:"También es una <b>adaptación</b> del vídeo, no su receta. No conozco los ingredientes ni las cantidades de la salsa original."
 },
 {
+  id:"quesadillas_chipotle", n:"Quesadillas de pollo chipotle con miel (meal prep)", tipo:"antojo", tags:["antojo","congela","air fryer"],
+  servings:10, servingsLabel:"quesadillas", minutes:75,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Registra por UNIDADES: las 10 salen casi iguales. Pesa una quesadilla montada (antes de tostar) y ponla como peso de porción en MacroFactor. El relleno pésalo entero y divídelo entre 10 para repartirlo con báscula, no a ojo.",
+  ing:[
+    {f:"pollo_carne", g:1800, note:"180 g crudos por quesadilla (≈ 130 g cocidos). Pechuga entera, sin filetear"},
+    {f:"especias", g:15, note:"sazonador chipotle: pimentón ahumado, cayena o chile en polvo, comino, ajo en polvo, sal. Mitad para el pollo, mitad para la salsa"},
+    {f:"aove", g:20, note:"para untar el pollo"},
+    {f:"q_batido_0", g:300, note:"base de la salsa (en el vídeo usan cottage; el batido 0 % tiene más proteína y ya lo compras)"},
+    {f:"mayo_ligera", g:60},
+    {f:"salsa_chipotle", g:40, note:"si no la encuentras: 20 g más de picante + 1 cucharadita de pimentón ahumado"},
+    {f:"picante", g:30},
+    {f:"miel", g:40, note:"4 g por quesadilla: es lo que da el toque «honey»"},
+    {f:"lima", g:35, note:"zumo de media lima; 1 diente de ajo también a la salsa"},
+    {f:"q_rallado_light", g:150, note:"va MEZCLADO con el pollo y la salsa (15 g por unidad)"},
+    {f:"q_cheddar_rallado", g:300, note:"15 g bajo el relleno + 15 g encima, en cada tortilla"},
+    {f:"tortilla_grande", g:620, note:"10 tortillas grandes; con las pequeñas de 36 g haz 2 por ración y registra 2"}
+  ],
+  utensilios:"Sartén grande con tapa, batidora de vaso, dos tenedores (o batidora de varillas para desmenuzar), bol grande, plancha o sartén antiadherente, papel de horno, báscula.",
+  pasos:[
+    "Seca las pechugas, úntalas con el aceite y la mitad del sazonador chipotle. Sartén a fuego medio, TAPADA: 8-10 min por lado según grosor. Están cuando el centro marca 74 °C o ya no está rosa. Deja reposar 10 min.",
+    "Salsa: en la batidora, queso batido 0 %, mayonesa ligera, salsa chipotle, picante, miel, zumo de lima, el diente de ajo y el resto del sazonador. Tritura hasta que quede lisa. Prueba y ajusta picante o sal.",
+    "Desmenuza el pollo (dos tenedores, o 20 s con varillas eléctricas en el bol). Añade la salsa y el queso rallado light, y cebollino picado si tienes. Mezcla bien. PESA el bol: ese número entre 10 es el relleno de cada quesadilla.",
+    "Monta cada quesadilla: tortilla, 15 g de cheddar en una mitad, 1/10 del relleno encima, otros 15 g de cheddar, dobla.",
+    "Tuesta en sartén o plancha sin aceite, fuego medio, 2-3 min por lado hasta que esté dorada y el queso fundido. Presiona un poco con la espátula al dar la vuelta.",
+    "Las que no comas hoy: deja enfriar del todo sobre una rejilla (si las envuelves calientes sudan y se ablandan), envuelve una a una en papel de horno + aluminio o bolsa zip, etiqueta con fecha, y a la nevera (2 días) o al congelador."
+  ],
+  conservacion:{
+    nevera:"Envueltas y frías: 3-4 días (USDA para pollo cocinado), pero la tortilla pierde textura a partir del segundo día. Plan razonable: 2 en nevera, 8 al congelador.",
+    congelador:"Sí, ya tostadas y envueltas individualmente: 1-2 meses de calidad buena. Congélalas planas y luego apílalas.",
+    descongelar:"No hace falta: van directas de congelado a la air fryer o la sartén.",
+    recalentar:"Air fryer 180 °C, 6-8 min desde nevera o 10-12 desde congelado, dándole la vuelta a mitad: recupera el crujiente. Sartén a fuego medio, tapada, también sirve. Microondas 2-3 min funciona pero queda blanda (es lo que tendrás en la facultad).",
+    universidad:"Sí, si aceptas que en microondas queda blanda. Llévala en bolsa isotérmica con acumulador de frío y no la dejes más de 2 h sin frío."
+  },
+  variantes:[
+    {n:"Más proteína", d:"Sube el pollo a 2.000 g (200 g crudos por unidad): cada quesadilla suma ~4 g de proteína y ~25 kcal. Es la única forma realista de acercarse a los 65 g que anuncia el vídeo."},
+    {n:"Menos grasa", d:"Baja el cheddar a 200 g (20 g por unidad) y quita la mayonesa (sube el queso batido a 360 g): cada quesadilla pierde ~55 kcal y ~5 g de grasa sin notarlo mucho, porque la salsa sigue siendo cremosa."},
+    {n:"Con las sobras del pollo asado", d:"Si te sobra pollo de la receta 1, desmenúzalo y úsalo aquí en vez de cocinar pechugas: solo haces la salsa y montas."}
+  ],
+  micro:"ok",
+  aviso:"Es una <b>adaptación</b> del vídeo (@aussiefitness, «cheesy honey chipotle chicken quesadillas»), no su receta: el vídeo enseña los ingredientes y los pasos pero <b>no da ninguna cantidad</b>. Todos los gramos son míos, pensados para 10 unidades y para comprar en Mercadona. Los «65 g de proteína» que anuncia no salen con estas cantidades (salen unos 54 g): o sus tortillas y su pollo son más grandes, o la cifra es generosa. Los valores del cheddar rallado, el queso rallado light, la mayonesa ligera, la salsa chipotle y la miel son estimaciones: comprueba las etiquetas."
+},
+{
   id:"bol_desayuno", n:"Bol de queso batido con chía y fruta", tipo:"desayuno", tags:["desayuno","postre","sin cocinar"],
   useRaw:true, servings:1, minutes:5,
   cookedWeight:null,

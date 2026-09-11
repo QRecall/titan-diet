@@ -76,6 +76,17 @@ const FOODS = {
   leche:{n:"Leche desnatada",cat:"Huevos y lácteos",st:"líquida",kcal:35,p:3.4,c:4.8,f:0.1,fib:0,q:"e",src:"Estimación genérica de leche desnatada.",price:0.85,priceQ:"p"},
   lima:{n:"Lima",cat:"Frutería",st:"cruda",kcal:30,p:0.7,c:10.5,f:0.2,fib:2.8,q:"e",src:"USDA. 0,33 €/ud en Mercadona.",price:4.4,unitG:70,unitName:"lima"},
   cilantro:{n:"Cilantro fresco",cat:"Frutería",st:"crudo",kcal:23,p:2.1,c:3.7,f:0.5,fib:2.8,q:"e",src:"USDA. Producto confirmado en catálogo Mercadona, precio no verificado.",price:12,priceQ:"p"},
+  tortilla_grande:{n:"Tortillas de trigo grandes (para quesadilla)",cat:"Despensa",st:"tal cual",kcal:294,p:8.4,c:50,f:5.8,fib:4.2,q:"e",
+    src:"Mismos valores por 100 g que las tortillas de trigo Hacendado. Peso por unidad ≈ 62 g: ESTIMACIÓN para el formato grande (25 cm); pesa una y corrígelo.",price:3.14,priceQ:"p",unitG:62,unitName:"tortilla grande"},
+  q_cheddar_rallado:{n:"Queso cheddar rallado",cat:"Huevos y lácteos",st:"tal cual",kcal:392,p:26,c:0,f:32,fib:0,q:"e",
+    src:"Valores copiados del cheddar en lonchas Hacendado (OFF 8480000550170); el rallado debería ser casi idéntico, pero NO he visto su etiqueta. Precio no verificado.",price:9.25,priceQ:"p"},
+  q_rallado_light:{n:"Queso rallado light (mezcla para fundir)",cat:"Huevos y lácteos",st:"tal cual",kcal:250,p:29,c:1,f:14,fib:0,q:"e",
+    src:"ESTIMACIÓN genérica de queso rallado light (~50 % menos grasa). Producto de Mercadona no verificado: mira la etiqueta del que compres y corrige.",price:9,priceQ:"p"},
+  mayo_ligera:{n:"Mayonesa ligera",cat:"Despensa",st:"tal cual",kcal:330,p:1,c:6,f:33,fib:0,q:"e",
+    src:"ESTIMACIÓN genérica de mayonesa ligera (la Hacendado ligera no la he verificado en ficha). Se usa muy poca.",price:4,priceQ:"p"},
+  salsa_chipotle:{n:"Salsa chipotle",cat:"Despensa",st:"tal cual",kcal:120,p:1.5,c:20,f:3.5,fib:2,q:"e",
+    src:"ESTIMACIÓN genérica (chipotles en adobo / salsa chipotle). NO he confirmado que Mercadona la tenga: si no la encuentras, sustitúyela por más salsa picante + pimentón ahumado.",price:8,priceQ:"p"},
+  miel:{n:"Miel",cat:"Despensa",st:"tal cual",kcal:304,p:0.3,c:82,f:0,fib:0,q:"e",src:"USDA FoodData Central (miel). Precio no verificado.",price:7,priceQ:"p"},
   especias:{n:"Especias (pimentón, comino, ajo en polvo, orégano, sal, pimienta)",cat:"Despensa",st:"secas",kcal:0,p:0,c:0,f:0,fib:0,q:"e",
     src:"Se cuentan como 0 kcal: a estas cantidades el error es irrelevante.",price:0,priceQ:"e",noWeight:true}
 };
