@@ -123,12 +123,12 @@ function sundayTasks(){
   if(P) T.push({id:"patatas_montar",m:45,t:"Montar las patatas",d:`Sacar las bandejas, mezclar patata + carne y repartir en ${n("pastel_carne")} táperes. Huevo y cottage NO van al táper: se añaden al servir.${C?" Baja el horno a 200 °C para el pollo.":""}`});
   if(C){
     T.push({id:"pollo_horno",m:polloStart,t:"Pollo al horno, en mariposa",d:`Abre el pollo por el espinazo con tijeras, aplástalo, sal y especias, sin aceite. 200 °C, 45-55 min, hasta 74 °C en la parte más gruesa. Los ${r0(gLote("pollo_arroz","pechuga"))} g de pechuga extra, en la misma bandeja los últimos 20-25 min.`});
-    T.push({id:"verduras_pollo",m:polloStart+10,t:"Verduras del pollo",d:`${r0(gLote("pollo_arroz","pimiento"))} g de pimiento y ${r0(gLote("pollo_arroz","cebolla"))} g de cebolla en sartén antiadherente, sin aceite, 8-10 min.`});
+    T.push({id:"verduras_pollo",m:polloStart+10,t:"Verduras del pollo",d:`${r0(gLote("pollo_arroz","pimiento"))} g de pimiento rojo en tiras y ${r0(gLote("pollo_arroz","cebolla"))} g de cebolla en juliana en sartén antiadherente, sin aceite (en dos tandas si no caben), 12-15 min.`});
   }
   if(B) T.push({id:"pasta",m:40,t:"Pasta",d:`${r0(gLote("bolonesa","pasta"))} g en la olla grande, 2 min menos que el paquete. Escurre, agua fría 10 s, mezcla con la salsa y reparte en ${n("bolonesa")} táperes. Déjalos enfriar destapados.`});
   if(C){
     const am=Math.max(polloStart+25, B?55:0);
-    T.push({id:"arroz",m:am,t:"Arroz y brócoli",d:`${r0(gLote("pollo_arroz","arroz"))} g de arroz en mucha agua con sal${B?" (la misma olla de la pasta)":""}, 15-16 min; los últimos 4 min, ${r0(gLote("pollo_arroz","brocoli"))} g de brócoli congelado. Escurre, extiéndelo en una bandeja y A LA NEVERA YA: el arroz tiene que estar frío en menos de 1 hora.`});
+    T.push({id:"arroz",m:am,t:"Arroz",d:`${r0(gLote("pollo_arroz","arroz"))} g de arroz en mucha agua con sal${B?" (la misma olla de la pasta)":""}, 15-16 min. Escurre, extiéndelo en una bandeja y A LA NEVERA YA: el arroz tiene que estar frío en menos de 1 hora.`});
     T.push({id:"pollo_montar",m:Math.max(polloStart+55, am+25),t:"Deshuesar y montar el pollo",d:`Reposo 10 min, fuera piel y huesos, trozos gordos. Táperes con el arroz ya frío + verduras + pollo, y si quieres 5 g de AOVE en crudo por táper. Pesa el total y apúntalo en la receta. Deja 1 en la nevera como mucho; el resto, al congelador.`});
   }
   let m = Math.max(0,...T.map(x=>x.m)) + 15;

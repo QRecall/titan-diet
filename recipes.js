@@ -4,17 +4,16 @@
    ========================================================================= */
 const RECIPES = [
 {
-  id:"pollo_arroz", rev:2, short:"Pollo con arroz", n:"Pollo asado con arroz, brócoli y verduras", tipo:"principal", tags:["principal","micro","congela"],
+  id:"pollo_arroz", rev:3, short:"Pollo con arroz", n:"Pollo asado con arroz, pimiento rojo y cebolla", tipo:"principal", tags:["principal","micro","congela"],
   servings:4, minutes:90,
-  cookedWeight:3200, cookedWeightQ:"e",
-  cookedNote:"3.200 g es una ESTIMACIÓN (pollo −25 % al asarse, arroz ×2,8 su peso seco, brócoli casi igual). Pesa el bol lleno el domingo y escribe el número real: es lo que hace que registrar por gramos sea exacto.",
+  cookedWeight:3000, cookedWeightQ:"e",
+  cookedNote:"3.000 g es una ESTIMACIÓN (pollo −25 % al asarse, arroz ×2,8 su peso seco, pimiento y cebolla −35 % al saltearlos). Pesa el bol lleno el domingo y escribe el número real: es lo que hace que registrar por gramos sea exacto.",
   ing:[
     {f:"pollo_carne", g:900, note:"1 pollo entero de ~1,9 kg da aproximadamente esta carne limpia, cruda y sin piel"},
     {f:"pechuga", g:300, note:"extra para llegar a ~1000 kcal y ~70 g de proteína por ración"},
     {f:"arroz", g:600},
-    {f:"brocoli", g:400, note:"congelado; 100 g por ración, sube la fibra"},
-    {f:"pimiento", g:200},
-    {f:"cebolla", g:150},
+    {f:"pimiento", g:450, note:"pimiento ROJO, en tiras; ~110 g por ración, sube la fibra"},
+    {f:"cebolla", g:300, note:"en juliana"},
     {f:"aove", g:20, note:"OPCIONAL y EN CRUDO: un chorrito (5 g) por ración al montar. Es la receta con menos grasa y el AOVE en crudo es la grasa que recomiendan las guías; si no lo quieres, pon 0"},
     {f:"especias", g:8, note:"pimentón dulce, ajo en polvo, orégano, sal, pimienta"}
   ],
@@ -22,9 +21,9 @@ const RECIPES = [
   pasos:[
     "Abre el pollo en mariposa: con tijeras, corta a lo largo de los dos lados del espinazo, quítalo y aplasta el pollo con la palma sobre la bandeja, piel arriba. Así se asa en la mitad de tiempo y de forma pareja. Sécalo, sálalo y ponle las especias. Sin aceite: la piel suelta su propia grasa.",
     "Horno 200 °C, calor arriba y abajo: 45-55 min. Está hecho cuando la parte más gruesa (muslo y pechuga) marca 74 °C con el termómetro. Los 300 g de pechuga extra van en la misma bandeja los últimos 20-25 min, hasta 74 °C.",
-    "Mientras se asa: pimiento y cebolla picados en la sartén antiadherente SIN aceite, 8-10 min a fuego medio con 2-3 cucharadas de agua si se pegan, hasta que estén tiernos y algo dorados.",
-    "Arroz como si fuera pasta: olla grande con mucha agua hirviendo y sal, 600 g de arroz, 15-16 min. Los últimos 4 min echa el brócoli congelado en la misma olla. Escurre todo junto: así queda suelto y no se pega en tanda grande.",
-    "EL ARROZ TIENE RELOJ: extiéndelo con el brócoli en una bandeja o fuente amplia y métela en la nevera nada más escurrirlo. La FSA pide enfriarlo en menos de 1 hora.",
+    "Mientras se asa: pimiento rojo en tiras y cebolla en juliana en la sartén antiadherente grande SIN aceite (si no caben, en dos tandas), 12-15 min a fuego medio con 2-3 cucharadas de agua si se pegan, hasta que estén tiernos y algo dorados.",
+    "Arroz como si fuera pasta: olla grande con mucha agua hirviendo y sal, 600 g de arroz, 15-16 min. Escúrrelo: así queda suelto y no se pega en tanda grande.",
+    "EL ARROZ TIENE RELOJ: extiéndelo en una bandeja o fuente amplia y métela en la nevera nada más escurrirlo. La FSA pide enfriarlo en menos de 1 hora.",
     "Cuando salga el pollo, 10 min de reposo. Quita piel y huesos y corta la carne (y la pechuga) en trozos gordos. Si pesas la carne ya asada, pesará un ~25-35 % menos que en crudo: es normal, no cambies los 900 g de la receta por ese número.",
     "Monta los táperes con el arroz ya frío + verduras + pollo templado y, si quieres, el chorrito de AOVE en crudo por encima (5 g por táper). Pesa el total y escríbelo abajo en «peso cocinado real».",
     "Tapa y al frío enseguida: como mucho 1 ración a la nevera (para el día siguiente) y el resto al congelador el mismo domingo."
