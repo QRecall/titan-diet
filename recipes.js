@@ -260,6 +260,36 @@ const RECIPES = [
   aviso:"Es una <b>adaptación</b> del vídeo (@aussiefitness, «cheesy honey chipotle chicken quesadillas»), no su receta: el vídeo enseña los ingredientes y los pasos pero <b>no da ninguna cantidad</b>. Todos los gramos son míos, pensados para 10 unidades y para Mercadona. Mercadona <b>no vende salsa chipotle, cheddar rallado ni queso rallado light</b> (comprobado en su tienda online el 3/10/2026): el toque chipotle sale del pimentón ahumado y el queso es el rallado especial fundir. Todos los productos de esta receta están verificados con la etiqueta de la tienda, salvo la salsa picante, que no aparecía."
 },
 {
+  id:"fruta_dia", rev:1, short:"Fruta", n:"Fruta del día (pera)", tipo:"fruta", tags:["fruta","fibra","sin cocinar"],
+  useRaw:true, servings:1, minutes:1,
+  cookedWeight:null,
+  cookedNote:"No se cocina: una pera mediana (~180 g sin el corazón).",
+  ing:[
+    {f:"pera", g:180, note:"1 pera mediana, con piel (la piel lleva buena parte de la fibra)"}
+  ],
+  utensilios:"Nada.",
+  pasos:[
+    "Una al día, cuando mejor te venga: de postre, de merienda o antes del gym.",
+    "Con piel: lávala y cómetela entera, menos el corazón.",
+    "Para la facultad aguanta en la mochila sin frío; si está muy madura, en un táper pequeño para que no se aplaste."
+  ],
+  conservacion:{
+    nevera:"Las peras maduran fuera de la nevera; cuando ya ceden un poco al apretar junto al rabo, a la nevera para que aguanten varios días más.",
+    congelador:"No tiene sentido.",
+    descongelar:"—",
+    recalentar:"—",
+    universidad:"Sí, es la más fácil de llevar."
+  },
+  alergenos:"Ninguno de los principales.",
+  variantes:[
+    {n:"Manzana", d:"Una manzana mediana (~180 g, con piel): ~94 kcal y ~4,3 g de fibra, algo menos que la pera."},
+    {n:"2 kiwis", d:"Dos kiwis verdes (~150 g pelados): ~92 kcal y ~4,5 g de fibra, y mucha vitamina C."},
+    {n:"Cambiar de fruta", d:"Cambia el ingrediente en los gramos de arriba o elige otra fruta parecida: lo que importa es comer una pieza entera al día, no zumo."}
+  ],
+  micro:"n/a",
+  aviso:"Se añade para llegar a la fibra: con los platos solos te quedabas en 20-23 g al día y el objetivo son 30. Una pera suma ~103 kcal y ~5,6 g de fibra (valores USDA, estimación)."
+},
+{
   id:"bol_desayuno", rev:2, short:"Bol", n:"Bol de queso batido con chía y fruta", tipo:"desayuno", tags:["desayuno","postre","sin cocinar"],
   useRaw:true, servings:1, minutes:5,
   cookedWeight:null,

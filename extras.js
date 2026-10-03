@@ -115,7 +115,7 @@ const PYR_MAP = {
   arroz:"cereal", pasta:"cereal", patata:"cereal", tortilla:"cereal", pan_chapata:"cereal", avena:"cereal", maiz:"cereal",
   tomate:"frutaverdura", lechuga:"frutaverdura", rucula:"frutaverdura", cebolla:"frutaverdura",
   cebolla_morada:"frutaverdura", pimiento:"frutaverdura", tomate_trit:"frutaverdura",
-  fruta_fp:"frutaverdura", fruta_trop:"frutaverdura", lima:"frutaverdura", cilantro:"frutaverdura",
+  fruta_fp:"frutaverdura", fruta_trop:"frutaverdura", pera:"frutaverdura", manzana:"frutaverdura", kiwi:"frutaverdura", lima:"frutaverdura", cilantro:"frutaverdura",
   aove:"frutaverdura", chia:"proteico",
   pechuga:"proteico", cottage:"lacteo", q_fundir:"lacteo",
   jalapenos:"frutaverdura", brocoli:"frutaverdura", calabacin:"frutaverdura",
@@ -137,13 +137,14 @@ function pyrWeek(){
       const grams = (it.g*scale/r.servings)*mult;
       g[grp]=(g[grp]||0)+grams;
       if(grp==="frutaverdura"){
-        if(it.f==="fruta_fp"||it.f==="fruta_trop"||it.f==="lima") fruta+=grams;
+        if(["fruta_fp","fruta_trop","lima","pera","manzana","kiwi"].includes(it.f)) fruta+=grams;
         else if(it.f!=="aove") veg+=grams;
       }
     });
   };
   S.plan.forEach(p=>{ if(p.r) add(p.r, p.q); });
   S.extras.forEach(e=>{ if(e && e.desayuno) add(e.desayuno, 1); });
+  if(S.fruta && S.plan.some(p=>p.r)) add("fruta_dia", 7);
   for(const k in g) g[k]=g[k]/7;
   return {g, veg:veg/7, fruta:fruta/7, total:(veg+fruta)/7};
 }

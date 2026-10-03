@@ -7,7 +7,7 @@ function renderCompra(){
   $("#batchPicker").innerHTML = `<div class="scrollx"><table class="ingt">
     <thead><tr><th>Receta</th><th class="num">Raciones<br><small>a cocinar</small></th><th class="num">kcal<br><small>/rac.</small></th><th class="num">prot<br><small>/rac.</small></th></tr></thead><tbody>
     ${RECIPES.map(b=>{const r=recipe(b.id),sm=servingMacros(r);
-      return `<tr><td>${esc(b.n)}<br><small>${b.tipo==="antojo"?"antojo — no descuenta comidas principales":b.tipo==="desayuno"?"desayuno/postre":"principal"}</small></td>
+      return `<tr><td>${esc(b.n)}<br><small>${b.tipo==="antojo"?"antojo — no descuenta comidas principales":b.tipo==="desayuno"?"desayuno/postre":b.tipo==="fruta"?"fruta — 1 al día":"principal"}</small></td>
       <td class="num"><input type="number" data-bt="${b.id}" aria-label="Raciones a cocinar de ${esc(b.n)}" value="${S.batches[b.id]??0}" min="0" step="1" style="max-width:90px;text-align:right"></td>
       <td class="num">${r0(sm.kcal)}</td><td class="num">${d1(sm.p)}</td></tr>`;}).join("")}
     </tbody></table></div>
@@ -19,6 +19,7 @@ function renderCompra(){
     S.extras.forEach(e=>{ if(e&&e.desayuno) need[e.desayuno]=(need[e.desayuno]||0)+1; });
     if(!Object.keys(need).length){ toast("La semana está vacía"); return; }
     RECIPES.forEach(r=>{ S.batches[r.id]=Math.ceil(need[r.id]||0); });
+    if(S.fruta) S.batches.fruta_dia = 7;
     save(); renderCompra(); renderDomingo(); toast("Raciones calculadas desde la semana");
   };
   $$("input[data-bt]").forEach(i=>i.onchange=()=>{
@@ -155,7 +156,7 @@ function altaAutomatica(){
   };
   const done=[];
   RECIPES.forEach(r=>{
-    const n=S.batches[r.id]||0; if(!n || r.tipo==="desayuno") return;
+    const n=S.batches[r.id]||0; if(!n || r.tipo==="desayuno" || r.tipo==="fruta") return;
     const nev = r.id==="pollo_arroz" ? Math.min(1,n) : Math.min(2,n);
     add(r.id, nev, n-nev); done.push(`${r.n} (${n})`);
   });

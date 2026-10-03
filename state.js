@@ -31,7 +31,8 @@ function defaultState(){
     consumed:{kcal:0,p:0,c:0,f:0,fib:0},
     plan:Array.from({length:14},(_,i)=>({r:null,q:1})),
     extras:Array.from({length:7},()=>({desayuno:"bol_desayuno",otro:""})),
-    batches:{pollo_arroz:4,pastel_carne:4,bolonesa:4,burritos:0,bocata_pollo:0,quesadillas_chipotle:0,bol_desayuno:0,helado_prot:0},
+    batches:{pollo_arroz:4,pastel_carne:4,bolonesa:4,burritos:0,bocata_pollo:0,quesadillas_chipotle:0,bol_desayuno:0,helado_prot:0,fruta_dia:7},
+    fruta:true,
     pantry:{},
     freezer:[],
     ov:{},          // overrides de recetas
@@ -99,6 +100,8 @@ function saneaEstado(o){
   const isoOK = s => typeof s==="string" && /^\d{4}-\d{2}-\d{2}$/.test(s) && !isNaN(new Date(s+"T12:00:00"));
   S.freezer.forEach(f=>{ if(!isoOK(f.date)) f.date=todayISO(); if(f.left>f.portions) f.left=f.portions; });
   for(const k of Object.keys(S.batches)) S.batches[k]=Math.round(Number(S.batches[k]));
+  S.fruta = S.fruta!==false;
+  if(S.batches.fruta_dia===undefined) S.batches.fruta_dia = 7;
   if(!esReceta(S.adj.recipe)) S.adj.recipe = d.adj.recipe;
   S.adj.ap = S.adj.ap!==false;
   if(!(Number(S.adj.q)>0)) S.adj.q = 1;
@@ -269,6 +272,7 @@ function renderToday(){
   const items=[];
   if(ex.desayuno) items.push({lbl:"Desayuno",id:ex.desayuno,q:1});
   [0,1].forEach(s=>{const p=S.plan[d*2+s]; if(p&&p.r) items.push({lbl:s===0?"Comida":"Cena",id:p.r,q:p.q});});
+  if(S.fruta && items.length) items.push({lbl:"Fruta",id:"fruta_dia",q:1});
   if(!items.length){ el.innerHTML=`<p class="small">No tienes nada planificado para hoy (${DAYS[d].toLowerCase()}). En «Semana» puedes rellenarla con un toque.</p>`; return; }
   const tot=zero(); items.forEach(it=>{const r=recipe(it.id); if(r) addTo(tot, servingMacros(r), it.q);});
   el.innerHTML=`<div class="row" style="justify-content:space-between"><b>${DAYS[d]}</b><span class="badge">${r0(tot.kcal)} kcal · ${d1(tot.p)} g prot · ${d1(tot.f)} g grasa</span></div>
@@ -368,14 +372,15 @@ function dayCombos(){
   const T=S.targets, R=RECIPES;
   const des=R.filter(r=>r.tipo==="desayuno"), pri=R.filter(r=>r.tipo==="principal"), ant=R.filter(r=>r.tipo==="antojo");
   const m=id=>servingMacros(recipe(id));
+  const fr = (S.fruta && recipe("fruta_dia")) ? servingMacros(recipe("fruta_dia")) : null;
   const cenas=[...pri.map(r=>({id:r.id,q:1}))];
   ant.forEach(r=>UNIT_Q.forEach(([q])=>cenas.push({id:r.id,q})));
   const out=[];
   des.forEach(d=>pri.forEach(c=>[1,0.75].forEach(qc=>cenas.forEach(ce=>{
-    const t=zero(); addTo(t,m(d.id)); addTo(t,m(c.id),qc); addTo(t,m(ce.id),ce.q);
+    const t=zero(); addTo(t,m(d.id)); addTo(t,m(c.id),qc); addTo(t,m(ce.id),ce.q); if(fr) addTo(t,fr);
     const ok = (!T.kcal || (t.kcal>=T.kcal-250 && t.kcal<=T.kcal+150)) && (!T.p || t.p>=T.p-5) && (!T.f || t.f<=T.f+15);
     if(!ok) return;
-    const score = (T.kcal?Math.abs(t.kcal-T.kcal)/100:0) + (T.p?Math.max(0,T.p-t.p)/5:0) + (T.f?Math.max(0,t.f-T.f)/5:0) + (qc<1?0.6:0);
+    const score = (T.kcal?Math.abs(t.kcal-T.kcal)/100:0) + (T.p?Math.max(0,T.p-t.p)/5:0) + (T.f?Math.max(0,t.f-T.f)/5:0) + (qc<1?2:0);
     out.push({d:d.id, c:c.id, qc, ce:ce.id, qe:ce.q, t, score});
   }))));
   // quita duplicados (pollo + patatas = patatas + pollo)
@@ -391,7 +396,7 @@ function comboTxt(x){
 function proponerSemana(){
   const combos=dayCombos(); if(!combos.length){ toast("Con estos objetivos no sale ninguna combinación"); return null; }
   const stock={}; S.freezer.forEach(f=>{ stock[f.recipeId]=(stock[f.recipeId]||0)+f.left; });
-  const avail={}; RECIPES.forEach(r=>{ avail[r.id]= r.tipo==="desayuno" ? Infinity : Math.max(S.batches[r.id]||0, stock[r.id]||0); });
+  const avail={}; RECIPES.forEach(r=>{ avail[r.id]= (r.tipo==="desayuno"||r.tipo==="fruta") ? Infinity : Math.max(S.batches[r.id]||0, stock[r.id]||0); });
   const used={}, plan=[]; let prev=null;
   for(let d=0; d<7; d++){
     let best=null, bs=Infinity;
@@ -412,12 +417,13 @@ function renderPlanner(){
   const el=$("#weekPlanner"); if(!el) return;
   const combos=dayCombos();
   const T=S.targets;
-  el.innerHTML=`<p class="small">Combinaciones de <b>desayuno + comida + cena</b> con tus recetas que dan ${T.kcal?`${r0(T.kcal-250)}-${r0(T.kcal+150)} kcal`:""}, al menos ${r0((T.p||0)-5)} g de proteína y como mucho ${r0((T.f||0)+15)} g de grasa (según tus objetivos de «Hoy»).</p>
+  el.innerHTML=`<label class="row tight small" style="margin:0 0 .4rem"><input type="checkbox" id="planFruta" ${S.fruta?"checked":""}> Sumar 1 fruta al día (pera, ~103 kcal y ~5,6 g de fibra)</label><p class="small">Combinaciones de <b>desayuno + comida + cena${S.fruta?" + fruta":""}</b> con tus recetas que dan ${T.kcal?`${r0(T.kcal-250)}-${r0(T.kcal+150)} kcal`:""}, al menos ${r0((T.p||0)-5)} g de proteína y como mucho ${r0((T.f||0)+15)} g de grasa (según tus objetivos de «Hoy»).</p>
     ${combos.length?`<div class="scrollx"><table class="combos"><thead><tr><th>Día</th><th class="num">kcal</th><th class="num">prot</th><th class="num">grasa</th></tr></thead><tbody>
       ${combos.slice(0,12).map(x=>`<tr><td>${comboTxt(x)}</td><td class="num">${r0(x.t.kcal)}</td><td class="num">${r0(x.t.p)}</td><td class="num">${r0(x.t.f)}</td></tr>`).join("")}
     </tbody></table></div>`:`<div class="note warn">Con estos objetivos no sale ninguna combinación de un día. Revisa los objetivos o las raciones.</div>`}
     <div class="row" style="margin-top:.5rem"><button class="btn primary sm" id="btnPlanWeek">Rellenar la semana con esto</button></div>
     <p class="small">Reparte los 7 días con estas combinaciones, variando y sin pasarse de las raciones que vas a cocinar (pestaña «Compra») o que tienes en el congelador. Si una receta está a 0, no la usa. Sustituye lo que haya en comidas, cenas y desayunos.</p>`;
+  $("#planFruta").onchange=e=>{S.fruta=e.target.checked; S.batches.fruta_dia=S.fruta?7:0; save(); renderSemana(); renderToday(); if(typeof renderCompra==="function") renderCompra();};
   $("#btnPlanWeek").onclick=()=>{
     const hasPlan=S.plan.some(p=>p.r);
     if(hasPlan && !confirm("Esto sustituye las comidas, cenas y desayunos que tengas en la semana. ¿Seguir?")) return;
@@ -432,7 +438,7 @@ function renderPlanner(){
   };
 }
 function renderSemana(){
-  const opts = id => `<option value="">— libre —</option>` + RECIPES.filter(r=>r.tipo!=="desayuno")
+  const opts = id => `<option value="">— libre —</option>` + RECIPES.filter(r=>r.tipo!=="desayuno"&&r.tipo!=="fruta")
     .map(r=>`<option value="${r.id}" ${id===r.id?"selected":""}>${esc(r.n)}</option>`).join("");
   let html="";
   for(let d=0; d<7; d++){
@@ -440,6 +446,7 @@ function renderSemana(){
     [0,1].forEach(s=>{const p=S.plan[d*2+s]; if(p.r){const r=recipe(p.r); if(r) addTo(sum, servingMacros(r), p.q);}});
     const ex=S.extras[d]||{};
     if(ex.desayuno){const r=recipe(ex.desayuno); if(r) addTo(sum, servingMacros(r), 1);}
+    if(S.fruta && sum.kcal>0){const r=recipe("fruta_dia"); if(r) addTo(sum, servingMacros(r), 1);}
     html+=`<div class="day"><h4><span>${DAYS[d]}</span><span class="badge">${r0(sum.kcal)} kcal · ${d1(sum.p)} g prot · ${d1(sum.f)} g grasa</span></h4>
       ${sum.kcal>0?dayCheck(sum):""}
       <div class="grid g2">

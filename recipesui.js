@@ -2,7 +2,7 @@
 /* =========================================================================
    8. VISTA RECETAS
    ========================================================================= */
-const FILTERS=[["todas","Todas"],["principal","Principales"],["antojo","Antojos"],["desayuno","Desayuno/postre"],["micro","Solo microondas"]];
+const FILTERS=[["todas","Todas"],["principal","Principales"],["antojo","Antojos"],["desayuno","Desayuno, postre y fruta"],["micro","Solo microondas"]];
 let recFilter="todas";
 const openRec=new Set();   // tarjetas abiertas (se conservan al recalcular)
 function renderRecetas(){
@@ -11,7 +11,7 @@ function renderRecetas(){
   const q=($("#recSearch").value||"").toLowerCase().trim();
   const list = RECIPES.filter(base=>{
     if(recFilter==="micro" && base.micro!=="ok") return false;
-    if(["principal","antojo","desayuno"].includes(recFilter) && base.tipo!==recFilter) return false;
+    if(["principal","antojo","desayuno"].includes(recFilter) && base.tipo!==recFilter && !(recFilter==="desayuno" && base.tipo==="fruta")) return false;
     if(!q) return true;
     const hay = base.n.toLowerCase()+" "+base.ing.map(i=>food(i.f).n.toLowerCase()).join(" ")+" "+base.tags.join(" ");
     return hay.includes(q);
