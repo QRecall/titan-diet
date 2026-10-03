@@ -8,12 +8,20 @@ let storageOK = true;
 const DAYS = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
 const MACROS = [["kcal","Calorías","kcal"],["p","Proteína","g"],["c","Hidratos","g"],["f","Grasa","g"],["fib","Fibra","g"]];
 
+/* Medición Tanita del 03/10/2026: 114,2 kg · 27,7 % grasa · masa libre de grasa 82,57 kg ·
+   TMB según la báscula 2526 kcal · grasa visceral 9 */
+const TANITA = {fecha:"2026-10-03", peso:114.2, grasa:27.7, mlg:82.57, tmbTanita:2526, visceral:9};
+const TARGETS_V = 2;   // sube cuando cambia la forma de estimar: re-aplica la estimación a quien no tenga cifras de MacroFactor
 function estimateTargets(){
-  // Mifflin-St Jeor, hombre 24 a, 193 cm, 113 kg -> TMB
-  const tmb = 10*113 + 6.25*193 - 5*24 + 5;              // ≈ 2221 kcal
-  const mant = Math.round(tmb*1.4/10)*10;                 // gimnasio + poco movimiento fuera ≈ 3110
-  const kcal = Math.round(mant*0.8/10)*10;                // déficit ~20 % ≈ 2490
-  return {kcal, p:190, c:250, f:80, fib:28};
+  // TMB con Katch-McArdle (usa la masa libre de grasa de la Tanita): 370 + 21,6 × 82,57 ≈ 2154 kcal
+  // (Mifflin-St Jeor con 114,2 kg da ≈ 2233; la TMB que imprime la báscula, 2526, sale de una fórmula propia no publicada)
+  const tmb = 370 + 21.6*TANITA.mlg;
+  const mant = Math.round(tmb*1.55/10)*10;                // gimnasio + grappling ≈ 3340
+  const kcal = 2550;                                       // ≈ −790 kcal/día → ~0,7 kg/semana (~0,6 % del peso)
+  const p = 190;                                           // ≈ 2,3 g/kg de masa libre de grasa
+  const f = 80;
+  const c = Math.round((kcal - p*4 - f*9)/4/5)*5;          // el resto, hidratos ≈ 270 g
+  return {kcal, p, c, f, fib:30, mant, v:TARGETS_V};
 }
 function defaultState(){
   const est = estimateTargets();
@@ -64,6 +72,7 @@ function saneaEstado(o){
   }));
 
   for(const k of ["targets","consumed","batches","pantry","ov","fov","checks","sunday","adj"]) S[k]=obj(S[k], d[k]);
+  if(S.targets.source==="estimacion" && S.targets.v!==TARGETS_V){ const e=estimateTargets(); S.targets=Object.assign({}, e, {source:"estimacion", updated:todayISO()}); }
   for(const k of ["kcal","p","c","f","fib"]){
     S.targets[k] = Math.max(0, Number(S.targets[k])||0);
     S.consumed[k] = Math.max(0, Number(S.consumed[k])||0);
@@ -247,7 +256,7 @@ function renderHoy(){
   const isEst = S.targets.source==="estimacion";
   $("#targetSourceNote").className = isEst? "note warn":"note ok";
   $("#targetSourceNote").innerHTML = isEst
-    ? `<b>Estos objetivos son una ESTIMACIÓN de partida, no cifras confirmadas.</b> Mifflin-St Jeor (24 años, 193 cm, 113 kg → TMB ≈ 2.220 kcal) × 1,4 de actividad × 0,8 de déficit ≈ <b>${est.kcal} kcal</b>. El 1,4 probablemente se queda corto con gimnasio + grappling, así que tu déficit real puede ser mayor. No lo afines a ojo: <b>a las 2-3 semanas, pon aquí lo que te diga MacroFactor</b> con tu tendencia de peso. Ritmo razonable: perder un 0,5-1 % del peso a la semana; si bajas más rápido o rindes peor en el tatami, sube 150-250 kcal. La proteína (190 g ≈ 1,7 g/kg) es un valor de trabajo: cuando tengas la bioimpedancia, se puede recalcular sobre tu masa magra.`
+    ? `<b>Objetivos calculados con tu Tanita del ${fmtDate(TANITA.fecha)}</b> (${String(TANITA.peso).replace(".",",")} kg · ${String(TANITA.grasa).replace(".",",")} % de grasa · ${String(TANITA.mlg).replace(".",",")} kg de masa libre de grasa). Metabolismo basal con Katch-McArdle, que usa tu masa libre de grasa: ≈ 2.150 kcal. Con gimnasio + grappling (× 1,55), mantenimiento ≈ <b>${est.mant} kcal</b>. Objetivo <b>${est.kcal} kcal</b>: unas ${est.mant-est.kcal} kcal de déficit, para perder ~0,7 kg a la semana. Proteína ${est.p} g ≈ 2,3 g por kg de masa libre de grasa. Sigue siendo una estimación (± 10 %): <b>a las 2-3 semanas, pon aquí lo que te diga MacroFactor</b> con tu tendencia de peso. Si bajas más de 1 kg a la semana o rindes peor en el tatami, sube 150-250 kcal.`
     : `<b>Objetivos tuyos de MacroFactor</b>, actualizados el ${fmtDate(S.targets.updated)}. Si MacroFactor te los cambia el lunes, cámbialos aquí.`;
   renderToday();
   renderAdj();
