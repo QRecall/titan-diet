@@ -2,7 +2,7 @@
    Estrategia: network-first para el HTML (para que se actualice solo),
    cache-first para iconos y manifest. Los datos del usuario NUNCA pasan por aquí:
    viven en localStorage y no se envían a ningún sitio. */
-const CACHE = "titan-diet-v6";
+const CACHE = "titan-diet-v7";
 const ASSETS = [
   "./",
   "./index.html",

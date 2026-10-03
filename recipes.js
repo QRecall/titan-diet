@@ -45,7 +45,7 @@ const RECIPES = [
   micro:"ok"
 },
 {
-  id:"pastel_carne", rev:2, short:"Patatas con carne", n:"Patatas al horno con carne picada, cottage, jalapeños y huevo", tipo:"principal", tags:["principal","micro","huevo"],
+  id:"pastel_carne", rev:3, short:"Patatas con carne", n:"Patatas al horno con carne picada, cottage, jalapeños y huevo", tipo:"principal", tags:["principal","micro","huevo"],
   servings:4, minutes:60,
   cookedWeight:1950, cookedWeightQ:"e",
   cookedNote:"1.950 g es una ESTIMACIÓN de lo que va en los táperes (patata asada sin aceite −25 %, carne −25 %). Los huevos y el cottage NO entran en este peso: se añaden al servir y la app los cuenta aparte, así que lo que pesas y registras por gramos es solo el táper.",
@@ -56,7 +56,7 @@ const RECIPES = [
     {f:"cebolla", g:150},
     {f:"especias", g:8, note:"pimentón (dulce o ahumado), comino, ajo en polvo, sal, pimienta"},
     {f:"huevo", g:504, aparte:true, note:"AL SERVIR · 2 huevos L cocidos por ración (8 en total)"},
-    {f:"cottage", g:400, aparte:true, note:"AL SERVIR · 100 g por ración, en frío: no se congela ni se calienta"}
+    {f:"cottage", g:800, aparte:true, note:"AL SERVIR · 200 g por ración (1 tarrina), en frío: no se congela ni se calienta"}
   ],
   utensilios:"Horno + 2 bandejas con papel de horno, sartén antiadherente grande, cazo para los huevos, báscula. Para 4 raciones, mejor horno que air fryer: en la air fryer serían 3-4 tandas.",
   pasos:[
@@ -66,7 +66,7 @@ const RECIPES = [
     "Huevos: cuece solo 2 por cada ración que vayas a comer en los próximos 7 días (lo normal: 4 huevos para 2 raciones). Agua hirviendo, 10-11 min, a agua fría, y a la nevera EN SU CÁSCARA. Las raciones que congeles llevan sus huevos recién cocidos el día que las descongeles (10 min).",
     "Mezcla patata + carne y reparte en 4 táperes (pesa cada uno). Los jalapeños, por encima o en un bote aparte.",
     "Tapa cuando esté frío, y a la nevera o al congelador antes de 2 h (regla USDA).",
-    "AL SERVIR: calienta el táper, pela 2 huevos y pártelos por encima, y añade 100 g de cottage frío."
+    "AL SERVIR: calienta el táper, pela 2 huevos y pártelos por encima, y añade una tarrina de cottage frío (200 g)."
   ],
   conservacion:{
     nevera:"Base de patata y carne: la USDA da 3-4 días; la FSA es más prudente con las sobras (unos 2 días). Plan sensato: en nevera las raciones de los próximos 2 días, el resto congelado. Huevos cocidos con cáscara: máximo 7 días (FDA). Cottage abierto: lo que diga su etiqueta; mejor una tarrina pequeña por semana.",
@@ -83,10 +83,10 @@ const RECIPES = [
     {n:"Estilo «patatas bravas»", d:"Pimentón picante en la patata y un poco de salsa picante en la carne. Cambio nutricional despreciable."}
   ],
   micro:"ok",
-  aviso:"Cada ración: <b>400 g de patata, 200 g de carne, 2 huevos y 100 g de cottage</b>. Huevo y cottage van <b>aparte</b>: no entran en el peso del táper. Aviso honesto: <b>no he encontrado ninguna fuente oficial que trate la congelación de patata asada</b>. Si la primera ración congelada no te convence de textura, deja esta receta en nevera y congela las otras dos."
+  aviso:"Cada ración: <b>400 g de patata, 200 g de carne, 2 huevos y 200 g de cottage</b>. Huevo y cottage van <b>aparte</b>: no entran en el peso del táper. Aviso honesto: <b>no he encontrado ninguna fuente oficial que trate la congelación de patata asada</b>. Si la primera ración congelada no te convence de textura, deja esta receta en nevera y congela las otras dos."
 },
 {
-  id:"bolonesa", rev:2, short:"Boloñesa", n:"Pasta boloñesa reforzada con cottage", tipo:"principal", tags:["principal","micro","congela"],
+  id:"bolonesa", rev:3, short:"Boloñesa", n:"Pasta boloñesa reforzada con cottage", tipo:"principal", tags:["principal","micro","congela"],
   servings:4, minutes:50,
   cookedWeight:2600, cookedWeightQ:"e",
   cookedNote:"2.600 g estimados (pasta ×2,3 desde seca cocida un punto firme, carne −22 %, tomate reducido). El cottage NO entra en este peso: se añade al servir y la app lo cuenta aparte. Pésalo.",
@@ -97,7 +97,7 @@ const RECIPES = [
     {f:"pimiento", g:300, note:"muy picado: casi desaparece en la salsa y sube la fibra"},
     {f:"cebolla", g:150},
     {f:"especias", g:8, note:"orégano, ajo, laurel, sal, pimienta"},
-    {f:"cottage", g:400, aparte:true, note:"AL SERVIR · 100 g por ración, en frío por encima: más proteína y menos grasa que el cheddar"}
+    {f:"cottage", g:800, aparte:true, note:"AL SERVIR · 200 g por ración (1 tarrina), en frío por encima: más proteína y menos grasa que el cheddar"}
   ],
   utensilios:"Olla grande, sartén honda o cazuela antiadherente, colador, báscula.",
   pasos:[
@@ -106,7 +106,7 @@ const RECIPES = [
     "Cuece la pasta 2 MINUTOS MENOS de lo que diga el paquete: la pasta pasada de punto se deshace al recalentar. Escúrrela y pásala por agua fría 10 segundos.",
     "Mezcla pasta + salsa (así la pasta absorbe salsa y no se seca). Si la ves seca, un chorrito del agua de cocción: al congelar, la pasta chupa salsa.",
     "Reparte en 4 táperes y déjalos enfriar destapados (no los cierres en caliente). Tapa ya fríos y a la nevera o al congelador antes de 2 h.",
-    "AL SERVIR: calienta y pon 100 g de cottage frío por encima."
+    "AL SERVIR: calienta y pon una tarrina de cottage frío (200 g) por encima."
   ],
   conservacion:{
     nevera:"La USDA da 3-4 días para sobras; la FSA, unos 2. Plan sensato: en nevera las de los próximos 2 días, el resto al congelador. La USDA no tiene una línea específica para pasta cocida: entra en la categoría general de sobras.",
@@ -119,7 +119,7 @@ const RECIPES = [
   variantes:[
     {n:"Boloñesa picante (arrabbiata)", d:"Guindilla o una cucharada de salsa picante en la salsa. Sin cambio nutricional relevante."},
     {n:"Más verdura escondida", d:"Añade 300 g de calabacín rallado a la salsa con la cebolla: +~50 kcal y +3 g de fibra por lote, y llena más."},
-    {n:"Con queso fundido", d:"Si echas de menos el queso: 25 g de cheddar por ración en vez de los 100 g de cottage. Mismas calorías, pero ~7,5 g menos de proteína y ~4 g más de grasa por ración."}
+    {n:"Con queso fundido", d:"Si echas de menos el queso: 25 g de cheddar por ración en vez de la tarrina de cottage: ~65 kcal menos, pero ~17 g menos de proteína y ~2 g más de grasa por ración."}
   ],
   micro:"ok"
 },
@@ -218,7 +218,7 @@ const RECIPES = [
   aviso:"También es una <b>adaptación</b> del vídeo, no su receta. No conozco los ingredientes ni las cantidades de la salsa original."
 },
 {
-  id:"quesadillas_chipotle", rev:2, short:"Quesadillas", n:"Quesadillas de pollo chipotle con miel (meal prep)", tipo:"antojo", tags:["antojo","congela","air fryer"],
+  id:"quesadillas_chipotle", rev:3, short:"Quesadillas", n:"Quesadillas de pollo chipotle con miel (meal prep)", tipo:"antojo", tags:["antojo","congela","air fryer"],
   servings:10, servingsLabel:"quesadillas", minutes:75,
   cookedWeight:null, cookedWeightQ:"p",
   cookedNote:"Registra por UNIDADES: las 10 salen casi iguales. Pesa una quesadilla montada (antes de tostar) y ponla como peso de porción en MacroFactor. El relleno pésalo entero y divídelo entre 10 para repartirlo con báscula, no a ojo.",
@@ -227,20 +227,19 @@ const RECIPES = [
     {f:"especias", g:15, note:"sazonador chipotle: pimentón ahumado, cayena o chile en polvo, comino, ajo en polvo, sal. Mitad para el pollo, mitad para la salsa"},
     {f:"q_batido_0", g:300, note:"base de la salsa (en el vídeo usan cottage; el batido 0 % tiene más proteína y ya lo compras)"},
     {f:"mayo_ligera", g:60},
-    {f:"salsa_chipotle", g:40, note:"si no la encuentras: 20 g más de picante + 1 cucharadita de pimentón ahumado"},
     {f:"picante", g:30},
     {f:"miel", g:40, note:"4 g por quesadilla: es lo que da el toque «honey»"},
     {f:"lima", g:35, note:"zumo de media lima; 1 diente de ajo también a la salsa"},
-    {f:"q_rallado_light", g:150, note:"va MEZCLADO con el pollo y la salsa (15 g por unidad)"},
-    {f:"q_cheddar_rallado", g:300, note:"15 g bajo el relleno + 15 g encima, en cada tortilla"},
+    {f:"q_fundir", g:150, note:"va MEZCLADO con el pollo y la salsa (15 g por unidad)"},
+    {f:"q_fundir", g:300, key:"q_fundir_tortilla", note:"15 g bajo el relleno + 15 g encima, en cada tortilla"},
     {f:"tortilla_grande", g:620, note:"10 tortillas grandes; con las pequeñas de 36 g haz 2 por ración y registra 2"}
   ],
   utensilios:"Sartén grande con tapa, batidora de vaso, dos tenedores (o batidora de varillas para desmenuzar), bol grande, plancha o sartén antiadherente, papel de horno, báscula.",
   pasos:[
     "Seca las pechugas y úntalas con la mitad del sazonador chipotle (sin aceite). Sartén antiadherente a fuego medio, TAPADA: 8-10 min por lado según grosor. Están cuando el centro marca 74 °C o ya no está rosa. Deja reposar 10 min.",
-    "Salsa: en la batidora, queso batido 0 %, mayonesa ligera, salsa chipotle, picante, miel, zumo de lima, el diente de ajo y el resto del sazonador. Tritura hasta que quede lisa. Prueba y ajusta picante o sal.",
-    "Desmenuza el pollo (dos tenedores, o 20 s con varillas eléctricas en el bol). Añade la salsa y el queso rallado light, y cebollino picado si tienes. Mezcla bien. PESA el bol: ese número entre 10 es el relleno de cada quesadilla.",
-    "Monta cada quesadilla: tortilla, 15 g de cheddar en una mitad, 1/10 del relleno encima, otros 15 g de cheddar, dobla.",
+    "Salsa: en la batidora, queso batido 0 %, Salsa Light, picante, 1 cucharadita de pimentón ahumado (Mercadona no vende salsa chipotle), miel, zumo de lima, el diente de ajo y el resto del sazonador. Tritura hasta que quede lisa. Prueba y ajusta picante o sal.",
+    "Desmenuza el pollo (dos tenedores, o 20 s con varillas eléctricas en el bol). Añade la salsa y 150 g de queso rallado para fundir, y cebollino picado si tienes. Mezcla bien. PESA el bol: ese número entre 10 es el relleno de cada quesadilla.",
+    "Monta cada quesadilla: tortilla, 15 g de queso rallado en una mitad, 1/10 del relleno encima, otros 15 g de queso, dobla.",
     "Tuesta en sartén o plancha sin aceite, fuego medio, 2-3 min por lado hasta que esté dorada y el queso fundido. Presiona un poco con la espátula al dar la vuelta.",
     "Las que no comas hoy: deja enfriar del todo sobre una rejilla (si las envuelves calientes sudan y se ablandan), envuelve una a una en papel de horno + aluminio o bolsa zip, etiqueta con fecha, y a la nevera (para los próximos 2 días) o al congelador."
   ],
@@ -252,13 +251,13 @@ const RECIPES = [
     universidad:"Sí, si aceptas que en microondas queda blanda. Llévala en bolsa isotérmica con acumulador de frío y no la dejes más de 2 h sin frío."
   },
   variantes:[
-    {n:"Más proteína", d:"Sube el pollo a 2.000 g (200 g crudos por unidad): cada quesadilla suma ~4,5 g de proteína y ~20 kcal: unos 64 g por unidad, casi los 65 g que anuncia el vídeo."},
-    {n:"Menos grasa", d:"Baja el cheddar a 200 g (20 g por unidad) y quita la mayonesa (sube el queso batido a 360 g): cada quesadilla pierde ~55 kcal y ~5 g de grasa sin notarlo mucho, porque la salsa sigue siendo cremosa."},
+    {n:"Más proteína", d:"Sube el pollo a 2.000 g (200 g crudos por unidad): cada quesadilla suma ~4,5 g de proteína y ~20 kcal: unos 60 g por unidad, cerca de los 65 g que anuncia el vídeo."},
+    {n:"Menos grasa", d:"Baja el queso de las tortillas a 200 g (20 g por unidad) y quita la Salsa Light (sube el queso batido a 360 g): cada quesadilla pierde ~45 kcal y ~4 g de grasa, y la salsa sigue siendo cremosa."},
     {n:"Con las sobras del pollo asado", d:"Si te sobra pollo de la receta 1, desmenúzalo y úsalo aquí en vez de cocinar pechugas: solo haces la salsa y montas."}
   ],
   alergenos:"Gluten (tortillas), leche (quesos) y huevo (mayonesa).",
   micro:"ok",
-  aviso:"Es una <b>adaptación</b> del vídeo (@aussiefitness, «cheesy honey chipotle chicken quesadillas»), no su receta: el vídeo enseña los ingredientes y los pasos pero <b>no da ninguna cantidad</b>. Todos los gramos son míos, pensados para 10 unidades y para comprar en Mercadona. Los «65 g de proteína» que anuncia casi salen con estas cantidades (unos 59 g con pechuga): o sus tortillas y su pollo son más grandes, o la cifra es generosa. Los valores del cheddar rallado, el queso rallado light, la mayonesa ligera, la salsa chipotle y la miel son estimaciones: comprueba las etiquetas."
+  aviso:"Es una <b>adaptación</b> del vídeo (@aussiefitness, «cheesy honey chipotle chicken quesadillas»), no su receta: el vídeo enseña los ingredientes y los pasos pero <b>no da ninguna cantidad</b>. Todos los gramos son míos, pensados para 10 unidades y para Mercadona. Mercadona <b>no vende salsa chipotle, cheddar rallado ni queso rallado light</b> (comprobado en su tienda online el 3/10/2026): el toque chipotle sale del pimentón ahumado y el queso es el rallado especial fundir. Todos los productos de esta receta están verificados con la etiqueta de la tienda, salvo la salsa picante, que no aparecía."
 },
 {
   id:"bol_desayuno", rev:2, short:"Bol", n:"Bol de queso batido con chía y fruta", tipo:"desayuno", tags:["desayuno","postre","sin cocinar"],

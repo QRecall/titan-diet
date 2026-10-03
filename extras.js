@@ -117,9 +117,9 @@ const PYR_MAP = {
   cebolla_morada:"frutaverdura", pimiento:"frutaverdura", tomate_trit:"frutaverdura",
   fruta_fp:"frutaverdura", fruta_trop:"frutaverdura", lima:"frutaverdura", cilantro:"frutaverdura",
   aove:"frutaverdura", chia:"proteico",
-  pechuga:"proteico", cottage:"lacteo", q_cheddar_rallado:"lacteo", q_rallado_light:"lacteo",
+  pechuga:"proteico", cottage:"lacteo", q_fundir:"lacteo",
   jalapenos:"frutaverdura", brocoli:"frutaverdura", calabacin:"frutaverdura",
-  tortilla_grande:"cereal", mayo_ligera:"ocasional", salsa_chipotle:"ocasional", miel:"ocasional",
+  tortilla_grande:"cereal", mayo_ligera:"ocasional", miel:"ocasional",
   salsa_yogur:"ocasional", picante:"ocasional", especias:null
 };
 let pyrSel = null;
