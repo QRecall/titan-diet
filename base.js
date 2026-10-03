@@ -10,8 +10,8 @@ const d1=n=>String(r1(n)).replace(".",",");
 const eur=n=>(Number(n)||0).toFixed(2).replace(".",",");
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function later(fn){ setTimeout(fn,0); }
-function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
-const todayISO=()=>new Date().toISOString().slice(0,10);
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),Math.max(2200,String(msg).length*55));}
+const todayISO=()=>{ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); }; // fecha LOCAL, no UTC
 function fmtDate(iso){if(!iso)return"";const[a,m,d]=iso.split("-");return `${d}/${m}/${a}`;}
 function daysSince(iso){if(!iso)return null;const ms=Date.now()-new Date(iso+"T12:00:00").getTime();return Math.floor(ms/86400000);}
 
@@ -21,21 +21,27 @@ function daysSince(iso){if(!iso)return null;const ms=Date.now()-new Date(iso+"T1
    genérica o producto equivalente) ; p = provisional / pendiente de comprobar
    ========================================================================= */
 const FOODS = {
-  pollo_carne:{n:"Pollo (carne comestible, cruda, sin piel ni hueso)",cat:"Carnicería",st:"crudo, parte comestible",kcal:120,p:18.8,c:0.5,f:5.6,fib:0,q:"v",
-    src:"Etiqueta pollo entero Mercadona (Open Food Facts 2302781004573)",
+  pollo_carne:{n:"Pollo entero (carne comestible, cruda, sin piel ni hueso)",cat:"Carnicería",st:"crudo, parte comestible sin piel",kcal:119,p:21.4,c:0,f:3.1,fib:0,q:"e",
+    src:"USDA FoodData Central, «chicken, broilers or fryers, meat only, raw» (carne sin piel). La etiqueta del pollo entero Mercadona (≈120-128 kcal, 19 g prot., 6 g grasa) incluye la piel; como tú la quitas, se usa el valor sin piel.",
     buyFactor:2.1, buyUnit:"pollo entero", buyNote:"Se compra pollo entero: hacen falta ~2,1 g de pollo entero por cada 1 g de carne limpia (rendimiento estimado 45-50 %).", price:3.50},
+  pechuga:{n:"Pechuga de pollo (filete o entera)",cat:"Carnicería",st:"cruda",kcal:106,p:22,c:0,f:1.8,fib:0,q:"e",
+    src:"Pechuga de pollo entera Mercadona: valores de etiqueta recogidos en FatSecret (106 kcal, 22 g prot., 1,8 g grasa). No la he visto en la ficha oficial: compruébalo con tu bandeja. Precio no verificado.",price:6.9,priceQ:"p"},
   carne_picada:{n:"Carne picada de vacuno 99 %",cat:"Carnicería",st:"cruda",kcal:204,p:19,c:0.5,f:14,fib:0,q:"v",
     src:"Preparado de carne picada vacuno 99 % (OFF 8436569263174) — coincide exactamente con tu entrada provisional",price:9.5,priceQ:"p"},
   lomo_vacuno:{n:"Lomo de vacuno",cat:"Carnicería",st:"crudo",kcal:145,p:23,c:0.5,f:5.7,fib:0,q:"v",
     src:"Lomo vacuno Mercadona (OFF 2302800004812). Precio no verificado.",price:16,priceQ:"p"},
   arroz:{n:"Arroz redondo",cat:"Despensa",st:"seco",kcal:344,p:8.2,c:75,f:1,fib:1.05,q:"v",
     src:"Arroz redondo Hacendado (OFF 8480000050441)",price:1.15, cookFactor:2.8},
-  pasta:{n:"Macarrones",cat:"Despensa",st:"seca",kcal:361,p:13,c:72,f:1.5,fib:3.5,q:"v",
-    src:"Macarrón Hacendado (OFF 8480000062505)",price:1.15, cookFactor:2.5},
+  pasta:{n:"Macarrones",cat:"Despensa",st:"seca",kcal:354,p:11,c:72,f:2,fib:3.5,q:"e",
+    src:"Macarrón Hacendado (8480000062505): MyRealFood da 354 kcal, 11 g prot., 2 g grasa; Open Food Facts daba 361 / 13 / 1,5. Las dos fuentes no coinciden (puede ser un cambio de etiqueta): uso la más prudente en proteína. Mira tu paquete",price:1.15, cookFactor:2.5},
   patata:{n:"Patata",cat:"Frutería",st:"cruda, pelada",kcal:77,p:2,c:17.5,f:0.09,fib:2.1,q:"e",
     src:"USDA FoodData Central (patata cruda). Producto a granel sin etiqueta propia.",price:1.30,priceQ:"p"},
   huevo:{n:"Huevo L",cat:"Huevos y lácteos",st:"crudo, sin cáscara",kcal:150,p:12.5,c:0.5,f:11.1,fib:0,q:"v",
     src:"Huevos L Hacendado (OFF 8437019803032). 1 huevo L ≈ 63 g sin cáscara (rango UE 63-73 g con cáscara).",price:4.03,priceQ:"e",unitG:63,unitName:"huevo"},
+  cottage:{n:"Queso cottage",cat:"Huevos y lácteos",st:"tal cual",kcal:99,p:14,c:2,f:4,fib:0,q:"v",
+    src:"Queso cottage Hacendado (código 8480000609632, valores de etiqueta recogidos en MyRealFood). Precio no verificado.",price:5,priceQ:"p"},
+  jalapenos:{n:"Jalapeños en vinagre (escurridos)",cat:"Despensa",st:"escurridos",kcal:18,p:0.9,c:2.5,f:0.5,fib:1.5,q:"e",
+    src:"Kcal y grasa: Jalapeños picantes en vinagre Hacendado (OFF 8480000331892, bote 135 g). Proteína, hidratos y fibra: ESTIMACIÓN (no aparecían en la ficha consultada). Aporte casi nulo. Precio no verificado.",price:8,priceQ:"p",packG:65,packName:"bote de 135 g (≈65 g escurridos, estimación por su 48,7 % de jalapeño)"},
   q_batido_prot:{n:"Queso fresco batido + proteínas",cat:"Huevos y lácteos",st:"tal cual",kcal:52,p:10,c:3.1,f:0.5,fib:0,q:"v",
     src:"Queso fresco batido +proteínas Hacendado (OFF 8480000210036)",price:2.4,priceQ:"p"},
   q_batido_0:{n:"Queso fresco batido 0 %",cat:"Huevos y lácteos",st:"tal cual",kcal:46,p:8,c:3.5,f:0.1,fib:0,q:"v",
@@ -48,16 +54,19 @@ const FOODS = {
     src:"Tortillas trigo Hacendado (OFF 8480000808592) — 1,13 € / 360 g. Peso por unidad ≈ 36 g (estimado del peso total).",price:3.14,unitG:36,unitName:"tortilla"},
   pan_chapata:{n:"Chapata de cristal (pan de bocata)",cat:"Panadería",st:"tal cual",kcal:299,p:8.8,c:48,f:7,fib:2.5,q:"p",
     src:"Chapata cristal El Horno de Mercadona (OFF 8480000064592). La ficha NO trae azúcares, saturadas, fibra ni sal: la fibra que ves es una estimación mía.",price:4.65,unitG:71,unitName:"panecillo"},
-  maiz:{n:"Maíz dulce en conserva",cat:"Despensa",st:"escurrido",kcal:75,p:2.6,c:9.3,f:2.3,fib:2.84,q:"v",
-    src:"Maíz dulce Hacendado (OFF 8480000167125). Peso escurrido de la lata de 150 g ≈ 90-100 g (estimación).",price:3,priceQ:"p"},
+  maiz:{n:"Maíz dulce en conserva",cat:"Despensa",st:"escurrido",kcal:82,p:3,c:14,f:1,fib:2.84,q:"e",
+    src:"Maíz dulce Hacendado (8480000167125): valores de MyRealFood (82 kcal, 3 g prot., 14 g HC, 1 g grasa); Open Food Facts daba 75 / 2,6 / 9,3 / 2,3. No coinciden: mira la lata. Peso escurrido de la lata de 150 g ≈ 90-100 g (estimación).",price:3,priceQ:"p"},
   tomate:{n:"Tomate",cat:"Frutería",st:"crudo",kcal:18,p:0.88,c:3.9,f:0.2,fib:1.2,q:"e",src:"USDA FoodData Central",price:1.9,priceQ:"p"},
   lechuga:{n:"Lechuga",cat:"Frutería",st:"cruda",kcal:15,p:1.36,c:2.87,f:0.15,fib:1.3,q:"e",src:"USDA FoodData Central",price:2.2,priceQ:"p"},
   rucula:{n:"Rúcula",cat:"Frutería",st:"cruda",kcal:25,p:2.6,c:3.6,f:0.66,fib:1.6,q:"e",src:"USDA FoodData Central",price:8,priceQ:"p"},
   cebolla_morada:{n:"Cebolla morada",cat:"Frutería",st:"cruda",kcal:42,p:0.94,c:9.9,f:0.1,fib:2.2,q:"e",src:"USDA FoodData Central",price:1.9,priceQ:"p"},
+  brocoli:{n:"Brócoli congelado",cat:"Congelados",st:"congelado, tal cual",kcal:34,p:2.8,c:6.6,f:0.4,fib:2.6,q:"e",
+    src:"USDA FoodData Central (brócoli crudo). No he verificado la ficha del brócoli congelado de Mercadona: compruébalo en la bolsa. Precio no verificado.",price:2.6,priceQ:"p"},
+  calabacin:{n:"Calabacín",cat:"Frutería",st:"crudo",kcal:17,p:1.2,c:3.1,f:0.3,fib:1,q:"e",src:"USDA FoodData Central",price:1.9,priceQ:"p"},
   cebolla:{n:"Cebolla",cat:"Frutería",st:"cruda",kcal:40,p:1.1,c:9.3,f:0.1,fib:1.7,q:"e",src:"USDA FoodData Central",price:1.2,priceQ:"p"},
   pimiento:{n:"Pimiento (rojo/verde)",cat:"Frutería",st:"crudo",kcal:26,p:0.99,c:6.03,f:0.3,fib:2.1,q:"e",src:"USDA FoodData Central",price:2.5,priceQ:"p"},
-  aove:{n:"Aceite de oliva virgen extra",cat:"Despensa",st:"tal cual",kcal:822,p:0,c:0,f:91,fib:0,q:"v",
-    src:"AOVE Hacendado (OFF 8480000047403) — 4,45 €/L",price:4.87},
+  aove:{n:"Aceite de oliva virgen extra",cat:"Despensa",st:"tal cual, en crudo",kcal:899,p:0,c:0,f:99.9,fib:0,q:"v",
+    src:"AOVE Hacendado (OFF 8480000047403): la etiqueta da 822 kcal y 91,4 g de grasa por 100 ml; pasado a 100 g (densidad ≈0,915) son ≈899 kcal y ≈99,9 g. 4,45 €/L",price:4.87},
   chia:{n:"Semillas de chía",cat:"Despensa",st:"secas",kcal:464,p:22,c:2.6,f:34,fib:30,q:"v",
     src:"Semillas de chía Hacendado (OFF 8480000054647) — 1,45 € / 150 g",price:9.67},
   avena:{n:"Copos de avena",cat:"Despensa",st:"secos",kcal:370,p:14,c:58,f:6.5,fib:10,q:"e",

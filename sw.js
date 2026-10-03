@@ -2,7 +2,7 @@
    Estrategia: network-first para el HTML (para que se actualice solo),
    cache-first para iconos y manifest. Los datos del usuario NUNCA pasan por aquí:
    viven en localStorage y no se envían a ningún sitio. */
-const CACHE = "titan-diet-v4";
+const CACHE = "titan-diet-v5";
 const ASSETS = [
   "./",
   "./index.html",
@@ -22,7 +22,8 @@ const ASSETS = [
 ];
 
 self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+  // cache:"reload" para no precargar copias viejas de la caché HTTP del navegador (GitHub Pages cachea ~10 min)
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS.map(u => new Request(u, {cache: "reload"})))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener("activate", e => {
@@ -44,8 +45,12 @@ self.addEventListener("fetch", e => {
     e.respondWith(
       fetch(req)
         .then(res => {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put("./index.html", copy));
+          // solo se guarda una respuesta buena de la página principal (nunca un 404 de otra ruta)
+          const p = url.pathname;
+          if (res.ok && (p.endsWith("/") || p.endsWith("/index.html"))) {
+            const copy = res.clone();
+            caches.open(CACHE).then(c => c.put("./index.html", copy));
+          }
           return res;
         })
         .catch(() => caches.match("./index.html").then(r => r || caches.match("./")))
@@ -55,8 +60,7 @@ self.addEventListener("fetch", e => {
 
   e.respondWith(
     caches.match(req).then(hit => hit || fetch(req).then(res => {
-      const copy = res.clone();
-      caches.open(CACHE).then(c => c.put(req, copy));
+      if (res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
       return res;
     }).catch(() => hit))
   );

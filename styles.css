@@ -148,3 +148,19 @@ ol.steps li{margin-bottom:.5rem}
   section[hidden]{display:block!important}
   a{color:#000;text-decoration:none}
 }
+
+/* v5 */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+a{overflow-wrap:anywhere}
+details.rec>summary{cursor:pointer;list-style:none;display:flex;align-items:flex-start;gap:.5rem}
+details.rec>summary::-webkit-details-marker{display:none}
+details.rec>summary::after{content:"▸";margin-left:auto;font-size:1.1rem;line-height:1.4;transition:transform .15s}
+details.rec[open]>summary::after{transform:rotate(90deg)}
+.rec-h{display:flex;flex-direction:column;gap:.15rem}
+.rec-h b{font-size:1.08rem}
+tr.aparte td{background:color-mix(in srgb, var(--warn, #d97706) 8%, transparent)}
+.daytot{font-size:.78rem;display:flex;flex-wrap:wrap;gap:.35rem;margin:.2rem 0 .4rem}
+.daytot span{padding:.1rem .45rem;border-radius:999px;border:1px solid currentColor}
+.daytot .ok{color:var(--ok, #0e9f6e)} .daytot .bad{color:var(--bad, #c0392b)} .daytot .meh{color:var(--warn, #d97706)}
+.combos td,.combos th{font-size:.82rem}
+.ingt input[type=number]{min-width:76px}

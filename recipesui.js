@@ -4,6 +4,7 @@
    ========================================================================= */
 const FILTERS=[["todas","Todas"],["principal","Principales"],["antojo","Antojos"],["desayuno","Desayuno/postre"],["micro","Solo microondas"]];
 let recFilter="todas";
+const openRec=new Set();   // tarjetas abiertas (se conservan al recalcular)
 function renderRecetas(){
   $("#recFilters").innerHTML = FILTERS.map(([k,l])=>`<button class="chip" data-fi="${k}" aria-pressed="${recFilter===k}">${l}</button>`).join("");
   $$("#recFilters .chip").forEach(b=>b.onclick=()=>{recFilter=b.dataset.fi;renderRecetas();});
@@ -29,8 +30,8 @@ function recipeCard(r){
     const F=food(it.f), m=ingMacros(it), scale=r.servings/base.servings;
     const g=it.g*scale;
     const unit = F.unitG? ` <small>(${d1(g/F.unitG)} ${F.unitName||"ud"})</small>`:"";
-    return `<tr>
-      <td>${esc(F.n)} ${qTag(F.q)}<br><small>${esc(F.st)}${it.note?" · "+esc(it.note):""}</small></td>
+    return `<tr${it.aparte?' class="aparte"':''}>
+      <td>${it.aparte?'<span class="tag p">AL SERVIR</span> ':''}${esc(F.n)} ${qTag(F.q)}<br><small>${esc(F.st)}${it.note?" · "+esc(it.note):""}</small></td>
       <td class="num"><input type="number" data-ig="${r.id}|${i}|${it.key||it.f}" aria-label="Gramos de ${esc(F.n)}" value="${r1(it.g)}" min="0" step="5" style="max-width:90px;text-align:right"></td>
       <td class="num">${d1(g)} g${unit}</td>
       <td class="num">${r0(m.kcal*scale)}</td>
@@ -39,12 +40,16 @@ function recipeCard(r){
   }).join("");
 
   const cons=r.conservacion||{};
+  const ap=hasAparte(r), apM=ap?servingPart(r,"aparte"):null;
+  const unitLbl = r.servingsLabel? r.servingsLabel.replace(/s$/,"") : "ración";
   return `<div class="card" id="rec-${r.id}">
-    <div class="row" style="justify-content:space-between;align-items:flex-start">
-      <h2 style="margin:0">${esc(r.n)}</h2>
-      <span class="badge">${r.minutes} min · ${r.micro==="ok"?"microondas ✓":r.micro==="no"?"air fryer":"sin cocinar"}</span>
-    </div>
+    <details class="rec" data-rec="${r.id}" ${openRec.has(r.id)?"open":""}>
+    <summary>
+      <span class="rec-h"><b>${esc(r.n)}</b>
+      <small>${r0(sm.kcal)} kcal · ${d1(sm.p)} g prot · ${d1(sm.f)} g grasa por ${unitLbl} · ${r.minutes} min · ${r.micro==="ok"?"microondas ✓":r.micro==="no"?"air fryer":"sin cocinar"}</small></span>
+    </summary>
     ${r.aviso?`<div class="note warn">${r.aviso}</div>`:""}
+    ${r.alergenos?`<p class="small"><b>Alérgenos:</b> ${esc(r.alergenos)}</p>`:""}
 
     <div class="row" style="margin:.6rem 0">
       <label class="fld" style="max-width:150px;margin:0"><span>${label==="raciones"?"Raciones del lote":"Unidades"}</span>
@@ -65,8 +70,9 @@ function recipeCard(r){
     <div class="grid g2" style="margin-top:.7rem">
       <div><h4>Por lote (${r.servings} ${label})</h4>${macroBox(bm)}</div>
       <div><h4>Por ración</h4>${macroBox(sm)}</div>
-      <div><h4>Por 100 g del plato terminado</h4>${p1?macroBox(p1):`<div class="note warn small" style="margin:0">Sin peso cocinado no puedo darlo. Pesa el resultado y escríbelo arriba: no me lo voy a inventar.</div>`}</div>
+      <div><h4>Por 100 g ${ap?"del táper (sin lo de servir)":"del plato terminado"}</h4>${p1?macroBox(p1):`<div class="note warn small" style="margin:0">Sin peso cocinado no puedo darlo. Pesa el resultado y escríbelo arriba: no me lo voy a inventar.</div>`}</div>
     </div>
+    ${ap?`<div class="note small"><b>Al servir se añade</b> (no va en el táper ni en su peso): ${r.ing.filter(it=>it.aparte).map(it=>esc(food(it.f).n.toLowerCase())).join(" y ")} → ${r0(apM.kcal)} kcal y ${d1(apM.p)} g de proteína por ración, ya incluidos en «Por ración».</div>`:""}
     ${cw?`<p class="small">Peso cocinado usado: <b>${r0(cw)} g</b> ${r.cookedWeightUser?'<span class="tag v">pesado por ti</span>':'<span class="tag e">estimación</span>'} → ración de ≈ <b>${r0(cw/r.servings)} g</b>.</p>`:""}
 
     <details><summary>Preparación (${r.minutes} min)</summary>
@@ -95,6 +101,7 @@ function recipeCard(r){
     <details><summary>Variantes</summary>
       ${r.variantes.map(v=>`<div class="kv" style="display:block"><b>${esc(v.n)}</b><br><span class="small">${v.d}</span></div>`).join("")}
     </details>
+    </details>
   </div>`;
 }
 
@@ -103,6 +110,7 @@ function mfInstructions(r,cw){
   return `<ol class="steps small">
     <li>En MacroFactor: botón <b>«+» → «New Recipe» → «Build from scratch» → Next</b>. <span class="tag v">CONFIRMADO</span> en su Help Center.</li>
     <li>Nombre: <b>${esc(r.n)}</b>. En <b>número de porciones (servings)</b> pon <b>${r.servings}</b>.</li>
+    ${hasAparte(r)?`<li><b>Ojo:</b> mete en la receta <b>solo los ingredientes del táper</b>. Lo marcado «AL SERVIR» (${r.ing.filter(it=>it.aparte).map(it=>esc(food(it.f).n.toLowerCase())).join(", ")}) regístralo aparte cada vez que comas, como alimento suelto: así el peso del táper y los gramos cuadran.</li>`:""}
     <li>«Add Ingredients»: añade uno a uno los ingredientes con los gramos de la columna <b>«g del lote»</b> de arriba. Busca el producto de Mercadona; si no aparece o los valores no cuadran con tu envase, créalo como <b>alimento personalizado</b> (+ → alimento nuevo: eliges «Por 100 g», metes kcal/proteína/hidratos/grasa de la etiqueta). <span class="tag v">CONFIRMADO</span></li>
     <li><b>Lo importante:</b> rellena la casilla <b>«Total Weight»</b> con el peso del plato ya cocinado${cw?` — ahora mismo tienes ${r0(cw)} g${r.cookedWeightUser?" (pesado)":" (estimado: pésalo)"}`:""}. Su documentación dice literalmente que esto <i>«te permitirá registrar la receta usando unidades de masa»</i>. Es decir: podrás registrar «310 g de esto» en vez de «0,7 raciones». <span class="tag v">CONFIRMADO</span></li>
     <li>Si vas a repartir el lote en porciones iguales y comerlas enteras, su propia documentación dice que no hace falta afinar el peso final. El peso real solo importa si vas a comer <b>cantidades variables</b> — que es exactamente tu caso, así que pésalo.</li>
@@ -114,17 +122,18 @@ function mfInstructions(r,cw){
 }
 
 function bindRecipeCards(){
+  $$("details[data-rec]").forEach(d=>d.ontoggle=()=>{ if(d.open) openRec.add(d.dataset.rec); else openRec.delete(d.dataset.rec); });
   $$("input[data-sv]").forEach(i=>i.onchange=()=>{
     const id=i.dataset.sv, v=Math.max(1,Math.round(Number(i.value)||1));
-    S.ov[id]=S.ov[id]||{}; S.ov[id].servings=v; save(); later(()=>{renderRecetas(); renderAdj();});
+    ovFor(id).servings=v; save(); later(()=>{renderRecetas(); renderAdj();});
   });
   $$("input[data-cw]").forEach(i=>i.onchange=()=>{
     const id=i.dataset.cw, v=i.value===""?null:Math.max(0,Number(i.value)||0);
-    S.ov[id]=S.ov[id]||{}; S.ov[id].cookedWeight=v; save(); later(()=>{renderRecetas(); renderAdj();});
+    const o=ovFor(id); o.cookedWeight=v; if(v) o.cwServings=recipe(id).servings; else delete o.cwServings; save(); later(()=>{renderRecetas(); renderAdj();});
   });
   $$("input[data-ig]").forEach(i=>i.onchange=()=>{
     const [id,idx,key]=i.dataset.ig.split("|");
-    S.ov[id]=S.ov[id]||{}; S.ov[id].ing=S.ov[id].ing||{};
+    const o=ovFor(id); o.ing=o.ing||{};
     S.ov[id].ing[idx+"_"+key]=Math.max(0,Number(i.value)||0);
     save(); later(()=>{renderRecetas(); renderAdj();});
   });

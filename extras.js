@@ -12,10 +12,10 @@ const SOURCES=[
   ["Carne picada 99 %","La ficha da 204 kcal, 19 g proteína, 0,5 g HC y 14 g grasa por 100 g: <b>coincide exactamente</b> con la entrada provisional que tenías. Aun así, «99 % carne» no significa magra — 14 g de grasa por 100 g. Comprueba el envase que compres.","es.openfoodfacts.org/producto/8436569263174"],
   ["Verduras, patata y alimentos a granel","USDA FoodData Central (no tienen etiqueta propia en Mercadona). Marcados como ESTIMACIÓN.","fdc.nal.usda.gov"],
   ["Rendimiento del pollo entero","No hay una cifra oficial única. Las fuentes consultadas dan ~50-65 % de carne aprovechable con piel, ~45-50 % sin piel, ~25-30 % de hueso. Aquí se usa un factor de 2,1 g de pollo entero por 1 g de carne limpia, editable. Pesa tu carne limpia el domingo y tendrás tu número real.",""],
-  ["Arroz cocido y Bacillus cereus","Food Standards Agency (Reino Unido): enfriar rápido, máximo 1 día en nevera, congelar dentro de la primera hora, recalentar una sola vez.","www.gov.uk/government/publications/home-food-fact-checker/home-food-fact-checker"],
+  ["Arroz cocido y Bacillus cereus","Food Standards Agency (Reino Unido): enfriar en menos de 1 hora, máximo 1 día en nevera, congelar lo antes posible una vez frío, recalentar una sola vez. El NHS dice lo mismo (enfriar en 1 h, consumir en 24 h).","www.gov.uk/government/publications/home-food-fact-checker/home-food-fact-checker"],
   ["Regla de las 2 horas y zona de peligro","USDA FSIS: no más de 2 h fuera de la nevera (1 h si hace más de 32 °C); zona de peligro 4-60 °C.","www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/danger-zone-40f-140f"],
-  ["Días en nevera y meses en congelador","FoodSafety.gov / FDA Cold Food Storage Chart y USDA FSIS «Leftovers and Food Safety»: carne y aves cocinadas 3-4 días en nevera y 2-6 meses congeladas; sopas y guisos 2-3 meses; cazuelas con huevo 2-3 meses; huevo duro 1 semana en nevera y <b>«no congelar»</b>.","www.foodsafety.gov/food-safety-charts/cold-food-storage-charts"],
-  ["Recalentar desde congelado y a qué temperatura","USDA FSIS: es seguro recalentar sobras congeladas sin descongelar; objetivo 74 °C (165 °F) medido con termómetro; en microondas, tapar, remover y dejar reposar.","www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety"],
+  ["Días en nevera y meses en congelador","FoodSafety.gov / FDA Cold Food Storage Chart y USDA FSIS «Leftovers and Food Safety»: carne y aves cocinadas 3-4 días en nevera (la FSA británica es más prudente con las sobras: unos 2 días) y, según la tabla, 2-6 meses congeladas por calidad (la página de sobras de la USDA dice 3-4 meses); sopas y guisos 2-3 meses; cazuelas con huevo 2-3 meses; huevo duro 1 semana en nevera y <b>«no congelar»</b>.","www.foodsafety.gov/food-safety-charts/cold-food-storage-charts"],
+  ["Recalentar desde congelado y a qué temperatura","USDA FSIS: es seguro recalentar sobras congeladas sin descongelar (la FSA prefiere descongelar del todo antes, y con táperes grandes es lo práctico); objetivo 74 °C (165 °F) medido con termómetro; en microondas, tapar, remover y dejar reposar.","www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety"],
   ["Llevar comida en la mochila","USDA FSIS «Keeping Bag Lunches Safe»: bolsa isotérmica y <b>al menos dos</b> fuentes de frío; sigue aplicando el máximo de 2 horas sin frío.","www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/keeping-bag-lunches-safe"],
   ["Tomate cortado y hoja verde cortada","FDA: tomate ya cortado, máximo 4 h a temperatura ambiente; hoja verde cortada a ≤5 °C y máximo 7 días. Son guías para restauración, pero es el criterio técnico de fondo.","www.fda.gov/food/retail-food-industryregulatory-assistance-training/time-public-health-control-cut-tomatoes"],
   ["Etiquetar y rotar","AESAN: anotar la fecha de congelación en los envases y consumir primero lo más antiguo.","www.aesan.gob.es/AECOSAN/web/para_el_consumidor/ampliacion/colocar_segura.htm"],
@@ -26,9 +26,30 @@ const SOURCES=[
 ];
 function renderDatos(){
   renderStoreStatus();
+  renderFoodEditor();
   $("#sourcesList").innerHTML = SOURCES.map(([t,d,u])=>
     `<details><summary>${esc(t)}</summary><p class="small">${d}</p>${u?`<p class="small"><a href="https://${u.replace(/^https?:\/\//,"")}" target="_blank" rel="noopener">${esc(u)}</a></p>`:""}</details>`).join("")
     + `<div class="note warn small"><b>Vacíos que no he rellenado a ojo:</b> ninguna agencia oficial (AESAN, FSA, USDA, FDA, EFSA) dice nada sobre <b>congelar patata cocida</b>; tampoco hay cifra oficial de meses para arroz o pasta cocidos congelados; ni una línea separada para «huevo duro pelado» en nevera. El nº de tortillas por paquete y el peso escurrido del maíz son estimaciones del peso total. La ficha del pan de chapata no trae fibra: la que ves es estimada.</div>`;
+}
+let feSel=null;
+function renderFoodEditor(){
+  const el=$("#foodEditor"); if(!el) return;
+  const ids=Object.keys(FOODS).filter(id=>!FOODS[id].noWeight).sort((a,b)=>FOODS[a].n.localeCompare(FOODS[b].n));
+  if(!feSel || !FOODS[feSel]) feSel = FOODS.proteina? "proteina" : ids[0];
+  const F=food(feSel), B=FOODS[feSel], ov=S.fov[feSel]||{};
+  const fld=(k,l,step)=>`<label class="fld"><span>${l}${ov[k]!==undefined?' <span class="tag v">TUYO</span>':''}</span><input type="number" data-fe="${k}" value="${F[k]??0}" min="0" step="${step}" aria-label="${l}"></label>`;
+  el.innerHTML=`<label class="fld"><span>Alimento</span><select id="feSelect">${ids.map(id=>`<option value="${id}" ${id===feSel?"selected":""}>${esc(FOODS[id].n)}${S.fov[id]?" ✎":""}</option>`).join("")}</select></label>
+    <div class="grid g3">${fld("kcal","kcal",1)}${fld("p","Proteína (g)",0.1)}${fld("c","Hidratos (g)",0.1)}${fld("f","Grasa (g)",0.1)}${fld("fib","Fibra (g)",0.1)}${fld("price","Precio (€/kg)",0.01)}</div>
+    <p class="small">Valor de la app: ${r0(B.kcal)} kcal · ${d1(B.p)} P · ${d1(B.c)} HC · ${d1(B.f)} G ${qTag(B.q)}<br>${B.src?esc(B.src.replace(/<[^>]+>/g,"")):""}</p>
+    <div class="row"><button class="btn primary sm" id="feSave">Guardar</button><button class="btn ghost sm" id="feReset" ${S.fov[feSel]?"":"disabled"}>Volver al valor de la app</button></div>`;
+  $("#feSelect").onchange=e=>{feSel=e.target.value; renderFoodEditor();};
+  $("#feSave").onclick=()=>{
+    const o={};
+    $$("input[data-fe]").forEach(i=>{ const k=i.dataset.fe, v=Number(i.value); if(i.value!=="" && isFinite(v) && v>=0 && v!==Number(B[k]??0)) o[k]=v; });
+    if(Object.keys(o).length) S.fov[feSel]=o; else delete S.fov[feSel];
+    save(); renderAll(); toast("Alimento guardado");
+  };
+  $("#feReset").onclick=()=>{ delete S.fov[feSel]; save(); renderAll(); toast("Valor de la app restaurado"); };
 }
 $("#btnExport").onclick=()=>{
   const blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});
@@ -96,6 +117,9 @@ const PYR_MAP = {
   cebolla_morada:"frutaverdura", pimiento:"frutaverdura", tomate_trit:"frutaverdura",
   fruta_fp:"frutaverdura", fruta_trop:"frutaverdura", lima:"frutaverdura", cilantro:"frutaverdura",
   aove:"frutaverdura", chia:"proteico",
+  pechuga:"proteico", cottage:"lacteo", q_cheddar_rallado:"lacteo", q_rallado_light:"lacteo",
+  jalapenos:"frutaverdura", brocoli:"frutaverdura", calabacin:"frutaverdura",
+  tortilla_grande:"cereal", mayo_ligera:"ocasional", salsa_chipotle:"ocasional", miel:"ocasional",
   salsa_yogur:"ocasional", picante:"ocasional", especias:null
 };
 let pyrSel = null;
@@ -230,3 +254,9 @@ try{
   if(qv && VIEWS.some(v=>v[0]===qv)) S.tab=qv;
 }catch(e){}
 renderAll();
+// recetas que han cambiado: los ajustes guardados sobre la versión anterior se han descartado
+if(S.ovReset && S.ovReset.length){
+  const names=S.ovReset.map(id=>(RECIPES.find(r=>r.id===id)||{}).short||id).join(", ");
+  setTimeout(()=>toast(`Recetas actualizadas (${names}): tus ajustes antiguos de esas recetas se han borrado porque eran de la versión anterior. Vuelve a pesar el domingo.`),400);
+  S.ovReset=[]; save();
+}

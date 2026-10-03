@@ -78,7 +78,7 @@ function renderEquipo(){
       </tbody>
     </table></div>
     <p class="small"><b>Para tus dos usos:</b> en el <b>bol de queso batido</b> cualquiera vale, pero si te molestan los tropezones elige caramelo o vainilla en vez de cookies&amp;cream. En el <b>helado de fruta</b>, la fruta ya endulza: si quieres lo más limpio, la isolada de Bulk (0,4 g de azúcar por dosis). <b>Mejor relación €/proteína real: HSN Evowhey.</b></p>
-    <div class="note">Cuando compres, <b>abre la ficha del bote y corrige los valores de «Proteína en polvo»</b> en la biblioteca de recetas: los que hay puestos ahora (390 kcal, 78 g prot./100 g) son de una whey concentrada típica, no de tu bote. Y <b>pesa el cacito</b>: no todos son de 30 g.</div>
+    <div class="note">Cuando compres, <b>abre la ficha del bote y corrige los valores de «Proteína en polvo»</b> en la pestaña «Datos» → «Corregir un alimento»: los que hay puestos ahora (390 kcal, 78 g prot./100 g) son de una whey concentrada típica, no de tu bote. Y <b>pesa el cacito</b>: no todos son de 30 g.</div>
 
     <h3>Creatina</h3>
     <div class="scrollx"><table>
@@ -125,8 +125,8 @@ function renderEquipo(){
   <div class="card">
     <h2>Equipamiento que ya tienes y cómo se reparte</h2>
     <ul class="small">
-      <li><b>Horno</b> — pollo entero y el pastel de carne. Es lo que trabaja solo mientras tú haces otra cosa.</li>
-      <li><b>Air fryer</b> — patata en dados (mejor que hervida para congelar) y recalentar bocatas.</li>
+      <li><b>Horno</b> — pollo entero y las patatas en dados (2 bandejas). Es lo que trabaja solo mientras tú haces otra cosa.</li>
+      <li><b>Air fryer</b> — raciones sueltas de patata y recalentar bocatas.</li>
       <li><b>Fogones</b> — arroz, pasta y las dos carnes picadas.</li>
       <li><b>Batidora</b> — solo el helado proteico. Sin ella hay alternativa (mirar la receta).</li>
       <li><b>Microondas</b> — entre semana, en casa y en la facultad. Las tres recetas principales están diseñadas para esto.</li>

@@ -18,6 +18,7 @@
 </head>
 <body>
 
+<h1 class="sr-only">TITAN Diet</h1>
 <header class="top">
   <div class="brand">
     <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 14.9 8.2H9.1L12 3Z" fill="#fff"/><path d="M8.6 9.1h6.8l2.1 3.8H6.5l2.1-3.8Z" fill="#fff" opacity=".92"/><path d="M5.9 13.8h12.2l2.4 4.4H3.5l2.4-4.4Z" fill="#fff" opacity=".8"/></svg></span>
@@ -48,6 +49,10 @@
   </div>
 
   <div class="card">
+    <h2>Hoy toca</h2>
+    <div id="todayPlan"></div>
+  </div>
+  <div class="card">
     <h2>¿Qué me cabe ahora?</h2>
     <p class="small">Elige un táper y una porción: te digo qué aporta esa porción y qué queda del día. No compensa nada ni te manda hacer nada raro.</p>
     <div class="grid g2">
@@ -63,7 +68,8 @@
   <div class="card noprint">
     <h3>Cómo se usa esto (30 segundos)</h3>
     <ol class="steps small">
-      <li><b>Domingo:</b> pestaña «Domingo» → cocinas los lotes → repartes en táperes → los das de alta en «Congelador».</li>
+      <li><b>Semana:</b> «Rellenar la semana» te propone días que cuadran con tus objetivos; en «Compra», «Calcular raciones desde la semana» y sale la lista.</li>
+      <li><b>Domingo:</b> pestaña «Domingo» → cocinas en el orden que marca → al marcar «Dar de alta el stock» se apunta solo en «Congelador».</li>
       <li><b>Antes de comprar:</b> pestaña «Compra» → marcas lo que ya tienes → la lista se recalcula sola.</li>
       <li><b>Cada día:</b> aquí arriba metes objetivo y consumido de MacroFactor, eliges el táper y la porción que encaja.</li>
       <li><b>Registrar:</b> en MacroFactor registras la receta por gramos (pestaña «Recetas» → «Cómo meterla en MacroFactor»).</li>
@@ -78,6 +84,10 @@
     <p class="small">14 huecos de comida y cena. El plan base son <b>12 raciones</b> de táper + <b>2 libres</b>. Desayuno, almuerzo, merienda y postre van aparte y no gastan raciones.</p>
     <div id="weekCount"></div>
   </div>
+  <div class="card">
+    <h3>Días que cuadran</h3>
+    <div id="weekPlanner"></div>
+  </div>
   <div id="weekDays"></div>
   <div class="card">
     <h3>Fuera de las 14</h3>
@@ -90,7 +100,7 @@
 <section id="v-recetas" hidden>
   <div class="card noprint">
     <div class="row">
-      <input type="search" id="recSearch" placeholder="Buscar receta o ingrediente…" style="flex:1;min-width:180px">
+      <input type="search" id="recSearch" aria-label="Buscar receta o ingrediente" placeholder="Buscar receta o ingrediente…" style="flex:1;min-width:180px">
     </div>
     <div class="row tight" id="recFilters" style="margin-top:.5rem"></div>
   </div>
@@ -202,6 +212,11 @@
     </ul>
   </div>
   <div class="card">
+    <h3>Corregir un alimento con tu etiqueta</h3>
+    <p class="small">Si compras un producto con valores distintos (la proteína en polvo, la pechuga, el cottage…), pon aquí los de su etiqueta <b>por 100 g</b>. Se recalcula todo: recetas, compra y planificador.</p>
+    <div id="foodEditor"></div>
+  </div>
+  <div class="card">
     <h3>De dónde salen los números</h3>
     <div id="sourcesList"></div>
   </div>
@@ -230,6 +245,13 @@
 (function(){
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
+      // si ya había una versión controlando la página y llega otra, recarga una vez para usar el código nuevo
+      var hadCtrl=!!navigator.serviceWorker.controller, reloaded=false;
+      navigator.serviceWorker.addEventListener("controllerchange",function(){
+        if(!hadCtrl||reloaded) return; reloaded=true;
+        try{ if(typeof saveNow==="function") saveNow(); }catch(_){}
+        location.reload();
+      });
       navigator.serviceWorker.register("sw.js").catch(function(){});
     });
   }
