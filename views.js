@@ -135,6 +135,7 @@ function sundayTasks(){
   let m = Math.max(0,...T.map(x=>x.m)) + 15;
   if(on("burritos")){ T.push({id:"burritos",m,t:"Relleno de burritos",d:`Pechuga y lomo en tiras, por separado, en sartén sin aceite; verduras salteadas. Dos rellenos, pesados y divididos. Solo relleno, sin montar.`}); m+=25; }
   if(on("bocata_pollo")){ T.push({id:"bocatas",m,t:"Bocatas",d:`Plancha la pechuga especiada sin aceite, monta ${n("bocata_pollo")} bocatas SIN salsa y envuelve en papel de horno + aluminio. La salsa, en su bote.`}); m+=20; }
+  if(on("pizza_pollo")){ T.push({id:"pizzas",m,t:"Pizzas de pollo",d:`Pollo especiado al horno sin aceite; masa de harina integral + queso batido, ${n("pizza_pollo")} bolas pesadas; prehornea las bases 5-6 min, monta y hornea 8-10 min. Enfría y congela una a una.`}); m+=40; }
   if(on("quesadillas_chipotle")){ T.push({id:"quesadillas",m,t:"Quesadillas chipotle",d:`Pechuga tapada a fuego medio sin aceite hasta 74 °C, salsa en la batidora, desmenuza y mezcla con el queso. Monta ${n("quesadillas_chipotle")}, tuesta sin aceite, enfría en rejilla y envuelve una a una.`}); m+=45; }
   if(on("helado_prot")){ T.push({id:"helado",m,t:"Bolsas del helado",d:`${n("helado_prot")} bolsas zip con su fruta, chía y proteína pesadas, al congelador.`}); m+=10; }
   if(on("bol_desayuno")){ T.push({id:"bol",m,t:"Botes del bol",d:`Hasta 3 botes de queso batido + chía para los próximos días (aguantan 2-3 días en nevera).`}); m+=5; }

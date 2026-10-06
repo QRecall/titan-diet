@@ -260,6 +260,47 @@ const RECIPES = [
   aviso:"Es una <b>adaptación</b> del vídeo (@aussiefitness, «cheesy honey chipotle chicken quesadillas»), no su receta: el vídeo enseña los ingredientes y los pasos pero <b>no da ninguna cantidad</b>. Todos los gramos son míos, pensados para 10 unidades y para Mercadona. Mercadona <b>no vende salsa chipotle, cheddar rallado ni queso rallado light</b> (comprobado en su tienda online el 3/10/2026): el toque chipotle sale del pimentón ahumado y el queso es el rallado especial fundir. Todos los productos de esta receta están verificados con la etiqueta de la tienda, salvo la salsa picante, que no aparecía."
 },
 {
+  id:"pizza_pollo", rev:1, short:"Pizzas", n:"Pizza proteica de pollo con masa de queso batido (integral)", tipo:"antojo", tags:["antojo","congela","horno"],
+  servings:4, servingsLabel:"pizzas", minutes:60,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Registra por UNIDADES: las 4 pizzas salen casi iguales si repartes la masa y los toppings con báscula. Pesa una pizza ya horneada y ponla como peso de porción en MacroFactor.",
+  ing:[
+    {f:"harina_integral", g:280, note:"70 g por pizza"},
+    {f:"q_batido_0", g:280, note:"70 g por pizza: es el «agua» de la masa"},
+    {f:"levadura", g:10, note:"1 cucharadita rasa (unos 8-10 g) + una pizca de sal"},
+    {f:"pechuga", g:400, note:"100 g crudos por pizza, en tiras"},
+    {f:"especias", g:10, note:"pimentón, ajo en polvo, orégano, sal y pimienta para el pollo"},
+    {f:"tomate_trit", g:160, note:"40 g por pizza, con orégano"},
+    {f:"mozza_light", g:160, note:"40 g por pizza, escurrida y a trocitos (1 bola de 125 g + un poco más)"},
+    {f:"pimiento", g:120, note:"rojo, en tiras"},
+    {f:"cebolla_morada", g:120, note:"en juliana"}
+  ],
+  utensilios:"Bol grande, báscula, rodillo, 2 bandejas de horno con papel, papel film o bolsas zip.",
+  pasos:[
+    "Horno a 220 °C. Pollo en tiras con las especias, en una bandeja con papel, sin aceite: 12-15 min hasta que no quede rosa (74 °C). Mientras, corta pimiento y cebolla.",
+    "Masa: mezcla la harina integral, la levadura y la sal; añade el queso batido y amasa 2-3 min hasta que no se pegue (si se pega, una cucharada más de harina; si se agrieta, una de batido). Divide en 4 bolas de unos 140 g pesándolas.",
+    "Estira cada bola con el rodillo sobre papel de horno, fina (~20 cm). Hornea las bases solas 5-6 min a 220 °C para que no se queden crudas debajo.",
+    "Monta cada base: 40 g de tomate con orégano, el pollo repartido (pésalo y divide entre 4), pimiento, cebolla y 40 g de mozzarella a trocitos.",
+    "Hornea 8-10 min más, hasta que el borde se dore y el queso funda.",
+    "Para meal prep: deja enfriar en rejilla, envuelve cada pizza en film o bolsa zip y congela plana. Etiqueta con fecha."
+  ],
+  conservacion:{
+    nevera:"Horneada: 3-4 días (USDA para comida cocinada con pollo).",
+    congelador:"Horneada y envuelta una a una: 1-2 meses de buena calidad.",
+    descongelar:"Mejor directa del congelador al horno o a la air fryer; si no, nevera la noche antes.",
+    recalentar:"Horno o air fryer a 180-200 °C: 8-10 min desde congelada, 5-6 min desde nevera, hasta que esté bien caliente en el centro. En microondas se come, pero la base queda blanda.",
+    universidad:"Se puede llevar fría o calentarla en el microondas (más blanda). Mejor en casa con air fryer."
+  },
+  variantes:[
+    {n:"Más hidratos", d:"80 g de harina y 80 g de batido por pizza: +37 kcal y +7 g de hidratos por unidad."},
+    {n:"Harina blanca", d:"Con harina de trigo normal salen unos 6 g más de hidratos y unos 5 g menos de fibra por pizza. Hay que añadirla a la base de datos antes de cambiarla."},
+    {n:"Más verdura", d:"Añade champiñón laminado o espinacas: casi no suma kcal y sube la fibra."}
+  ],
+  alergenos:"Gluten (harina de trigo) y leche (queso batido, mozzarella).",
+  micro:"ok",
+  aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@moishabenitez, 429 kcal y 38 g de proteína por pizza según él), no su receta exacta: en el vídeo no se ven las cantidades de todo. Valores de la harina integral, la mozzarella light y el tomate triturado: FatSecret; el queso batido y la pechuga: etiqueta Mercadona. La fibra de la harina es estimación."
+},
+{
   id:"fruta_dia", rev:1, short:"Fruta", n:"Fruta del día (pera)", tipo:"fruta", tags:["fruta","fibra","sin cocinar"],
   useRaw:true, servings:1, minutes:1,
   cookedWeight:null,
