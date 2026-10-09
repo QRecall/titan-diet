@@ -31,7 +31,7 @@ function defaultState(){
     consumed:{kcal:0,p:0,c:0,f:0,fib:0},
     plan:Array.from({length:14},(_,i)=>({r:null,q:1})),
     extras:Array.from({length:7},()=>({desayuno:"bol_desayuno",otro:""})),
-    batches:{pollo_arroz:4,pastel_carne:4,bolonesa:4,burritos:0,bocata_pollo:0,quesadillas_chipotle:0,pizza_pollo:0,bol_desayuno:0,helado_prot:0,fruta_dia:7},
+    batches:{pollo_arroz:4,pastel_carne:4,bolonesa:4,burritos:0,bocata_pollo:0,quesadillas_chipotle:0,pizza_pollo:0,tarta_choco:0,bol_desayuno:0,helado_prot:0,fruta_dia:7},
     fruta:true,
     pantry:{},
     freezer:[],
@@ -277,7 +277,7 @@ function renderToday(){
   const tot=zero(); items.forEach(it=>{const r=recipe(it.id); if(r) addTo(tot, servingMacros(r), it.q);});
   el.innerHTML=`<div class="row" style="justify-content:space-between"><b>${DAYS[d]}</b><span class="badge">${r0(tot.kcal)} kcal · ${d1(tot.p)} g prot · ${d1(tot.f)} g grasa</span></div>
     <ul class="checks" style="margin-top:.4rem">${items.map(it=>{const r=recipe(it.id); if(!r) return "";
-      const qtxt = r.servingsLabel? `${it.q} ${it.q===1? r.servingsLabel.replace(/s$/,""):r.servingsLabel}` : (it.q===1?"1 ración":`${String(it.q).replace(".",",")} ración`);
+      const qtxt = r.servingsLabel? `${it.q} ${it.q===1? r.servingsLabel.replace(/ones$/,"ón").replace(/s$/,""):r.servingsLabel}` : (it.q===1?"1 ración":`${String(it.q).replace(".",",")} ración`);
       return `<li><span style="flex:1"><b>${it.lbl}:</b> ${esc(r.n)} <small>(${qtxt})</small></span>
         <button class="btn xs" data-today="${it.id}" data-tq="${it.q}">Ver</button></li>`;}).join("")}</ul>`;
   $$("[data-today]").forEach(b=>b.onclick=()=>{S.adj.recipe=b.dataset.today; const q=Number(b.dataset.tq); S.adj.q=q>0?q:1; S.adj.g=null; save(); renderAdj(); $("#adjRecipe").scrollIntoView({behavior:"smooth",block:"center"});});
@@ -389,7 +389,7 @@ function dayCombos(){
 }
 function comboTxt(x){
   const part=(id,q)=>{const r=RECIPES.find(z=>z.id===id); const nm=r.short||r.n;
-    if(r.servingsLabel) return `${q} ${q===1? r.servingsLabel.replace(/s$/,"") : r.servingsLabel}`;
+    if(r.servingsLabel) return `${q} ${q===1? r.servingsLabel.replace(/ones$/,"ón").replace(/s$/,"") : r.servingsLabel}`;
     return q===1? nm : `${nm} (${q===0.75?"¾":String(q).replace(".",",")})`;};
   return esc(`${part(x.d,1)} + ${part(x.c,x.qc)} + ${part(x.ce,x.qe)}`);
 }

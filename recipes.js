@@ -301,6 +301,50 @@ const RECIPES = [
   aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@moishabenitez, 429 kcal y 38 g de proteína por pizza según él), no su receta exacta: en el vídeo no se ven las cantidades de todo. Valores de la harina integral, la mozzarella light y el tomate triturado: FatSecret; el queso batido y la pechuga: etiqueta Mercadona. La fibra de la harina es estimación."
 },
 {
+  id:"tarta_choco", rev:1, short:"Tarta choco", n:"Tarta proteica de chocolate crujiente", tipo:"antojo", tags:["antojo","postre","merienda","horno"],
+  servings:5, servingsLabel:"porciones", minutes:35,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Registra por PORCIONES: corta la tarta en 5 trozos iguales (pesa la tarta entera y divide). En MacroFactor, crea la receta con la tarta entera y registra 1/5.",
+  ing:[
+    {f:"bebida_almendra", g:60, note:"60 ml"},
+    {f:"claras", g:30},
+    {f:"compota_manzana", g:30, note:"sustituye parte de la grasa y da jugosidad"},
+    {f:"q_batido_0", g:45, note:"en lugar del yogur griego 0 % del vídeo (no encontré sus valores en Mercadona); hace el mismo papel"},
+    {f:"avena", g:20, note:"triturada en harina con la batidora"},
+    {f:"proteina", g:30, note:"mejor de chocolate o vainilla; el vídeo usa 25 g, aquí 30 para subir la proteína"},
+    {f:"cacao_puro", g:12},
+    {f:"eritritol", g:22, note:"20-25 g, al gusto"},
+    {f:"levadura", g:2, note:"media cucharadita + una pizca de sal"},
+    {f:"choco_0", g:20, note:"fundido, para la cobertura (el vídeo usa 30 g; con 20 hay unos 50 kcal y 4 g de grasa menos)"},
+    {f:"corn_flakes", g:25, note:"«1 taza» del vídeo, más o menos; dan el crujiente"}
+  ],
+  utensilios:"Horno, molde redondo de 23 cm con papel de horno, 2 boles, batidora (para la avena), varillas, microondas para fundir el chocolate, báscula.",
+  pasos:[
+    "Horno a 175 °C. Forra el molde de 23 cm con papel de horno.",
+    "Tritura la avena hasta que quede como harina. En un bol mezcla los secos: harina de avena, proteína, cacao, edulcorante, levadura y la pizca de sal.",
+    "En otro bol bate los húmedos: bebida de almendra, claras, compota y queso batido.",
+    "Junta los dos boles y mezcla con varillas solo hasta que no queden grumos secos (si bates de más, queda gomosa).",
+    "Vierte en el molde y alisa. Hornea 12-18 min: está lista cuando un palillo sale casi limpio. Mejor quedarse corto que pasarse, porque la proteína se seca.",
+    "Mientras se enfría, funde el chocolate en el microondas en tandas de 20 s, removiendo. Mézclalo con los corn flakes.",
+    "Con la tarta ya templada, reparte la cobertura por encima y métela 15-20 min en la nevera para que el chocolate endurezca. Corta en 5 porciones."
+  ],
+  conservacion:{
+    nevera:"3-4 días en táper cerrado (los corn flakes se van ablandando poco a poco).",
+    congelador:"Por porciones, envueltas: 1 mes. La cobertura pierde algo de crujiente.",
+    descongelar:"En la nevera unas horas, o 30-40 min a temperatura ambiente.",
+    recalentar:"Se come fría o del tiempo. Si la quieres templada, 10-15 s de microondas por porción.",
+    universidad:"Una porción en un táper pequeño aguanta la mañana sin nevera."
+  },
+  variantes:[
+    {n:"Como el vídeo", d:"30 g de chocolate y 25 g de proteína, y 15 ml de sirope sin azúcar por encima. Mercadona no vende sirope 0 % (comprobado en Open Food Facts el 9/10/2026): si lo compras fuera, añádelo a la base de datos."},
+    {n:"Más proteína", d:"Sube la proteína a 35 g y la bebida de almendra a 70 ml para que la masa no quede seca: unas +4 kcal y +0,8 g de proteína por porción."},
+    {n:"Sin corn flakes", d:"Solo la capa de chocolate fino: unos −19 kcal y −4 g de hidratos por porción, pero pierde el crujiente."}
+  ],
+  alergenos:"Huevo (claras), leche (queso batido y proteína whey), frutos secos (bebida de almendra), gluten (avena y corn flakes, salvo que sean sin gluten) y posible soja o leche en el chocolate (mira la etiqueta).",
+  micro:"ok",
+  aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@christopherkaiyu: ~475 kcal y 41 g de proteína la tarta entera, según él), no su receta exacta. Cambios: queso batido 0 % en lugar de yogur griego 0 %, sin sirope (Mercadona no lo vende), menos chocolate y algo más de proteína. Valores de todos los productos: fichas de Open Food Facts consultadas el 9/10/2026, salvo el queso batido, la avena y la proteína, que ya estaban en la base. La tienda online de Mercadona no se pudo consultar: compara con las etiquetas."
+},
+{
   id:"fruta_dia", rev:1, short:"Fruta", n:"Fruta del día (pera)", tipo:"fruta", tags:["fruta","fibra","sin cocinar"],
   useRaw:true, servings:1, minutes:1,
   cookedWeight:null,

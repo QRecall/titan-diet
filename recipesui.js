@@ -41,7 +41,7 @@ function recipeCard(r){
 
   const cons=r.conservacion||{};
   const ap=hasAparte(r), apM=ap?servingPart(r,"aparte"):null;
-  const unitLbl = r.servingsLabel? r.servingsLabel.replace(/s$/,"") : "ración";
+  const unitLbl = r.servingsLabel? r.servingsLabel.replace(/ones$/,"ón").replace(/s$/,"") : "ración";
   return `<div class="card" id="rec-${r.id}">
     <details class="rec" data-rec="${r.id}" ${openRec.has(r.id)?"open":""}>
     <summary>
