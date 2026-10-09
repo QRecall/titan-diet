@@ -345,6 +345,50 @@ const RECIPES = [
   aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@christopherkaiyu: ~475 kcal y 41 g de proteína la tarta entera, según él), no su receta exacta. Cambios: queso batido 0 % en lugar de yogur griego 0 %, sin sirope (Mercadona no lo vende), menos chocolate y algo más de proteína. Valores de todos los productos: fichas de Open Food Facts consultadas el 9/10/2026, salvo el queso batido, la avena y la proteína, que ya estaban en la base. La tienda online de Mercadona no se pudo consultar: compara con las etiquetas."
 },
 {
+  id:"smash_burger", rev:1, short:"Smash burgers", n:"Smash burgers crujientes en papel de arroz (vacuno + pollo)", tipo:"antojo", tags:["antojo","al momento","air fryer"],
+  servings:2, servingsLabel:"burgers", minutes:25,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Se hacen al momento, no para táper: el papel de arroz se reblandece en la nevera. Una cena = 2 burgers. En MacroFactor, crea la receta con estas cantidades y registra «2 burgers».",
+  ing:[
+    {f:"carne_picada", g:120, note:"vacuno: le da el sabor a burger"},
+    {f:"pechuga", g:150, note:"PICADA: en la picadora o batidora (trozos fríos, a golpes) o pide al carnicero que te la pique. Es lo que baja la grasa y sube la proteína"},
+    {f:"especias", g:4, note:"sal, pimienta, ajo en polvo y pimentón"},
+    {f:"q_havarti", g:30, note:"2 lonchas finas, una por burger"},
+    {f:"papel_arroz", g:18, note:"2 láminas grandes (~9 g cada una; pésalas)"},
+    {f:"claras", g:30, note:"para mojar el papel de arroz (en el vídeo usan huevo batido)"},
+    {f:"lechuga", g:30},
+    {f:"cebolla", g:30, note:"en aros finos o picada"},
+    {f:"pepinillos", g:30, note:"en rodajas"},
+    {f:"ketchup_zero", g:20, note:"mézclalo con un poco de mostaza si quieres salsa burger (la mostaza casi no suma)"},
+    {f:"sesamo", g:4, note:"por encima, una pizca"}
+  ],
+  utensilios:"Picadora o batidora, sartén o plancha antiadherente bien caliente, algo plano para aplastar (una espátula ancha o un cazo), bol pequeño hondo, plato hondo con agua, air fryer, termómetro de sonda, báscula.",
+  pasos:[
+    "Mezcla el vacuno con la pechuga picada y las especias. Haz 2 bolas iguales (pésalas: unos 135 g cada una).",
+    "Sartén antiadherente muy caliente, sin aceite. Pon una bola y APLÁSTALA fuerte con la espátula hasta que quede fina (smash). 2-3 min, dale la vuelta, pon la loncha de queso y 1-2 min más. Como lleva pollo, tiene que quedar hecha del todo: 74 °C en el centro, sin rosa.",
+    "Moja una lámina de papel de arroz 2-3 segundos en agua templada y luego pásala por las claras. Colócala dentro de un bol pequeño hondo, como si fuera un nido.",
+    "Dentro, en este orden: la carne con el queso hacia abajo, ketchup, pepinillo, cebolla y lechuga. Cierra el papel por encima, doblando los bordes hacia el centro, y dale la vuelta (la parte lisa queda arriba).",
+    "Pincela por encima con lo que quede de claras y echa el sésamo.",
+    "Air fryer a 200 °C, 6-8 min, hasta que el papel esté dorado y crujiente. Repite con la segunda.",
+    "Cómetelas recién hechas: en 10-15 min el papel se ablanda."
+  ],
+  conservacion:{
+    nevera:"Montadas no aguantan (el papel se reblandece). Lo que sí puedes hacer: tener la carne cocinada y aplastada en la nevera 3-4 días y montar al momento.",
+    congelador:"Las carnes ya hechas, separadas con papel de horno: 1-2 meses. Montadas, no.",
+    descongelar:"Carne: nevera la noche antes.",
+    recalentar:"Carne: 1-2 min por lado en la sartén o 3-4 min en la air fryer, hasta que esté bien caliente, y luego montas y vuelves a la air fryer.",
+    universidad:"No es para llevar: es cena de casa."
+  },
+  variantes:[
+    {n:"Solo vacuno (más sabor)", d:"270 g de carne picada de vacuno en lugar de la mezcla: unas +140 kcal, +11 g de grasa y −8 g de proteína por las 2 burgers."},
+    {n:"Más hidratos (día de carrera)", d:"Acompaña con 150 g de patata en dados a la air fryer, sin aceite: unos +115 kcal y +26 g de hidratos."},
+    {n:"Sin papel de arroz", d:"En una tortilla de trigo normal doblada y tostada: más fácil de cerrar, unas +30 kcal."}
+  ],
+  alergenos:"Huevo (claras), leche (queso), sésamo, mostaza si la añades, y posible gluten o soja según la marca del ketchup y del papel de arroz (mira las etiquetas).",
+  micro:"no",
+  aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@ataifit.coach: 590 kcal y 76 g de proteína según él), que no da cantidades. Para acercarme a esos números sin carne magra (no encontré en Mercadona picada de vacuno con menos del 12 % de grasa), mezclo vacuno con pechuga picada. El papel de arroz es de otra marca (Twin Lions), y su peso por lámina es estimado. Valores: Open Food Facts consultado el 9/10/2026 y etiquetas de Mercadona que ya estaban en la base."
+},
+{
   id:"fruta_dia", rev:1, short:"Fruta", n:"Fruta del día (pera)", tipo:"fruta", tags:["fruta","fibra","sin cocinar"],
   useRaw:true, servings:1, minutes:1,
   cookedWeight:null,
