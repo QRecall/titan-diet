@@ -124,6 +124,42 @@ const RECIPES = [
   micro:"ok"
 },
 {
+  id:"salmon_patatas", rev:1, short:"Salmón con patatas", n:"Salmón marinado al horno con patatas panadera y cebolla", tipo:"principal", tags:["principal","micro","horno"],
+  servings:4, minutes:70,
+  cookedWeight:2350, cookedWeightQ:"e",
+  cookedNote:"2.350 g es una ESTIMACIÓN (patata al horno −25 %, salmón −20 %, cebolla −40 %). Pesa los táperes el domingo y escribe el número real.",
+  ing:[
+    {f:"salmon", g:1200, note:"300 g por ración, en lomos sin piel (o quítasela después de hornear)"},
+    {f:"patata", g:1600, note:"400 g por ración, en rodajas de 0,5 cm (panadera)"},
+    {f:"cebolla", g:400, note:"en juliana, va con la patata"},
+    {f:"especias", g:10, note:"marinado: zumo de 1 limón, 2 dientes de ajo picados, eneldo, pimentón dulce, sal y pimienta (el limón y el ajo casi no suman: van aquí)"}
+  ],
+  utensilios:"Horno + 2 bandejas con papel de horno, bol o bolsa zip para el marinado, termómetro de sonda, báscula.",
+  pasos:[
+    "Marinado: en un bol o bolsa zip, el zumo de 1 limón, el ajo picado, eneldo, pimentón, sal y pimienta. Mete el salmón, dale la vuelta para que se impregne y a la nevera 20-30 min. No más de 1 hora: el limón empieza a «cocinar» el pescado y queda harinoso.",
+    "Horno a 200 °C. Patata en rodajas de 0,5 cm y cebolla en juliana; sécalas bien, sal y pimentón, y repártelas en DOS bandejas con papel, en capa fina. Sin aceite: el salmón suelta grasa de sobra.",
+    "Hornea la patata y la cebolla 25-30 min, dándoles la vuelta a mitad, hasta que estén casi tiernas.",
+    "Coloca los lomos de salmón encima de la patata (escurridos del marinado) y hornea 12-15 min más. Está hecho cuando la parte más gruesa marca 63 °C (FDA) y se separa en láminas.",
+    "Reparte en 4 táperes: 400 g de patata con cebolla de base (en crudo; ya hecha pesará menos) y un lomo de 300 g encima. Pesa cada táper.",
+    "Destapados hasta que dejen de humear y al frío antes de 2 h (USDA)."
+  ],
+  conservacion:{
+    nevera:"Pescado cocinado: la USDA da 3-4 días; la FSA es más prudente con las sobras (unos 2 días). Plan sensato: en nevera las de los próximos 2 días y el resto congelado.",
+    congelador:"Sí: FoodSafety.gov da para el pescado cocinado una calidad buena de unos 4-6 meses (es calidad, no seguridad). La patata asada no tiene ficha oficial de congelación: si la textura no te convence, congela solo el salmón.",
+    descongelar:"En la nevera la noche antes.",
+    recalentar:"Microondas tapado a potencia media 2-3 min desde nevera (a potencia máxima el salmón se reseca), hasta que esté bien caliente (74 °C para sobras). Desde congelado, potencia media 6-8 min dando la vuelta a mitad. Con air fryer, 180 °C 6-8 min deja la patata mejor.",
+    universidad:"Sí: táper con bolsa isotérmica y 2 acumuladores; sin frío, no más de 2 h. Ojo con calentar pescado en el microondas de la facultad: huele."
+  },
+  alergenos:"Pescado.",
+  variantes:[
+    {n:"Con miel y soja", d:"1 cucharada de miel + 2 de salsa de soja en el marinado: +~80 kcal y ~17 g de hidratos al lote, y bastante sal (y gluten, si la soja lo lleva)."},
+    {n:"Menos grasa", d:"Baja el salmón a 250 g por ración y añade 50 g de merluza o bacalao: misma proteína aproximada y bastante menos grasa. Mete su etiqueta como alimento nuevo."},
+    {n:"Con verdura", d:"Añade 100 g de pimiento rojo en tiras por ración junto a la patata: +~26 kcal y +2 g de fibra por ración."}
+  ],
+  micro:"ok",
+  aviso:"Cada ración: <b>300 g de salmón, 400 g de patata y 100 g de cebolla</b> (en crudo), unas <b>1.020 kcal y 69 g de proteína</b>, con la grasa más alta de las principales (~48 g), casi toda del salmón. Los valores del salmón son de FatSecret, no de la etiqueta: compruébalos en la bandeja."
+},
+{
   id:"burritos", rev:2, short:"Burritos", n:"Burritos frescos (mitad pollo, mitad vacuno)", tipo:"antojo", tags:["antojo","fresco","congela relleno"],
   servings:8, servingsLabel:"burritos", minutes:60,
   cookedWeight:null, cookedWeightQ:"p",

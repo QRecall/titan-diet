@@ -26,6 +26,8 @@ const FOODS = {
     buyFactor:2.1, buyUnit:"pollo entero", buyNote:"Se compra pollo entero: hacen falta ~2,1 g de pollo entero por cada 1 g de carne limpia (rendimiento estimado 45-50 %).", price:3.50},
   pechuga:{n:"Pechuga de pollo (entera o en filetes)",cat:"Carnicería",st:"cruda",kcal:108,p:22,c:0.5,f:1.8,fib:0,q:"v",
     src:"Pechugas enteras de pollo — Tienda online Mercadona, foto de la etiqueta (consultada el 3/10/2026). 3,33 € / 500 g.",price:6.66},
+  salmon:{n:"Lomos de salmón fresco (sin piel)",cat:"Pescadería",st:"crudo",kcal:224,p:20,c:0,f:16,fib:0,q:"e",
+    src:"FatSecret, «Lomo de salmón» de Mercadona (224 kcal, 20 g prot., 16 g grasa por 100 g; consultado el 11/10/2026). No he podido ver la etiqueta del envase: compruébala en la bandeja y cámbialo si no coincide. Precio NO verificado (provisional).",price:18,priceQ:"p"},
   carne_picada:{n:"Carne picada de vacuno 99 %",cat:"Carnicería",st:"cruda",kcal:204,p:19,c:0.5,f:14,fib:0,q:"v",
     src:"Preparado de carne picada vacuno 99 % (OFF 8436569263174) — coincide exactamente con tu entrada provisional",price:9.5,priceQ:"p"},
   lomo_vacuno:{n:"Lomo de vacuno",cat:"Carnicería",st:"crudo",kcal:145,p:23,c:0.5,f:5.7,fib:0,q:"v",
