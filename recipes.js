@@ -425,6 +425,46 @@ const RECIPES = [
   aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@ataifit.coach: 590 kcal y 76 g de proteína según él), que no da cantidades. Para acercarme a esos números sin carne magra (no encontré en Mercadona picada de vacuno con menos del 12 % de grasa), mezclo vacuno con pechuga picada. El papel de arroz es de otra marca (Twin Lions), y su peso por lámina es estimado. Valores: Open Food Facts consultado el 9/10/2026 y etiquetas de Mercadona que ya estaban en la base."
 },
 {
+  id:"patata_buffalo", rev:1, short:"Patata buffalo", n:"Patata rellena de pollo buffalo con salsa proteica de queso", tipo:"antojo", tags:["antojo","al momento","air fryer"],
+  servings:1, servingsLabel:"patatas", minutes:40,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Se hace al momento y se registra como 1 unidad. Adaptación de un vídeo de TikTok (@sammycertifies) a productos de Mercadona; los macros son los de tus ingredientes, no los del vídeo.",
+  ing:[
+    {f:"patata", g:400, note:"1 patata grande o 2 medianas, con piel, bien lavada"},
+    {f:"pechuga", g:200, note:"o 200 g del pollo asado del domingo, ya desmenuzado (más rápido)"},
+    {f:"cottage", g:100, note:"SALSA · media tarrina"},
+    {f:"q_batido_0", g:100, note:"SALSA"},
+    {f:"q_fundir", g:40, note:"20 g a la salsa y 20 g por encima"},
+    {f:"picante", g:20, note:"SALSA · salsa picante tipo buffalo (Frank's o la de Mercadona), al gusto"},
+    {f:"especias", g:5, note:"ajo en polvo, cebolla en polvo, pimentón, sal y pimienta"}
+  ],
+  utensilios:"Microondas, air fryer (u horno), batidora de vaso o túrmix, sartén antiadherente, tenedor.",
+  pasos:[
+    "PATATA (la parte larga): pínchala por todas partes con un tenedor y al microondas 8-10 min, dándole la vuelta a mitad, hasta que un cuchillo entre sin resistencia. Luego air fryer 200 °C 8-10 min para que la piel quede crujiente. Sin microondas: horno a 200 °C, 50-60 min.",
+    "POLLO: si usas pechuga cruda, en tiras con especias en la sartén sin aceite hasta 74 °C (8-10 min) y desmenúzala con dos tenedores. Si usas el pollo asado del domingo, solo desmenuzarlo.",
+    "SALSA PROTEICA: tritura el cottage, el queso batido, 20 g del queso de fundir, la salsa picante y las especias hasta que quede lisa (30 segundos). Pruébala y ajusta el picante.",
+    "Mezcla el pollo desmenuzado con unos 2/3 de la salsa.",
+    "Abre la patata a lo largo, aplasta un poco la pulpa con un tenedor y mezcla dentro el resto de la salsa. Rellena con el pollo buffalo y pon por encima los otros 20 g de queso.",
+    "Air fryer 200 °C, 5-6 min, hasta que el queso se funda y dore. Opcional como en el vídeo: dale un toque boca abajo en la sartén caliente 1-2 min para sellar.",
+    "Cómetela recién hecha."
+  ],
+  conservacion:{
+    nevera:"La salsa sola aguanta en un bote cerrado lo que diga la fecha del cottage (una vez abierto, 2-3 días). El pollo cocinado, 3-4 días (USDA).",
+    congelador:"No: el cottage y el queso batido cambian de textura al congelar. Lo que sí puedes tener congelado es el pollo ya cocinado.",
+    descongelar:"Si usas pollo congelado, a la nevera la noche antes.",
+    recalentar:"Se hace al momento. Si te sobra, air fryer 180 °C 5-6 min hasta que esté bien caliente.",
+    universidad:"No es un plato para llevar: la gracia es la patata crujiente recién hecha."
+  },
+  alergenos:"Leche (cottage, queso batido, queso de fundir). Revisa la etiqueta de la salsa picante.",
+  variantes:[
+    {n:"Con boniato", d:"Cambia la patata por 400 g de boniato: algo más dulce y más fibra (mete su etiqueta como alimento nuevo si lo haces fijo)."},
+    {n:"Más proteína", d:"Usa queso batido + proteínas en vez del 0 %: sube la proteína sin casi tocar las kcal."},
+    {n:"Sin picante", d:"Cambia la salsa picante por pimentón dulce y un poco de mostaza."}
+  ],
+  micro:"ok",
+  aviso:"Unas <b>780 kcal y 80 g de proteína</b> por patata con tus ingredientes. El vídeo original anuncia 850 kcal y 84 g con productos de EE. UU.: no son los mismos."
+},
+{
   id:"fruta_dia", rev:1, short:"Fruta", n:"Fruta del día (pera)", tipo:"fruta", tags:["fruta","fibra","sin cocinar"],
   useRaw:true, servings:1, minutes:1,
   cookedWeight:null,
