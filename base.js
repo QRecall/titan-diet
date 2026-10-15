@@ -128,6 +128,10 @@ const FOODS = {
     src:"Salsa Light Hacendado — Tienda online Mercadona, foto de la etiqueta (consultada el 3/10/2026). 1,20 € / 500 ml.",price:2.4},
   miel:{n:"Miel de flores",cat:"Despensa",st:"tal cual",kcal:333,p:0.3,c:83,f:0,fib:0,q:"v",
     src:"Miel de flores Hacendado — Tienda online Mercadona, foto de la etiqueta (consultada el 3/10/2026) (proteína «<0,5 g»). 3,20 € / 500 g.",price:6.4},
+  salsa_mexicana:{n:"Salsa Mexicana",cat:"Despensa",st:"tal cual",kcal:38,p:1.4,c:6.8,f:0.1,fib:0,q:"v",
+    src:"Salsa Mexicana Hacendado — Tienda online Mercadona, foto de la etiqueta (consultada el 15/10/2026). 1,25 € / 300 g. La etiqueta no da fibra.",price:4.17},
+  sazonador_fajitas:{n:"Sazonador para fajitas tex-mex (sobre)",cat:"Despensa",st:"seco",kcal:159,p:4.2,c:28.2,f:1.9,fib:6,q:"v",
+    src:"Sazonador para fajitas Hacendado sabor tex-mex — Tienda online Mercadona, foto de la etiqueta (consultada el 15/10/2026). Sobre de 17 g, 0,90 €. Ojo: 48,5 % de sal (≈ 8 g de sal por sobre).",price:52.9,unitG:17,unitName:"sobre"},
   especias:{n:"Especias (pimentón, comino, ajo en polvo, orégano, sal, pimienta)",cat:"Despensa",st:"secas",kcal:0,p:0,c:0,f:0,fib:0,q:"e",
     src:"Se cuentan como 0 kcal: a estas cantidades el error es irrelevante.",price:0,priceQ:"e",noWeight:true}
 };

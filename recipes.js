@@ -254,46 +254,49 @@ const RECIPES = [
   aviso:"También es una <b>adaptación</b> del vídeo, no su receta. No conozco los ingredientes ni las cantidades de la salsa original."
 },
 {
-  id:"quesadillas_chipotle", rev:3, short:"Quesadillas", n:"Quesadillas de pollo chipotle con miel (meal prep)", tipo:"antojo", tags:["antojo","congela","air fryer"],
-  servings:10, servingsLabel:"quesadillas", minutes:75,
+  id:"quesadillas_chipotle", rev:4, short:"Quesadillas", n:"Quesadillas de pollo «chipotle» (versión Mercadona)", tipo:"antojo", tags:["antojo","congela","air fryer"],
+  servings:6, servingsLabel:"quesadillas", minutes:60,
   cookedWeight:null, cookedWeightQ:"p",
-  cookedNote:"Registra por UNIDADES: las 10 salen casi iguales. Pesa una quesadilla montada (antes de tostar) y ponla como peso de porción en MacroFactor. El relleno pésalo entero y divídelo entre 10 para repartirlo con báscula, no a ojo.",
+  cookedNote:"Registra por UNIDADES: las 6 salen iguales si repartes el relleno con báscula. Pesa el bol de relleno entero y divide entre 6.",
   ing:[
-    {f:"pechuga", g:1800, note:"180 g crudos por quesadilla (≈ 130 g cocidos). Pechuga entera, sin filetear"},
-    {f:"especias", g:15, note:"sazonador chipotle: pimentón ahumado, cayena o chile en polvo, comino, ajo en polvo, sal. Mitad para el pollo, mitad para la salsa"},
-    {f:"q_batido_0", g:300, note:"base de la salsa (en el vídeo usan cottage; el batido 0 % tiene más proteína y ya lo compras)"},
-    {f:"mayo_ligera", g:60},
-    {f:"picante", g:30},
-    {f:"miel", g:40, note:"4 g por quesadilla: es lo que da el toque «honey»"},
-    {f:"lima", g:35, note:"zumo de media lima; 1 diente de ajo también a la salsa"},
-    {f:"q_fundir", g:150, note:"va MEZCLADO con el pollo y la salsa (15 g por unidad)"},
-    {f:"q_fundir", g:300, key:"q_fundir_tortilla", note:"15 g bajo el relleno + 15 g encima, en cada tortilla"},
-    {f:"tortilla_grande", g:620, note:"10 tortillas grandes; con las pequeñas de 36 g haz 2 por ración y registra 2"}
+    {f:"pechuga", g:800, note:"filetes de pechuga, ≈ 133 g crudos por quesadilla"},
+    {f:"sazonador_fajitas", g:17, note:"1 sobre de Sazonador para fajitas Hacendado tex-mex, todo al pollo"},
+    {f:"especias", g:5, note:"1 cucharadita de Pimentón dulce de la Vera Hacendado (ahumado: es el «chipotle», Mercadona no vende pasta de chipotle) + 1 cucharadita de Ajo granulado Hacendado"},
+    {f:"jalapenos", g:20, note:"Jalapeños picantes en vinagre Hacendado: 3-4 rodajas picadas, a la salsa (el picante del chipotle)"},
+    {f:"cebolla_morada", g:80, note:"media cebolla morada en tiras, a la air fryer"},
+    {f:"cottage", g:200, note:"Queso cottage Valblu: 1 tarrina entera, base de la salsa"},
+    {f:"mayo_ligera", g:60, note:"Salsa Light Hacendado: la mitad que el vídeo (sigue teniendo un 30 % de grasa)"},
+    {f:"salsa_mexicana", g:120, note:"Salsa Mexicana Hacendado"},
+    {f:"lima", g:35, note:"zumo de media lima"},
+    {f:"miel", g:14, note:"2 cucharaditas de Miel de flores Hacendado"},
+    {f:"tortilla_grande", g:360, note:"6 Maxi tortillas de trigo Hacendado (1 paquete)"},
+    {f:"q_havarti", g:300, note:"Queso en lonchas Light Hacendado: 2 lonchas por quesadilla = el paquete de 12 (sustituye al cheddar light y la mozzarella del vídeo)"}
   ],
-  utensilios:"Sartén grande con tapa, batidora de vaso, dos tenedores (o batidora de varillas para desmenuzar), bol grande, plancha o sartén antiadherente, papel de horno, báscula.",
+  utensilios:"Air fryer, batidora de vaso, dos tenedores, bol grande, sartén antiadherente, báscula, papel de aluminio.",
   pasos:[
-    "Seca las pechugas y úntalas con la mitad del sazonador chipotle (sin aceite). Sartén antiadherente a fuego medio, TAPADA: 8-10 min por lado según grosor. Están cuando el centro marca 74 °C o ya no está rosa. Deja reposar 10 min.",
-    "Salsa: en la batidora, queso batido 0 %, Salsa Light, picante, 1 cucharadita de pimentón ahumado (Mercadona no vende salsa chipotle), miel, zumo de lima, el diente de ajo y el resto del sazonador. Tritura hasta que quede lisa. Prueba y ajusta picante o sal.",
-    "Desmenuza el pollo (dos tenedores, o 20 s con varillas eléctricas en el bol). Añade la salsa y 150 g de queso rallado para fundir, y cebollino picado si tienes. Mezcla bien. PESA el bol: ese número entre 10 es el relleno de cada quesadilla.",
-    "Monta cada quesadilla: tortilla, 15 g de queso rallado en una mitad, 1/10 del relleno encima, otros 15 g de queso, dobla.",
-    "Tuesta en sartén o plancha sin aceite, fuego medio, 2-3 min por lado hasta que esté dorada y el queso fundido. Presiona un poco con la espátula al dar la vuelta.",
-    "Las que no comas hoy: deja enfriar del todo sobre una rejilla (si las envuelves calientes sudan y se ablandan), envuelve una a una en papel de horno + aluminio o bolsa zip, etiqueta con fecha, y a la nevera (para los próximos 2 días) o al congelador."
+    "Pollo: unta los filetes con el sobre de sazonador y el pimentón de la Vera, sin aceite. Air fryer a 200 °C, 12-15 min, hasta que el centro no esté rosa (74 °C).",
+    "Cebolla: la media cebolla morada en tiras, a la air fryer 5-8 min hasta que se tueste.",
+    "Salsa: en la batidora, el cottage, la Salsa Light, la Salsa Mexicana, el ajo granulado, el zumo de media lima, la miel, los jalapeños y una pizca de sal. Tritura hasta que quede lisa.",
+    "Relleno: desmenuza el pollo con dos tenedores, añade la cebolla y toda la salsa y mezcla. Pesa el bol: ese número entre 6 es el relleno de cada quesadilla.",
+    "Monta cada una: tortilla maxi, 1/6 del relleno en una mitad, 2 lonchas de queso light encima, dobla.",
+    "Sartén antiadherente sin aceite, fuego medio, 2-3 min por lado hasta que esté dorada y el queso fundido. Aplasta un poco al dar la vuelta.",
+    "Las que no comas hoy: enfría sobre rejilla, envuelve una a una en aluminio, etiqueta con fecha y congela."
   ],
   conservacion:{
-    nevera:"Envueltas y frías: la USDA da 3-4 días para pollo cocinado, pero la tortilla pierde textura a partir del segundo día. Plan razonable: las de los próximos 2 días en nevera, el resto al congelador.",
-    congelador:"Sí, ya tostadas y envueltas individualmente: 1-2 meses de calidad buena. Congélalas planas y luego apílalas.",
-    descongelar:"No hace falta: van directas de congelado a la air fryer o la sartén.",
-    recalentar:"Air fryer 180 °C, 6-8 min desde nevera o 10-12 desde congelado, dándole la vuelta a mitad: recupera el crujiente. Sartén a fuego medio, tapada, también sirve. Microondas 2-3 min funciona pero queda blanda (es lo que tendrás en la facultad).",
-    universidad:"Sí, si aceptas que en microondas queda blanda. Llévala en bolsa isotérmica con acumulador de frío y no la dejes más de 2 h sin frío."
+    nevera:"Envueltas y frías: 3-4 días según la USDA para pollo cocinado, aunque la tortilla pierde textura desde el segundo día. Mejor: 2 en nevera, el resto al congelador.",
+    congelador:"Ya tostadas y envueltas una a una: 1-2 meses de buena calidad. Congélalas planas y luego apílalas.",
+    descongelar:"No hace falta: directas del congelador a la air fryer o la sartén.",
+    recalentar:"Air fryer a 180 °C: 6-8 min desde nevera, 10-12 min desde congelada, dándole la vuelta a mitad. Microondas 2-3 min también vale, pero queda blanda.",
+    universidad:"Sí, en microondas (más blanda). Llévala en bolsa isotérmica con acumulador de frío, máximo 2 h sin frío."
   },
   variantes:[
-    {n:"Más proteína", d:"Sube el pollo a 2.000 g (200 g crudos por unidad): cada quesadilla suma ~4,5 g de proteína y ~20 kcal: unos 60 g por unidad, cerca de los 65 g que anuncia el vídeo."},
-    {n:"Menos grasa", d:"Baja el queso de las tortillas a 200 g (20 g por unidad) y quita la Salsa Light (sube el queso batido a 360 g): cada quesadilla pierde ~45 kcal y ~4 g de grasa, y la salsa sigue siendo cremosa."},
-    {n:"Con las sobras del pollo asado", d:"Si te sobra pollo de la receta 1, desmenúzalo y úsalo aquí en vez de cocinar pechugas: solo haces la salsa y montas."}
+    {n:"Más fiel al vídeo", d:"Salsa Light a 120 g (la cantidad del vídeo): cada quesadilla suma ~30 kcal y ~3 g de grasa."},
+    {n:"Menos grasa", d:"1 loncha de queso por quesadilla en vez de 2: cada una baja ~67 kcal y ~4 g de grasa (y ~7 g de proteína)."},
+    {n:"Con tortillas pequeñas", d:"2 tortillas de 36 g en vez de 1 maxi: +26 kcal por quesadilla."}
   ],
-  alergenos:"Gluten (tortillas), leche (quesos) y huevo (mayonesa).",
+  alergenos:"Gluten (tortillas), leche (cottage y queso) y huevo (Salsa Light).",
   micro:"ok",
-  aviso:"Es una <b>adaptación</b> del vídeo (@aussiefitness, «cheesy honey chipotle chicken quesadillas»), no su receta: el vídeo enseña los ingredientes y los pasos pero <b>no da ninguna cantidad</b>. Todos los gramos son míos, pensados para 10 unidades y para Mercadona. Mercadona <b>no vende salsa chipotle, cheddar rallado ni queso rallado light</b> (comprobado en su tienda online el 3/10/2026): el toque chipotle sale del pimentón ahumado y el queso es el rallado especial fundir. Todos los productos de esta receta están verificados con la etiqueta de la tienda, salvo la salsa picante, que no aparecía."
+  aviso:"Adaptación del vídeo de @panaceapalm (15/10/2026), que sí da las cantidades: 800 g de pechuga, 240 g de cottage, 120 g de mayo light, 120 g de salsa, chipotle, lima, ajo, miel y 30 g de cheddar light + 25 g de mozzarella por quesadilla. Cambios para Mercadona: pimentón de la Vera + jalapeños por la pasta de chipotle (no la venden), queso en lonchas light por el cheddar light (no lo venden; el cheddar normal tiene 35 g de grasa/100 g) y la mitad de mayo. El vídeo dice 62 g de proteína por quesadilla; con sus cantidades en 6 unidades no sale. Aquí: ≈ 537 kcal y ≈ 53 g de proteína por unidad (lo calcula la app)."
 },
 {
   id:"pizza_pollo", rev:1, short:"Pizzas", n:"Pizza proteica de pollo con masa de queso batido (integral)", tipo:"antojo", tags:["antojo","congela","horno"],
