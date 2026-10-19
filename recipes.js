@@ -428,6 +428,46 @@ const RECIPES = [
   aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@ataifit.coach: 590 kcal y 76 g de proteína según él), que no da cantidades. Para acercarme a esos números sin carne magra (no encontré en Mercadona picada de vacuno con menos del 12 % de grasa), mezclo vacuno con pechuga picada. El papel de arroz es de otra marca (Twin Lions), y su peso por lámina es estimado. Valores: Open Food Facts consultado el 9/10/2026 y etiquetas de Mercadona que ya estaban en la base."
 },
 {
+  id:"smash_burger_pan", rev:1, short:"Smash burgers con pan", n:"Smash burgers en pan de cristal (vacuno + pollo)", tipo:"antojo", tags:["antojo","al momento"],
+  servings:2, servingsLabel:"burgers", minutes:20,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Misma carne que las smash en papel de arroz, pero en chapata de cristal: más hidratos sin tener que comerte un kilo de patatas. Una cena = 2 burgers. En MacroFactor, crea la receta con estas cantidades y registra «2 burgers».",
+  ing:[
+    {f:"carne_picada", g:120, note:"vacuno: le da el sabor a burger"},
+    {f:"pechuga", g:150, note:"PICADA: en la picadora o batidora (trozos fríos, a golpes) o pide al carnicero que te la pique"},
+    {f:"especias", g:4, note:"sal, pimienta, ajo en polvo y pimentón"},
+    {f:"q_havarti", g:30, note:"2 lonchas finas, una por burger"},
+    {f:"pan_chapata", g:142, note:"2 Panes chapata de cristal Hacendado (71 g cada uno; vienen 4 por paquete)"},
+    {f:"lechuga", g:30},
+    {f:"cebolla", g:30, note:"en aros finos o picada"},
+    {f:"pepinillos", g:30, note:"en rodajas"},
+    {f:"ketchup_zero", g:20, note:"mézclalo con un poco de mostaza si quieres salsa burger (la mostaza casi no suma)"},
+    {f:"sesamo", g:4, note:"opcional, por encima de la carne"}
+  ],
+  utensilios:"Picadora o batidora, sartén o plancha antiadherente bien caliente, algo plano para aplastar (una espátula ancha o un cazo), air fryer o tostadora para el pan, termómetro de sonda, báscula.",
+  pasos:[
+    "Mezcla el vacuno con la pechuga picada y las especias. Haz 2 bolas iguales (pésalas: unos 135 g cada una).",
+    "Abre los 2 panes por la mitad y tuéstalos 2-3 min en la air fryer a 180 °C (o en la sartén, por el lado del corte) mientras se hace la carne.",
+    "Sartén antiadherente muy caliente, sin aceite. Pon una bola y APLÁSTALA fuerte con la espátula hasta que quede fina (smash). 2-3 min, dale la vuelta, pon la loncha de queso y 1-2 min más. Como lleva pollo, tiene que quedar hecha del todo: 74 °C en el centro, sin rosa.",
+    "Monta: pan, ketchup, carne con el queso, pepinillo, cebolla, lechuga y la otra mitad del pan. Repite con la segunda."
+  ],
+  conservacion:{
+    nevera:"Montadas no (el pan se moja). La carne cocinada y aplastada aguanta en la nevera 3-4 días: montas al momento.",
+    congelador:"Las carnes ya hechas, separadas con papel de horno: 1-2 meses. El pan de cristal también se congela bien.",
+    descongelar:"Carne: nevera la noche antes. Pan: directo a la air fryer o tostadora.",
+    recalentar:"Carne: 1-2 min por lado en la sartén o 3-4 min en la air fryer, hasta que esté bien caliente.",
+    universidad:"Con la carne ya hecha y el pan aparte, se puede montar fuera; mejor en casa."
+  },
+  variantes:[
+    {n:"Sin queso", d:"Quita las 2 lonchas: unos −80 kcal, −5 g de grasa y −8 g de proteína."},
+    {n:"Menos hidratos", d:"Una burger con pan y otra en papel de arroz: unos −175 kcal y −27 g de hidratos respecto a esta versión."},
+    {n:"Solo vacuno (más sabor)", d:"270 g de carne picada de vacuno en lugar de la mezcla: unas +140 kcal, +11 g de grasa y −8 g de proteína por las 2 burgers."}
+  ],
+  alergenos:"Gluten (pan), leche (queso), sésamo, mostaza si la añades, y posible soja según la marca del ketchup (mira las etiquetas).",
+  micro:"no",
+  aviso:"Variante con pan de la receta «Smash burgers» (papel de arroz). Frente a la de papel de arroz: unas +348 kcal, +9 g de proteína, +53 g de hidratos y +10 g de grasa por las 2 burgers. Valores del pan: etiqueta de Panes chapata de cristal Hacendado en la tienda online de Mercadona (consultada el 3/10/2026)."
+},
+{
   id:"patata_buffalo", rev:1, short:"Patata buffalo", n:"Patata rellena de pollo buffalo con salsa proteica de queso", tipo:"antojo", tags:["antojo","al momento","air fryer"],
   servings:1, servingsLabel:"patatas", minutes:40,
   cookedWeight:null, cookedWeightQ:"p",
