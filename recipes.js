@@ -605,5 +605,45 @@ const RECIPES = [
   alergenos:"Leche. La proteína en polvo suele llevar leche y puede llevar soja.",
   micro:"n/a",
   aviso:"Tu receta antigua anunciaba 581 kcal y 39 g de proteína con 225 g de fresa-plátano, 195 g de tropical, 55 g de avena, un cacito y 65 g de leche. Con los datos de etiqueta que uso aquí, esa combinación sale en torno a <b>580 kcal y ~37 g de proteína</b>: las cifras que tenías eran plausibles. Aun así no las doy por verificadas — dependen del bote de proteína concreto y de que el cacito pesara 30 g."
+},
+{
+  id:"pancakes_cottage", rev:1, short:"Pancakes", n:"Pancakes de cottage y arándanos (sin aceite)", tipo:"desayuno", tags:["desayuno","merienda","sartén","congela"],
+  servings:2, servingsLabel:"raciones", minutes:30,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Registra por RACIONES: cada ración es la mitad de las tortitas (unas 4 medianas). Si quieres afinar, pesa todas las tortitas hechas y divide entre 2.",
+  ing:[
+    {f:"cottage", g:200, note:"1 tarrina de queso cottage Valblu (la receta original pone 1 taza)"},
+    {f:"q_batido_0", g:250, note:"media tarrina, en lugar de 1 taza de yogur griego: hace el mismo papel cremoso y casi no tiene grasa"},
+    {f:"huevo", g:63, note:"1 huevo L"},
+    {f:"avena", g:75, note:"copos triturados en harina con la batidora (≈ ¾ de taza)"},
+    {f:"levadura", g:5, note:"1 cucharadita"},
+    {f:"especias", g:3, note:"1 cucharadita de canela (opcional)"},
+    {f:"eritritol", g:6, note:"OPCIONAL, al gusto: en lugar de ½ cucharada de azúcar moreno"},
+    {f:"arandanos", g:125, note:"frescos o congelados (los congelados, sin descongelar)"}
+  ],
+  utensilios:"Batidora de vaso, sartén antiadherente con tapa, cucharón, espátula, báscula.",
+  pasos:[
+    "Tritura los copos de avena en la batidora hasta que queden como harina y apártalos.",
+    "En la batidora: cottage, queso batido y huevo. Bate hasta que quede líquido.",
+    "Añade la mitad de la harina de avena con la levadura, la canela y el edulcorante. Bate. Añade el resto de la harina y vuelve a batir hasta que quede homogéneo.",
+    "<b>Deja reposar 5 minutos</b>: la masa espesa y las tortitas cuajan mucho mejor.",
+    "Sartén antiadherente a fuego medio-bajo, sin aceite. Echa un cucharón de masa, reparte 5-6 arándanos por encima y <b>tapa</b> 2-3 min, hasta que salgan burbujas y los bordes estén secos.",
+    "Dales la vuelta y deja 1-2 min más. Ten paciencia: a fuego fuerte se queman por fuera y quedan crudas por dentro."
+  ],
+  conservacion:{
+    nevera:"Hechas y frías, en táper: 3-4 días (USDA para sobras cocinadas).",
+    congelador:"Separadas con papel de horno en una bolsa zip, planas. No he encontrado una cifra oficial para tortitas: 1-2 meses es una estimación de calidad.",
+    descongelar:"No hace falta: directas del congelador a la sartén o la air fryer.",
+    recalentar:"Sartén a fuego medio 1-2 min por lado, air fryer a 180 °C 3-5 min o microondas 30-60 s (queda más blanda).",
+    universidad:"Sí: frías o 30-60 s en el microondas. Llévalas en bolsa isotérmica, que llevan lácteo y huevo."
+  },
+  variantes:[
+    {n:"Más proteína", d:"30 g de proteína en polvo en la masa: cada ración suma ~59 kcal y ~12 g de proteína. Si espesa demasiado, un chorrito de agua."},
+    {n:"Con claras", d:"Cambia el huevo por 120 g de claras: el total baja ~34 kcal y ~7 g de grasa, y gana ~5 g de proteína."},
+    {n:"Otra fruta", d:"Dúo fresa-plátano congelado (troceado) en lugar de arándanos: casi lo mismo en calorías."}
+  ],
+  alergenos:"Leche (cottage, queso batido) y huevo. La avena puede llevar trazas de gluten: mira la etiqueta.",
+  micro:"ok",
+  aviso:"Adaptación del vídeo de @nohelysnicolec (20-9-2026), que da las cantidades en tazas: 1 de yogur griego, 1 de cottage, 1 huevo, ¾ de harina de avena, ½ cucharada de azúcar moreno, 1 cucharadita de aceite, 1 de levadura y 1 de canela. Cambios: yogur griego → queso batido 0 %, fuera el aceite (sartén antiadherente), azúcar → eritritol y tazas → gramos de Mercadona. Los arándanos usan valores del USDA, no de etiqueta. Con estas cantidades: ≈ 363 kcal y ≈ 32 g de proteína por ración (lo calcula la app)."
 }
 ];

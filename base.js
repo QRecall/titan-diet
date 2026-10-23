@@ -105,6 +105,8 @@ const FOODS = {
     src:"Dúo fresa y plátano Hacendado congelado (2,75 € / 450 g)",price:6.11},
   fruta_trop:{n:"Mix tropical congelado (mango, melocotón, papaya)",cat:"Congelados",st:"congelado",kcal:59,p:0.7,c:12.4,f:0.2,fib:1.6,q:"v",
     src:"Mix frutas tropical Hacendado ultracongelado — Tienda online Mercadona, foto de la etiqueta (consultada el 3/10/2026). 2,75 € / 450 g.",price:6.11},
+  arandanos:{n:"Arándanos",cat:"Frutería",st:"crudos",kcal:57,p:0.7,c:14.5,f:0.3,fib:2.4,q:"e",
+    src:"USDA FoodData Central, arándanos crudos (57 kcal, 0,7 g prot., 14,5 g HC, 0,3 g grasa, 2,4 g fibra por 100 g). En la app no hay etiqueta de Mercadona: compara con la de tu bandeja o bolsa. Precio no verificado.",price:12,priceQ:"p"},
   tomate_trit:{n:"Tomate triturado",cat:"Despensa",st:"tal cual",kcal:23,p:1.1,c:3.8,f:0,fib:1.3,q:"v",
     src:"Tomate triturado Hacendado — Tienda online Mercadona, foto de la etiqueta (consultada el 3/10/2026). La etiqueta no declara fibra: la fibra es estimación. 1,00 € / 800 g.",price:1.25, packG:800, packName:"bote de 800 g"},
   salsa_yogur:{n:"Salsa de yogur",cat:"Despensa",st:"tal cual",kcal:257,p:0.8,c:8.7,f:23.9,fib:0,q:"v",

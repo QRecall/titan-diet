@@ -31,7 +31,7 @@ function defaultState(){
     consumed:{kcal:0,p:0,c:0,f:0,fib:0},
     plan:Array.from({length:14},(_,i)=>({r:null,q:1})),
     extras:Array.from({length:7},()=>({desayuno:"bol_desayuno",otro:""})),
-    batches:{pollo_arroz:4,pastel_carne:4,bolonesa:4,salmon_patatas:0,burritos:0,bocata_pollo:0,quesadillas_chipotle:0,pizza_pollo:0,tarta_choco:0,smash_burger:0,smash_burger_pan:0,patata_buffalo:0,bol_desayuno:0,helado_prot:0,fruta_dia:7},
+    batches:{pollo_arroz:4,pastel_carne:4,bolonesa:4,salmon_patatas:0,burritos:0,bocata_pollo:0,quesadillas_chipotle:0,pizza_pollo:0,tarta_choco:0,smash_burger:0,smash_burger_pan:0,patata_buffalo:0,bol_desayuno:0,helado_prot:0,pancakes_cottage:0,fruta_dia:7},
     fruta:true,
     pantry:{},
     freezer:[],
