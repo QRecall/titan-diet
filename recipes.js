@@ -340,15 +340,15 @@ const RECIPES = [
   aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@moishabenitez, 429 kcal y 38 g de proteína por pizza según él), no su receta exacta: en el vídeo no se ven las cantidades de todo. Valores de la harina integral, la mozzarella light y el tomate triturado: FatSecret; el queso batido y la pechuga: etiqueta Mercadona. La fibra de la harina es estimación."
 },
 {
-  id:"pizza_pepperoni", rev:1, short:"Pizzas pepperoni", n:"Pizza proteica de pepperoni y pavo (masa de queso batido)", tipo:"antojo", tags:["antojo","congela","horno"],
+  id:"pizza_pepperoni", rev:2, short:"Pizzas pepperoni", n:"Pizza proteica de pepperoni y pavo con masa de queso batido (integral)", tipo:"antojo", tags:["antojo","congela","horno"],
   servings:8, servingsLabel:"pizzas", minutes:75,
   cookedWeight:null, cookedWeightQ:"p",
-  cookedNote:"Registra por UNIDADES: las 8 pizzas salen casi iguales si pesas las bolas de masa (unos 112 g) y repartes los toppings con báscula. Pesa una pizza ya horneada y ponla como peso de porción en MacroFactor.",
+  cookedNote:"Registra por UNIDADES: las 8 pizzas salen casi iguales si pesas las bolas de masa (unos 140 g) y repartes los toppings con báscula. Pesa una pizza ya horneada y ponla como peso de porción en MacroFactor.",
   ing:[
-    {f:"harina_trigo", g:400, note:"50 g por pizza"},
-    {f:"levadura", g:16, note:"unos 16 g (2 g por pizza): convierte la harina normal en harina con levadura, como la del vídeo"},
-    {f:"q_batido_0", g:480, note:"60 g por pizza: es el «agua» de la masa"},
-    {f:"especias", g:10, note:"ajo en polvo, orégano o hierbas provenzales y sal, en la masa y en el tomate"},
+    {f:"harina_integral", g:560, note:"70 g por pizza (la misma masa que la pizza de pollo)"},
+    {f:"q_batido_0", g:560, note:"70 g por pizza: es el «agua» de la masa"},
+    {f:"levadura", g:20, note:"2 cucharaditas rasas (unos 16-20 g) + una pizca de sal"},
+    {f:"especias", g:10, note:"orégano y ajo en polvo para el tomate (y en la masa si quieres)"},
     {f:"tomate_trit", g:400, note:"50 g por pizza, con orégano"},
     {f:"mozza_light", g:1000, note:"8 bolas de 125 g, una por pizza: en dados y bien secada con papel de cocina"},
     {f:"pepperoni", g:80, note:"10 g por pizza (unas lonchas finas)"},
@@ -356,11 +356,11 @@ const RECIPES = [
   ],
   utensilios:"Bol grande, báscula, rodillo, 2-3 bandejas de horno con papel, papel de aluminio o film para envolver.",
   pasos:[
-    "Horno a 185 °C. Corta la mozzarella en dados y déjala sobre papel de cocina mientras haces la masa (suelta agua).",
-    "Masa: mezcla la harina, la levadura química, el ajo en polvo, el orégano y la sal. Añade el queso batido, mezcla con un tenedor hasta que quede grumoso y amasa 2-3 min hasta una bola que no se pegue (si se pega, una cucharada más de harina; si se agrieta, una de batido).",
-    "Divide en 8 bolas de unos 112 g pesándolas. Estira cada una sobre papel de horno, fina y lo más grande que puedas, y dobla el borde hacia dentro para hacer la corteza.",
+    "Horno a 220 °C. Corta la mozzarella en dados y déjala sobre papel de cocina mientras haces la masa (suelta agua).",
+    "Masa (la de la pizza de pollo): mezcla la harina integral, la levadura y la sal; añade el queso batido y amasa 2-3 min hasta que no se pegue (si se pega, una cucharada más de harina; si se agrieta, una de batido). Divide en 8 bolas de unos 140 g pesándolas.",
+    "Estira cada bola con el rodillo sobre papel de horno, fina (~20 cm). Hornea las bases solas 5-6 min a 220 °C para que no se queden crudas debajo (en tandas).",
     "Monta cada base: 50 g de tomate con orégano, una bola de mozzarella en dados, 10 g de pepperoni y el pavo en tiras repartido.",
-    "Hornea en 2-3 tandas a 185 °C unos 15 min, hasta que el borde esté dorado y crujiente. Sin aceite: con el papel de horno basta. Si la primera tanda queda cruda por debajo, prehornea las bases solas 5 min en las siguientes.",
+    "Hornea 8-10 min más, hasta que el borde se dore y el queso funda. Sin aceite: con el papel de horno basta.",
     "Para meal prep: deja enfriar en rejilla, envuelve cada pizza en aluminio o film y congela plana. Etiqueta con fecha."
   ],
   conservacion:{
@@ -372,12 +372,12 @@ const RECIPES = [
   },
   variantes:[
     {n:"Solo pavo", d:"Sin pepperoni y con 80 g más de pavo en el lote: unos 33 kcal y 4 g de grasa menos por pizza, con la misma proteína."},
-    {n:"Yogur +Proteínas", d:"Con yogur +Proteínas natural Hacendado en vez de queso batido: unos +2 g de proteína y +10 kcal por pizza (no he comprobado que esté en tu tienda; hay que añadirlo a la base de datos antes de cambiarlo)."},
-    {n:"Menos queso", d:"Media bola de mozzarella por pizza: unas 96 kcal, 11 g de proteína y 6 g de grasa menos por unidad."}
+    {n:"Menos queso", d:"Media bola de mozzarella por pizza: unas 96 kcal, 11 g de proteína y 6 g de grasa menos por unidad."},
+    {n:"Yogur +Proteínas", d:"Con yogur +Proteínas natural Hacendado en vez de queso batido en la masa: unos +2 g de proteína y +12 kcal por pizza (no he comprobado que esté en tu tienda; hay que añadirlo a la base de datos antes de cambiarlo)."}
   ],
   alergenos:"Gluten (harina de trigo) y leche (queso batido, mozzarella). Revisa la etiqueta del pepperoni y del pavo.",
   micro:"ok",
-  aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@aussiefitness, 563 kcal y 53 g de proteína por pizza según él), no su receta exacta: el vídeo no da cantidades y en vez de yogur griego y levadura nutricional usa productos de Mercadona. Valores de la harina y del pepperoni: FatSecret (pendientes de etiqueta); mozzarella light: FatSecret (coincide con la etiqueta que fotografió Nacho); pavo y queso batido: etiqueta. La fibra de la harina es estimación."
+  aviso:"Es una <b>adaptación</b> de un vídeo de TikTok (@aussiefitness, 563 kcal y 53 g de proteína por pizza según él), no su receta exacta: el vídeo no da cantidades. La masa es la misma que la de la pizza de pollo (harina integral + queso batido), por petición de Nacho. Valores de la harina integral y del pepperoni: FatSecret (pendientes de etiqueta); mozzarella light: FatSecret (coincide con la etiqueta que fotografió Nacho); pavo, queso batido y tomate triturado: etiqueta. La fibra de la harina es estimación."
 },
 {
   id:"tarta_choco", rev:1, short:"Tarta choco", n:"Tarta proteica de chocolate crujiente", tipo:"antojo", tags:["antojo","postre","merienda","horno"],
