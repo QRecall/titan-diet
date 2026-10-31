@@ -548,6 +548,52 @@ const RECIPES = [
   aviso:"Unas <b>780 kcal y 80 g de proteína</b> por patata con tus ingredientes. El vídeo original anuncia 850 kcal y 84 g con productos de EE. UU.: no son los mismos."
 },
 {
+  id:"burrito_kebab", rev:1, short:"Burrito kebab", n:"Burrito kebab de cena con patatas (salsa blanca de queso batido y cottage)", tipo:"antojo", tags:["antojo","al momento","air fryer","cena"],
+  servings:1, servingsLabel:"burritos", minutes:50,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Se hace al momento y se registra como 1 unidad (burrito + las patatas de fuera). Adaptación de un vídeo de TikTok (@zoyacooks7) con tus productos; el vídeo no da cantidades.",
+  ing:[
+    {f:"tortilla_delibreads", g:80, note:"1 tortilla"},
+    {f:"pechuga", g:180, note:"en dados"},
+    {f:"q_batido_0", g:80, note:"SALSA BLANCA"},
+    {f:"cottage", g:50, note:"SALSA BLANCA"},
+    {f:"salsa_soja", g:5, note:"SALSA BLANCA · 1 cucharadita"},
+    {f:"lima", g:35, note:"½ lima: zumo para la salsa y para el pico de gallo"},
+    {f:"especias", g:5, note:"ajo, comino, perejil o eneldo y pimienta para la salsa; pimentón ahumado y sal para el pollo y las patatas"},
+    {f:"patata", g:400, note:"150 g van DENTRO del burrito y 250 g al plato"},
+    {f:"tomate", g:80, note:"PICO DE GALLO"},
+    {f:"cebolla_morada", g:25, note:"PICO DE GALLO"},
+    {f:"cilantro", g:3, note:"PICO DE GALLO"},
+    {f:"pimiento", g:60, note:"en tiras, a la plancha"},
+    {f:"cebolla", g:40, note:"en tiras, a la plancha"},
+    {f:"lechuga", g:20, note:"o rúcula · solo si te lo comes al momento"}
+  ],
+  utensilios:"Air fryer, sartén antiadherente, batidora o túrmix (o un tenedor), tabla y cuchillo.",
+  pasos:[
+    "SALSA BLANCA: bate el queso batido, el cottage, la soja, un chorro de lima, ajo, comino, perejil o eneldo y pimienta hasta que quede lisa. SEPARA LA MITAD en un cuenco antes de tocar el pollo crudo: esa mitad es la de untar.",
+    "MARINADO: el pollo en dados con la otra mitad de la salsa, pimentón ahumado y sal. 30 min en la nevera, o desde la noche anterior.",
+    "PATATAS: 400 g en bastones, sin aceite, con pimentón, ajo y sal. Air fryer a 200 °C unos 18-22 min, removiendo a mitad (la primera vez, ajusta el tiempo a tu air fryer).",
+    "POLLO: sartén antiadherente sin aceite a fuego MEDIO (la salsa de lácteos se quema a fuego fuerte), 8-10 min hasta 74 °C por dentro.",
+    "VERDURAS: pimiento y cebolla en tiras a la plancha, sin aceite, 6-8 min. Pico de gallo: tomate, cebolla morada y cilantro picados con lima y sal; escúrrelo para que no moje la tortilla.",
+    "MONTAJE: tortilla 15 s en la sartén, unta la salsa reservada, lechuga, pollo, pimiento y cebolla, pico de gallo y 150 g de patatas. Cierra y tuesta sin aceite 1-2 min por lado, empezando por el cierre. Al plato con los otros 250 g de patatas."
+  ],
+  conservacion:{
+    nevera:"La salsa en bote cerrado, lo que diga la fecha del cottage (abierto, 2-3 días). El pollo cocinado, 3-4 días (USDA). El pico de gallo, 1-2 días.",
+    congelador:"Montado no es lo ideal. Si quieres congelarlo: sin lechuga ni pico de gallo dentro (sueltan agua), solo pollo, pimiento, cebolla y patata; el pico y las patatas de fuera, al momento.",
+    descongelar:"Si es el pollo o el burrito congelado, a la nevera la noche antes.",
+    recalentar:"Se hace al momento. Si te sobra o lo congelaste: air fryer u horno a 180 °C, 8-10 min, hasta que esté bien caliente en el centro.",
+    universidad:"No es plato de táper: la gracia es la tortilla tostada y las patatas crujientes recién hechas."
+  },
+  alergenos:"Gluten (tortilla de trigo), leche (queso batido, cottage) y soja (salsa de soja). Revisa la etiqueta de la tortilla.",
+  variantes:[
+    {n:"Menos patata", d:"Solo los 150 g de dentro, sin los de fuera: unas 190 kcal y 44 g de hidratos menos."},
+    {n:"Picante", d:"Separa un poco de la salsa blanca y mézclala con salsa picante o sriracha, como la salsa naranja del vídeo."},
+    {n:"Con aguacate", d:"30 g de aguacate en el pico de gallo, como en el vídeo: unas 50 kcal más, casi todo grasa buena (hay que añadirlo a la base de datos)."}
+  ],
+  micro:"ok",
+  aviso:"Unas <b>875 kcal y 69 g de proteína</b> con tus ingredientes (burrito + 250 g de patatas al plato). Tortilla: etiqueta de tus fotos; soja y lima: valores genéricos (USDA)."
+},
+{
   id:"fruta_dia", rev:1, short:"Fruta", n:"Fruta del día (pera)", tipo:"fruta", tags:["fruta","fibra","sin cocinar"],
   useRaw:true, servings:1, minutes:1,
   cookedWeight:null,
