@@ -594,6 +594,52 @@ const RECIPES = [
   aviso:"Unas <b>875 kcal y 69 g de proteína</b> con tus ingredientes (burrito + 250 g de patatas al plato). Tortilla: etiqueta de tus fotos; soja y lima: valores genéricos (USDA)."
 },
 {
+  id:"burrito_kebab_prote", rev:1, short:"Burrito kebab PROTE", n:"Burrito kebab PROTE: 310 g de pollo y 600 g de patata", tipo:"antojo", tags:["antojo","al momento","air fryer","cena","proteína"],
+  servings:1, servingsLabel:"burritos", minutes:55,
+  cookedWeight:null, cookedWeightQ:"p",
+  cookedNote:"Versión grande del burrito kebab: misma tortilla y misma salsa, con 310 g de pechuga (en vez de 180) y 600 g de patata (en vez de 400). Se hace al momento y se registra como 1 unidad (burrito + lo que va al plato).",
+  ing:[
+    {f:"tortilla_delibreads", g:80, note:"1 tortilla"},
+    {f:"pechuga", g:310, note:"en dados · lo que no quepa en el burrito, al plato con las patatas"},
+    {f:"q_batido_0", g:80, note:"SALSA BLANCA"},
+    {f:"cottage", g:50, note:"SALSA BLANCA"},
+    {f:"salsa_soja", g:5, note:"SALSA BLANCA · 1 cucharadita"},
+    {f:"lima", g:35, note:"½ lima: zumo para la salsa y para el pico de gallo"},
+    {f:"especias", g:5, note:"ajo, comino, perejil o eneldo y pimienta para la salsa; pimentón ahumado y sal para el pollo y las patatas"},
+    {f:"patata", g:600, note:"150 g van DENTRO del burrito y 450 g al plato"},
+    {f:"tomate", g:80, note:"PICO DE GALLO"},
+    {f:"cebolla_morada", g:25, note:"PICO DE GALLO"},
+    {f:"cilantro", g:3, note:"PICO DE GALLO"},
+    {f:"pimiento", g:60, note:"en tiras, a la plancha"},
+    {f:"cebolla", g:40, note:"en tiras, a la plancha"},
+    {f:"lechuga", g:20, note:"o rúcula · solo si te lo comes al momento"}
+  ],
+  utensilios:"Air fryer, sartén antiadherente, batidora o túrmix (o un tenedor), tabla y cuchillo.",
+  pasos:[
+    "SALSA BLANCA: bate el queso batido, el cottage, la soja, un chorro de lima, ajo, comino, perejil o eneldo y pimienta hasta que quede lisa. SEPARA LA MITAD en un cuenco antes de tocar el pollo crudo: esa mitad es la de untar.",
+    "MARINADO: los 310 g de pollo en dados con la otra mitad de la salsa, pimentón ahumado y sal. 30 min en la nevera, o desde la noche anterior. La salsa da para los 310 g; si la ves justa, añade un poco más de queso batido 0 % (apenas cambia las cifras).",
+    "PATATAS: 600 g en bastones, sin aceite, con pimentón, ajo y sal. Air fryer a 200 °C unos 18-22 min, removiendo a mitad. Si no caben en una sola capa, hazlas en dos tandas: amontonadas se cuecen en vez de dorarse.",
+    "POLLO: sartén antiadherente sin aceite a fuego MEDIO (la salsa de lácteos se quema a fuego fuerte), 10-12 min hasta 74 °C por dentro. Con 310 g, mejor en una sartén grande o en dos veces, para que se dore y no se cueza.",
+    "VERDURAS: pimiento y cebolla en tiras a la plancha, sin aceite, 6-8 min. Pico de gallo: tomate, cebolla morada y cilantro picados con lima y sal; escúrrelo para que no moje la tortilla.",
+    "MONTAJE: tortilla 15 s en la sartén, unta la salsa reservada, lechuga, el pollo que quepa, pimiento y cebolla, pico de gallo y 150 g de patatas. Cierra y tuesta sin aceite 1-2 min por lado, empezando por el cierre. Al plato, los otros 450 g de patatas y el pollo que haya sobrado."
+  ],
+  conservacion:{
+    nevera:"La salsa en bote cerrado, lo que diga la fecha del cottage (abierto, 2-3 días). El pollo cocinado, 3-4 días (USDA). El pico de gallo, 1-2 días.",
+    congelador:"Montado no es lo ideal. Si quieres congelarlo: sin lechuga ni pico de gallo dentro (sueltan agua), solo pollo, pimiento, cebolla y patata; el pico y las patatas de fuera, al momento.",
+    descongelar:"Si es el pollo o el burrito congelado, a la nevera la noche antes.",
+    recalentar:"Se hace al momento. Si te sobra o lo congelaste: air fryer u horno a 180 °C, 8-10 min, hasta que esté bien caliente en el centro.",
+    universidad:"No es plato de táper: la gracia es la tortilla tostada y las patatas crujientes recién hechas."
+  },
+  alergenos:"Gluten (tortilla de trigo), leche (queso batido, cottage) y soja (salsa de soja). Revisa la etiqueta de la tortilla.",
+  variantes:[
+    {n:"Patata normal", d:"Con 400 g de patata (150 dentro y 250 fuera) en vez de 600: unas 155 kcal y 35 g de hidratos menos, y la proteína casi igual (~98 g)."},
+    {n:"Picante", d:"Separa un poco de la salsa blanca y mézclala con salsa picante o sriracha."},
+    {n:"Pollo justo de 300 g", d:"Con 300 g de pechuga en vez de 310 te quedas en ~99,5 g de proteína: por eso la receta lleva 310, para pasar de 100."}
+  ],
+  micro:"ok",
+  aviso:"Unas <b>1.180 kcal y 102 g de proteína</b> con tus ingredientes (burrito + 450 g de patatas al plato), calculadas con los mismos valores que el burrito kebab normal. Es la versión que elegiste el 6-11: la normal (180 g de pollo, 400 g de patata) sigue en su ficha."
+},
+{
   id:"fruta_dia", rev:1, short:"Fruta", n:"Fruta del día (pera)", tipo:"fruta", tags:["fruta","fibra","sin cocinar"],
   useRaw:true, servings:1, minutes:1,
   cookedWeight:null,
